@@ -465,8 +465,8 @@ After the green led has turned off completly, unplug the ethernet cable and the
 power cable, and restart the Raspberry Pi by pluging again the power cable (not
 the ethernet cable though). With this you would be in a situation that
 
-You should now be able to access the store website by typing `raposfly.shop` in a
-browser from a client connected through Wifi!
+You should now be able to access the store website by typing `raposfly.shop/` in
+a browser from a client connected through the Wifi!
 
 # Version numbers
 
