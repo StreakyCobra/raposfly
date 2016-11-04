@@ -38,13 +38,14 @@ RUN ln -s /usr/lib/arm-linux-gnueabihf/libz.so /usr/lib/
 RUN mkdir /etc/uwsgi/
 COPY uwsgi.ini /etc/uwsgi/uwsgi.ini
 
-# Install the application
+# Copy the application
 COPY ./ /app
-RUN pip install --no-cache-dir -r /app/requirements.txt
-RUN chown www-data:www-data -R /app
-RUN python manage.py collectstatic --noinput
 
+# Install the application
 WORKDIR /app
+RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
+RUN python manage.py collectstatic --noinput
+RUN chown www-data:www-data -R /app
 
 EXPOSE 80
 
