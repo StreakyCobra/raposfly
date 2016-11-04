@@ -268,7 +268,7 @@ Edit `/etc/dnsmasq.conf` to uncomment and change the following lines:
 Add also this at the end of the file so that all URLs will redirect to the
 Rapsberry Pi:
 
-    address=/raposfly/192.168.42.1
+    address=/raposfly.shop/192.168.42.1
 
 Finally enable the DNS server at boot:
 
@@ -288,6 +288,10 @@ Open also port that will be used later: 80 for HTTP, and 53 for DNS
 
     sudo ufw allow 80
     sudo ufw allow 53
+    
+We also want containers in the docker network to communicate together:
+
+    sudo ufw allow from 172.16.0.0/12
 
 Start it right away:
 
@@ -461,7 +465,7 @@ After the green led has turned off completly, unplug the ethernet cable and the
 power cable, and restart the Raspberry Pi by pluging again the power cable (not
 the ethernet cable though). With this you would be in a situation that
 
-You should now be able to access the store website by typing `raposfly/` in a
+You should now be able to access the store website by typing `raposfly.shop` in a
 browser from a client connected through Wifi!
 
 # Version numbers
