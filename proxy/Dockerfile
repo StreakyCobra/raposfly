@@ -9,7 +9,9 @@ RUN echo "deb http://ftp.debian.org/debian jessie-backports main" >> /etc/apt/so
   && apt-get install --no-install-recommends --no-install-suggests -y \
             ca-certificates \
             gettext-base \
-  && rm -rf /var/lib/apt/lists/*
+  && apt-get autoclean \
+  && rm -rf /var/lib/apt/lists/* \
+  && rm -rf /usr/share/locale/* /usr/share/man/* /usr/share/doc/*
 
 # Forward request and error logs to docker log collector
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
