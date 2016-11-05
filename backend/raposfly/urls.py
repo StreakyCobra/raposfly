@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^docs/', include('rest_framework_docs.urls')),
     url(r'^api-auth/', include('rest_framework.urls')),
+    url(r'^api/shop/', include('shop.urls')),
 ]
 
 if settings.DEBUG:
