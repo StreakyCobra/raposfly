@@ -20,6 +20,6 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 # Copy the proxy configuration
 COPY proxy.conf /etc/nginx/sites-enabled/default
 
-EXPOSE 80 443
+EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
