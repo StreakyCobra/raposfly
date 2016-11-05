@@ -1,7 +1,7 @@
 astroid==1.4.8
 autoflake==0.6.6
 decorator==4.0.10
-Django==1.10.2
+Django==1.10.3
 django-cors-headers==1.2.2
 django-debug-toolbar==1.6
 djangorestframework==3.5.2
