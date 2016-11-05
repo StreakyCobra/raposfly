@@ -1,0 +1,7 @@
+[MASTER]
+
+load-plugins=pylint_django
+
+[BASIC]
+
+good-names=router,application
