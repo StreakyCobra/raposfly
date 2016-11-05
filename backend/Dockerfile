@@ -1,10 +1,11 @@
 FROM armhf/python:3.5
 MAINTAINER Fabien Dubosson <fabien.dubosson@qadmium.com>
 
-# Update the distribution and install dependencies from the official repos
-RUN apt-get update \
-  && apt-get install --no-install-recommends --no-install-suggests -y \
+RUN echo "deb http://ftp.debian.org/debian jessie-backports main" >> /etc/apt/sources.list.d/jessie-backports.list \
+  && apt-get update \
+  && apt-get install -t jessie-backports --no-install-recommends --no-install-suggests -y \
             nginx \
+  && apt-get install --no-install-recommends --no-install-suggests -y \
             supervisor \
             libjpeg-dev \
             python-dev \
@@ -14,36 +15,26 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/* \
   && rm -rf /usr/share/locale/* /usr/share/man/* /usr/share/doc/*
 
-# Install dependencies from pip
-RUN pip install uwsgi
-
-# Configure nginx
-COPY nginx.conf /etc/nginx/sites-enabled/default
-RUN mkdir -p /srv/http/static
-
-# Forward request and error logs to docker log collector
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
     && ln -sf /dev/stderr /var/log/nginx/error.log
 
-# Configure supervisor
-COPY supervisord.conf /etc/supervisor/conf.d/
+RUN pip install --upgrade pip && pip install uwsgi
 
-# Configure for raposfly
+RUN mkdir -p /srv/http/static
+RUN mkdir -p /etc/uwsgi/
+
 RUN gpasswd -a www-data dialout
 RUN ln -s /usr/lib/arm-linux-gnueabihf/libjpeg.so /usr/lib/
 RUN ln -s /usr/lib/arm-linux-gnueabihf/libfreetype.so /usr/lib/
 RUN ln -s /usr/lib/arm-linux-gnueabihf/libz.so /usr/lib/
 
-# Configure uwsgi
-RUN mkdir /etc/uwsgi/
+COPY ./ /app
+COPY nginx.conf /etc/nginx/sites-enabled/default
+COPY supervisord.conf /etc/supervisor/conf.d/
 COPY uwsgi.ini /etc/uwsgi/uwsgi.ini
 
-# Copy the application
-COPY ./ /app
-
-# Install the application
 WORKDIR /app
-RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 RUN python manage.py collectstatic --noinput
 RUN chown www-data:www-data -R /app
 
