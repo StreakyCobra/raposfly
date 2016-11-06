@@ -1,5 +1,6 @@
 <template>
-    <div id="app">
+    <div>
+        <h1 class="page-header">Hello</h1>
     </div>
 </template>
 
