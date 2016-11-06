@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Cart:</h1>
+        <h1 class="page-header">Cart</h1>
         <item
             del=true
             v-for="(item, index) in items"
@@ -15,17 +15,6 @@
 <script>
  import Item from './Item'
 
- var STORAGE_KEY = 'shop-cart'
- var localStorage = window.localStorage
- var itemsStorage = {
-     fetch () {
-         return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')
-     },
-     save (items) {
-         localStorage.setItem(STORAGE_KEY, JSON.stringify(items))
-     }
- }
-
  export default {
      name: 'cart',
      components: {
@@ -33,7 +22,7 @@
      },
      data: function () {
          return {
-             items: itemsStorage.fetch(),
+             items: [],
              total: 0
          }
      },
@@ -44,7 +33,6 @@
          items: {
              handler: function (items) {
                  this.recompute_total()
-                 itemsStorage.save(items)
              },
              deep: true
          }

@@ -1,27 +1,20 @@
 <template>
-    <div>
-        <div class="row">
-            <div class="col-md-8">
-                <shop ref="shop" @add_item="add_item"/>
-                <history ref="history"/>
-            </div>
-            <cart class="col-md-4" ref="cart" @purchase="purchase"/>
-        </div>
+    <div class="container" style="padding-top: 50px;">
+        <shop class="col-md-8" ref="shop" @add_item="add_item"/>
+        <cart class="col-md-4" ref="cart" @purchase="purchase"/>
     </div>
 </template>
 
 <script>
  import Shop from './components/Shop'
  import Cart from './components/Cart'
- import History from './components/History'
  var $ = require('jquery')
 
  export default {
      name: 'app',
      components: {
          Shop,
-         Cart,
-         History
+         Cart
      },
      mounted: function () {
          $('#splash').delay(2000).fadeOut(1000)

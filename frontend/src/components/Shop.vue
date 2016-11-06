@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Shop:</h1>
+        <h1 class="page-header">Shop</h1>
         <item
             add=true
             v-for="(item, index) in items"
