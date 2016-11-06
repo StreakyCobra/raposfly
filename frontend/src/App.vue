@@ -42,6 +42,8 @@
  import Shop from './components/Shop'
  import Cart from './components/Cart'
 
+ var $ = require('jquery')
+
  export default {
      name: 'app',
      components: {
@@ -49,7 +51,10 @@
          Cart
      },
      mounted: function () {
-         this.$('#splash').delay(1000).fadeOut(1000)
+         $('#splash').delay(1000).fadeOut(1000)
+         $('.nav a').on('click', function () {
+             $('.navbar-toggle').click()
+         })
      }
  }
 </script>
