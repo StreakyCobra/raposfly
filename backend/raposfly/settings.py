@@ -26,7 +26,7 @@ SECRET_KEY = 'mlfd-5wkib#9vo_pw81@%x2#0tju7osr-qc&f^sg=&4b@k8m+q'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['backend.raposfly.io']
+ALLOWED_HOSTS = ['localhost', 'backend.raposfly.io']
 
 
 # Application definition
