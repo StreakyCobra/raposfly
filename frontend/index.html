@@ -32,26 +32,10 @@
              width: 100%;
              max-width: 888px;
          }
-
-         @font-face {
-             font-family: 'Montserrat';
-             src: url('/static/fonts/Montserrat-Regular.otf');
-             font-weight: normal;
-         }
-
-         @font-face {
-             font-family: 'Montserrat';
-             src: url('/static/fonts/Montserrat-Bold.otf');
-             font-weight: bold;
-         }
-
-         #app {
-             font-family: 'Montserrat', Helvetica, Arial, sans-serif;
-         }
         </style>
     </head>
 
-    <body onload="$('#splash').delay(1000).fadeOut(1000)">
+    <body>
 
         <!-- SPLASH SCREEN -->
         <!-- This is not set as a component so it is loaded directly when the page is accessed and not only after vue.js is loaded.  -->
@@ -63,42 +47,7 @@
             </div>
         </div>
 
-        <!-- APPLICATION CONTAINER -->
-        <div id="app" style="padding-top: 50px;">
-
-            <!-- NAVBAR -->
-            <nav class="navbar navbar-inverse navbar-fixed-top">
-                <div class="container">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <router-link class="navbar-brand" to="/" exact>
-                            <img style="float: left; display:inline-block; height: 1.5em;"src="/static/favicon.png" />
-                            <span style="display: inline-block;">raposfly</span>
-                        </router-link>
-                    </div>
-                    <div id="navbar" class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav">
-                            <router-link to="/shop" tag="li" active-class="active" exact><router-link to="/shop">Shop</router-link></router-link>
-                            <router-link to="/history" tag="li" active-class="active" exact><router-link to="/history">History</router-link></router-link>
-                        </ul>
-                        <div class="navbar-right">
-                            <ul class="nav navbar-nav">
-                                <li><a href="//backend.raposfly.io/admin"><i class="fa fa-cog" aria-hidden="true"></i> Admin</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-
-            <!-- APPLICATION -->
-            <router-view></router-view>
-
-        </div>
-
+        <!-- APPLICATION -->
+        <div id="app"></div>
     </body>
 </html>

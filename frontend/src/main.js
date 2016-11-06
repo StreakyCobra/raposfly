@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App'
+import Home from './Home'
 import History from './History'
 import Shop from './Shop'
 import VueRouter from 'vue-router'
@@ -19,7 +20,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'font-awesome/css/font-awesome.css'
 
 const routes = [
-    { path: '/', component: App },
+    { path: '/', component: Home },
     { path: '/shop', component: Shop },
     { path: '/history', component: History }
 ]
@@ -29,6 +30,12 @@ const router = new VueRouter({
     routes: routes
 })
 
+/* eslint-disable no-new */
 new Vue({
-    router
-}).$mount('#app')
+    el: '#app',
+    template: '<App/>',
+    components: {
+        App
+    },
+    router: router
+})
