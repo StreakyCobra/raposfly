@@ -1,47 +1,32 @@
 <template>
     <div>
-        <h1 class="page-header">Shop</h1>
-        <item
-            add=true
-            v-for="(item, index) in items"
-            v-bind:item="item"
-            @add="add_item"/>
+        <div class="row">
+            <store ref="store" class="col-md-8" @add_item="add_item"></store>
+            <cart ref="cart" class="col-md-4" @purchase="purchase"></cart>
+        </div>
+        <div id="alerts"></div>
     </div>
 </template>
 
 <script>
- import Item from './Item'
+ import Store from './Store'
+ import Cart from './Cart'
+
+ var $ = require('jquery')
 
  export default {
      name: 'shop',
      components: {
-         Item
-     },
-     data () {
-         return {
-             items: [
-                 {
-                     name: 'Grillade',
-                     price: 12
-                 },
-                 {
-                     name: 'Raclette',
-                     price: 10
-                 },
-                 {
-                     name: 'Frites',
-                     price: 6
-                 },
-                 {
-                     name: 'Sandwich',
-                     price: 3.5
-                 }
-             ]
-         }
+         Cart,
+         Store
      },
      methods: {
          add_item: function (item) {
-             this.$emit('add_item', item)
+             this.$refs.cart.add_item(item)
+         },
+         purchase: function (items) {
+             console.log(items)
+             $('#alerts').append('<div class="alert alert-info fade in">Items purchased.</div>').delay(2000).slideUp(500)
          }
      }
  }

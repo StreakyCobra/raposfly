@@ -1,6 +1,5 @@
 <template>
     <div>
-
         <!-- NAVBAR -->
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
@@ -35,25 +34,17 @@
         </nav>
 
         <!-- APPLICATION -->
-        <div id="view" style="padding-top: 50px;">
+        <div id="view" class="container" style="padding-top: 50px;">
             <router-view></router-view>
         </div>
-
     </div>
 </template>
 
 <script>
- import Shop from './components/Shop'
- import Cart from './components/Cart'
-
  var $ = require('jquery')
 
  export default {
      name: 'app',
-     components: {
-         Shop,
-         Cart
-     },
      mounted: function () {
          $('#splash').delay(1000).fadeOut(1000)
      }

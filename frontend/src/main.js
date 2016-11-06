@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import App from './App'
-import Home from './Home'
-import History from './History'
-import Shop from './Shop'
+import History from './components/History'
+import Home from './components/Home'
+import Shop from './components/Shop'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 Vue.use(VueResource)
