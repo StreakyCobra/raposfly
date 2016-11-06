@@ -18,8 +18,12 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <router-link to="/shop" tag="li" active-class="active" exact><router-link to="/shop">Shop</router-link></router-link>
-                        <router-link to="/history" tag="li" active-class="active" exact><router-link to="/history">History</router-link></router-link>
+                        <router-link to="/shop" tag="li" active-class="active" exact data-toggle="collapse" data-target=".navbar-collapse.in">
+                            <router-link to="/shop">Shop</router-link>
+                        </router-link>
+                        <router-link to="/history" tag="li" active-class="active" exact data-toggle="collapse" data-target=".navbar-collapse.in">
+                            <router-link to="/history">History</router-link>
+                        </router-link>
                     </ul>
                     <div class="navbar-right">
                         <ul class="nav navbar-nav">
@@ -52,9 +56,6 @@
      },
      mounted: function () {
          $('#splash').delay(1000).fadeOut(1000)
-         $('.nav a').on('click', function () {
-             $('.navbar-toggle').click()
-         })
      }
  }
 </script>
