@@ -5,8 +5,8 @@ import Home from './components/Home'
 import Shop from './components/Shop'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
-Vue.use(VueResource)
 Vue.use(VueRouter)
+Vue.use(VueResource)
 
 // jquery
 var $ = require('jquery')
@@ -29,6 +29,8 @@ const router = new VueRouter({
     mode: 'history',
     routes: routes
 })
+
+Vue.url.options.root = 'http://localhost:8000/api'
 
 /* eslint-disable no-new */
 new Vue({
