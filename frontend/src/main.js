@@ -17,11 +17,11 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'font-awesome/css/font-awesome.css'
 
 const routes = [
-  { path: '/', component: App }
+    { path: '/', component: App }
 ]
 
 const router = new VueRouter({routes})
 
 new Vue({
-  router
+    router
 }).$mount('#app')
