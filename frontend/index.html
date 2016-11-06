@@ -32,10 +32,26 @@
              width: 100%;
              max-width: 888px;
          }
+
+         @font-face {
+             font-family: 'Montserrat';
+             src: url('/static/fonts/Montserrat-Regular.otf');
+             font-weight: normal;
+         }
+
+         @font-face {
+             font-family: 'Montserrat';
+             src: url('/static/fonts/Montserrat-Bold.otf');
+             font-weight: bold;
+         }
+
+         #app {
+             font-family: 'Montserrat', Helvetica, Arial, sans-serif;
+         }
         </style>
     </head>
 
-    <body>
+    <body onload="$('#splash').delay(1000).fadeOut(1000)">
 
         <!-- SPLASH SCREEN -->
         <!-- This is not set as a component so it is loaded directly when the page is accessed and not only after vue.js is loaded.  -->
