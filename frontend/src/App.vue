@@ -1,20 +1,38 @@
 <template>
     <div>
-        <h1 class="page-header">Hello</h1>
+        <div class="row">
+            <div class="col-md-8">
+                <shop ref="shop" @add_item="add_item"/>
+                <history ref="history"/>
+            </div>
+            <cart class="col-md-4" ref="cart" @purchase="purchase"/>
+        </div>
     </div>
 </template>
 
 <script>
- import Hello from './components/Hello'
+ import Shop from './components/Shop'
+ import Cart from './components/Cart'
+ import History from './components/History'
  var $ = require('jquery')
 
  export default {
      name: 'app',
      components: {
-         Hello
+         Shop,
+         Cart,
+         History
      },
      mounted: function () {
          $('#splash').delay(2000).fadeOut(1000)
+     },
+     methods: {
+         add_item: function (item) {
+             this.$refs.cart.add_item(item)
+         },
+         purchase: function (items, total) {
+             this.$refs.history.add_order(items, total)
+         }
      }
  }
 </script>
