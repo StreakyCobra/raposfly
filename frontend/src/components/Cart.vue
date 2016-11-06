@@ -38,14 +38,14 @@
          }
      },
      methods: {
-         items_total: function (items) {
+         get_items_total: function (items) {
              function add (a, b) {
                  return a + b
              }
-             return items.map(item => item.price).reduce(add, 0)
+             return items.map(item => parseFloat(item.price)).reduce(add, 0)
          },
          recompute_total: function () {
-             this.total = this.items_total(this.items)
+             this.total = this.get_items_total(this.items)
          },
          add_item: function (item) {
              this.items.push(item)
@@ -55,8 +55,11 @@
          },
          purchase: function () {
              if (this.items.length > 0) {
-                 this.$http.post('http://dubosson.tk:8080/purchase/', this.items)
-                 this.$emit('purchase', this.items, this.total)
+                 this.$http.post('shop/purchase/', this.items).then((response) => {
+                     this.$emit('purchase', this.items, this.total)
+                 }, (response) => {
+                     this.$emit('error', 'Impossible to purchase the items')
+                 })
              }
              this.reset()
          },
