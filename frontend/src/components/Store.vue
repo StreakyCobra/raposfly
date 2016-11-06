@@ -19,25 +19,14 @@
      },
      data () {
          return {
-             items: [
-                 {
-                     name: 'Grillade',
-                     price: 12
-                 },
-                 {
-                     name: 'Raclette',
-                     price: 10
-                 },
-                 {
-                     name: 'Frites',
-                     price: 6
-                 },
-                 {
-                     name: 'Sandwich',
-                     price: 3.5
-                 }
-             ]
+             items: []
          }
+     },
+     mounted: function () {
+         this.$http.get('shop/items/').then((response) => {
+             this.items = response.body
+             console.log(response.body)
+         }, null)
      },
      methods: {
          add_item: function (item) {
@@ -46,3 +35,4 @@
      }
  }
 </script>
+
