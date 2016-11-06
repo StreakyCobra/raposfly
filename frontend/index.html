@@ -10,6 +10,7 @@
 
         <title>raposfly</title>
 
+        <!-- The splash style is set directly here to be loaded directly when the page is accessed. -->
         <style>
          #splash {
              z-index: 999;
@@ -35,7 +36,9 @@
     </head>
 
     <body>
+
         <!-- SPLASH SCREEN -->
+        <!-- This is not set as a component so it is loaded directly when the page is accessed and not only after vue.js is loaded.  -->
         <div id="splash">
             <div>
                 <img src="/static/logo.png" />
@@ -64,8 +67,10 @@
             </div>
         </nav>
 
+        <!-- APPLICATION -->
         <div id="app" class="container" style="padding-top: 70px;">
             <router-view />
         </div>
+
     </body>
 </html>
