@@ -1,9 +1,7 @@
 <template>
     <div>
-        <div class="row">
-            <store ref="store" class="col-md-8" @add_item="add_item" @error="error"></store>
-            <cart ref="cart" class="col-md-4" @purchase="purchase" @error="error"></cart>
-        </div>
+        <store ref="store" class="col-md-8" @add_item="add_item" @error="error"></store>
+        <cart ref="cart" class="col-md-4" @purchase="purchase" @error="error"></cart>
         <div id="alerts"></div>
     </div>
 </template>
