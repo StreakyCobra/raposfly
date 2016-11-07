@@ -36,6 +36,7 @@ COPY uwsgi.ini /etc/uwsgi/uwsgi.ini
 WORKDIR /app
 RUN pip install --no-cache-dir -r requirements.txt
 RUN python manage.py collectstatic --noinput
+RUN python manage.py migrate
 RUN chown www-data:www-data -R /app
 
 EXPOSE 80

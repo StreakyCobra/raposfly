@@ -63,7 +63,6 @@ class PurchaseItems(APIView):
 
         try:
             printer = Usb(0x04b8, 0x0e02)
-            pass
         except USBNotFoundError:
             return Response({'status': 'Impossible to connect to the '
                                        'printer.'},
