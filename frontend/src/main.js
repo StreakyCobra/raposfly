@@ -30,7 +30,7 @@ const router = new VueRouter({
     routes: routes
 })
 
-Vue.url.options.root = 'http://localhost:8000/api'
+Vue.url.options.root = 'http://backend.raposfly.io/api'
 
 /* eslint-disable no-new */
 new Vue({
