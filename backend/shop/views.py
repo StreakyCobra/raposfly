@@ -72,7 +72,7 @@ class PurchaseItems(APIView):
         try:
             for item in items:
                 print(item.pk)
-                printer.text('{name} ({price} CHF)\n'.format(**item))
+                printer.text('{name} ({price} CHF)\n'.format(**item.__dict__))
                 printer.cut()
         except Error:
             return Response({'status': 'Impossible to print the tickets'},
