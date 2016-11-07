@@ -33,37 +33,31 @@
             </div>
         </nav>
 
-        <!-- MODAL -->
-        <div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-                    </div>
-                    <div class="modal-body">
-                        ...
-                    </div>
-                </div>
-            </div>
-        </div>
+        <error ref="error"></error>
 
         <!-- APPLICATION -->
         <div id="view" class="container" style="padding-top: 50px;">
-            <router-view></router-view>
+            <router-view @error="error"></router-view>
         </div>
     </div>
 </template>
 
 <script>
+ import Error from './components/Error'
  var $ = require('jquery')
 
  export default {
      name: 'app',
+     components: {
+         Error
+     },
      mounted: function () {
          $('#splash').delay(1000).fadeOut(1000)
+     },
+     methods: {
+         error: function (msg) {
+             this.$refs.error.alert(msg)
+         }
      }
  }
 </script>

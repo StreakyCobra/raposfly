@@ -27,7 +27,7 @@
              $('.alert').delay(2000).slideUp(500)
          },
          error: function (msg) {
-             $('#modal').modal('show')
+             this.$emit('error', 'Impossible to purchase items')
          }
      }
  }
