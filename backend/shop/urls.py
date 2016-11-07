@@ -2,10 +2,11 @@
 """URLs for the shop application."""
 from django.conf.urls import url
 
-from .views import ListItems, PurchaseItems
+from . import views
 
 
 urlpatterns = [
-    url(r'^items/', ListItems.as_view()),
-    url(r'^purchase/', PurchaseItems.as_view()),
+    url(r'^items/', views.ListItems.as_view()),
+    url(r'^purchase/', views.PurchaseItems.as_view()),
+    url(r'^purchases/', views.ListPurchases.as_view()),
 ]

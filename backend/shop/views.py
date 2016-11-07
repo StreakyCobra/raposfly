@@ -1,28 +1,40 @@
 # -*- coding: utf-8 -*-
 """Views for the shop application."""
 
+from django.utils import timezone
 from escpos.exceptions import Error, USBNotFoundError
 from escpos.printer import Usb
+from itertools import groupby
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import Item
-from .serializers import ItemSerializer
+from . import serializers
+from .models import Item, Purchase, Composition
 
 
 class ListItems(APIView):
-    """List the items in the shop."""
+    """List the items of the shop."""
 
     def get(self, request):
-        """GET request to access the list of items in the shop."""
+        """GET request to access the list of items of the shop."""
         items = Item.objects.all()
-        return Response(ItemSerializer(items, many=True).data)
+        return Response(serializers.ItemSerializer(items, many=True).data)
+
+
+class ListPurchases(APIView):
+    """List the purchases of the shop."""
+
+    def get(self, request):
+        """GET request to access the list of purchases of the shop."""
+        purchases = Purchase.objects.order_by('date').reverse()
+        serialized = serializers.PurchaseSerializer(purchases, many=True)
+        return Response(serialized.data)
 
 
 class PurchaseItems(APIView):
     """Purchase items in the shop."""
 
-    serializer_class = ItemSerializer
+    serializer_class = serializers.ItemSerializer
 
     def post(self, request):
         """POST request to purcharse items in the shop."""
@@ -30,12 +42,12 @@ class PurchaseItems(APIView):
         serializer.is_valid(raise_exception=True)
 
         sent_items = serializer.validated_data
-        items = []
 
         # ------------------------------------------------------------------- #
         # Verify that items are valid and haven't changed                     #
         # ------------------------------------------------------------------- #
 
+        items = []
         for item in sent_items:
             try:
                 item = Item.objects.get(**item)
@@ -50,7 +62,8 @@ class PurchaseItems(APIView):
         # ------------------------------------------------------------------- #
 
         try:
-            printer = Usb(0x04b8, 0x0e02)
+            # printer = Usb(0x04b8, 0x0e02)
+            pass
         except USBNotFoundError:
             return Response({'status': 'Impossible to connect to the '
                                        'printer.'},
@@ -59,10 +72,19 @@ class PurchaseItems(APIView):
         try:
             for item in items:
                 print(item.pk)
-                printer.text('{name} ({price} CHF)\n'.format(**item))
-                printer.cut()
+                # printer.text('{name} ({price} CHF)\n'.format(**item))
+                # printer.cut()
         except Error:
             return Response({'status': 'Impossible to print the tickets'},
                             status=400)
+
+        # ------------------------------------------------------------------- #
+        # Store the purchasñe                                                 #
+        # ------------------------------------------------------------------- #
+
+        purchase = Purchase(date=timezone.now())
+        purchase.save()
+        for item in items:
+            Composition(item=item, purchase=purchase, price=item.price).save()
 
         return Response({'status': 'ok'})
