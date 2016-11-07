@@ -62,7 +62,7 @@ class PurchaseItems(APIView):
         # ------------------------------------------------------------------- #
 
         try:
-            # printer = Usb(0x04b8, 0x0e02)
+            printer = Usb(0x04b8, 0x0e02)
             pass
         except USBNotFoundError:
             return Response({'status': 'Impossible to connect to the '
@@ -72,8 +72,8 @@ class PurchaseItems(APIView):
         try:
             for item in items:
                 print(item.pk)
-                # printer.text('{name} ({price} CHF)\n'.format(**item))
-                # printer.cut()
+                printer.text('{name} ({price} CHF)\n'.format(**item))
+                printer.cut()
         except Error:
             return Response({'status': 'Impossible to print the tickets'},
                             status=400)
