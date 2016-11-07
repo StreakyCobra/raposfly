@@ -11,9 +11,7 @@
   },
   "dependencies": {
     "bootstrap": "^3.3.7",
-    "es6-promise": "^4.0.5",
     "font-awesome": "^4.7.0",
-    "isomorphic-fetch": "^2.2.1",
     "jquery": "^3.1.1",
     "vue": "^2.0.1",
     "vue-i18n": "^4.7.1",
