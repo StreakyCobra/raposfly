@@ -26,6 +26,10 @@
                     </ul>
                     <div class="navbar-right">
                         <ul class="nav navbar-nav">
+                            <li><a @click="setLang('en')">EN</a></li>
+                            <li><a @click="setLang('fr')">FR</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav">
                             <li><a href="//backend.raposfly.io/admin"><i class="fa fa-cog" aria-hidden="true"></i> Admin</a></li>
                         </ul>
                     </div>
@@ -57,6 +61,10 @@
      methods: {
          error: function (msg) {
              this.$refs.error.alert(msg)
+         },
+         setLang: function (lang) {
+             console.log(this.$mylang)
+             this.$language = lang
          }
      }
  }

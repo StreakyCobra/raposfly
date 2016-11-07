@@ -27,7 +27,6 @@
      mounted: function () {
          this.$http.get('shop/purchases/').then((response) => {
              this.purchases = response.body
-             console.log(response.body)
          }, null)
      }
  }

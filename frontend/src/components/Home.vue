@@ -1,12 +1,12 @@
 <template>
     <div class="container">
-        <h1 class="page-header">Welcome to raposfly</h1>
+        <h1 class="page-header">{{ $t('Welcome to raposfly') }}</h1>
         <p>
-            You can directly access the shop:<br />
+            {{ $t('You can directly access the shop') }}:<br />
             <router-link to="/shop" tag="a" class="btn btn-info" style="width: 150px;">Shop</router-link>
         </p>
         <p>
-            Or see the history from:<br />
+            {{ $t('Or see the history from') }}:<br />
             <router-link to="/history" tag="a" class="btn btn-info" style="width: 150px;">History</router-link>
         </p>
     </div>
