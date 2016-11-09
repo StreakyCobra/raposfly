@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_docs',
     'corsheaders',
+    'django_cleanup',
     'shop',
 ]
 
@@ -132,6 +133,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = '/srv/http/static/'
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = '/srv/http/media/'
 
 INTERNAL_IPS = ['127.0.0.1']
 CORS_ORIGIN_ALLOW_ALL = True

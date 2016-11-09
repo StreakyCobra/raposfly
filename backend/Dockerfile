@@ -21,7 +21,9 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 RUN pip install --upgrade pip && pip install uwsgi
 
 RUN mkdir -p /srv/http/static
+RUN mkdir -p /srv/http/media
 RUN mkdir -p /etc/uwsgi/
+RUN chown -R www-data:www-data /srv/http/
 
 RUN gpasswd -a www-data dialout
 RUN ln -s /usr/lib/arm-linux-gnueabihf/libjpeg.so /usr/lib/

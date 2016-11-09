@@ -17,17 +17,19 @@ Including another URLconf
 """
 from django.conf import settings
 from django.conf.urls import include, url
+from django.conf.urls.static import static
 from django.contrib import admin
 
 urlpatterns = [
     url(r'^$', include('rest_framework_docs.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'^api-auth/', include('rest_framework.urls')),
     url(r'^api/shop/', include('shop.urls')),
 ]
 
 if settings.DEBUG:
     import debug_toolbar
-    urlpatterns += [
-        url(r'^__debug__/', include(debug_toolbar.urls)),
-    ]
+    urlpatterns += [url(r'^__debug__/', include(debug_toolbar.urls))]
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL,
+                          document_root=settings.STATIC_ROOT)
