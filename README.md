@@ -201,7 +201,7 @@ And finally make `hostapd` to start at boot:
 In order to get an IP address when connecting to the Wifi, a DHCP server is
 needed. The `isc-dhcp-server` package should be installed for this:
 
-    sudo apt install isc-dhcp-server
+    sudo apt install -y isc-dhcp-server
     
 Then edit `/etc/dhcp/dhcpd.conf` to comment out the following lines:
 
@@ -240,8 +240,8 @@ For this edit the file `/etc/network/interfaces` to comment out the following
     #    wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
 
     iface wlan0 inet static
-      address 192.168.42.1
-      netmask 255.255.255.0
+        address 192.168.42.1
+        netmask 255.255.255.0
 
 Set manually the ip address for this session:
 
