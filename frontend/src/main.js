@@ -11,8 +11,8 @@ Vue.use(VueRouter)
 Vue.use(VueResource)
 
 // config
-var ROOT_URL = 'http://localhost'
-var ROOT_BACKEND_URL = 'http://localhost:8000/api'
+var ROOT_URL = 'http://raposfly.io'
+var ROOT_BACKEND_URL = 'http://backend.raposfly.io/api'
 
 // jquery
 var $ = require('jquery')
