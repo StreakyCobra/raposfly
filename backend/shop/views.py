@@ -48,10 +48,11 @@ class PurchaseItems(APIView):
         # ------------------------------------------------------------------- #
 
         items = []
+        total = 0
         for item in sent_items:
             try:
-                del item['image']
-                item = Item.objects.get(**item)
+                item = Item.objects.get(name=item['name'], price=item['price'])
+                total += item.price
             except Item.DoesNotExist:
                 return Response({'status': 'Some items are not valid or '
                                            'have changed in the database.'},
@@ -70,10 +71,13 @@ class PurchaseItems(APIView):
                             status=400)
 
         try:
+            # Each ticket
             for item in items:
-                print(item.pk)
                 printer.text('{name} ({price} CHF)\n'.format(**item.__dict__))
                 printer.cut()
+            # Total
+            printer.text('Total: {price} CHF\n'.format(total))
+            printer.cut()
         except Error:
             return Response({'status': 'Impossible to print the tickets'},
                             status=400)
