@@ -9,6 +9,7 @@ from rest_framework.views import APIView
 
 from . import serializers
 from .models import Composition, Item, Purchase
+from .tickets import print_ticket, print_total
 
 
 class ListItems(APIView):
@@ -72,11 +73,8 @@ class PurchaseItems(APIView):
         try:
             # Each ticket
             for item in items:
-                printer.text('{name} ({price} CHF)\n'.format(**item.__dict__))
-                printer.cut()
-            # Total
-            printer.text('Total: {} CHF\n'.format(total))
-            printer.cut()
+                print_ticket(printer, item)
+            print_total(printer, items, total)
         except Error:
             return Response({'status': 'Impossible to print the tickets'},
                             status=400)
