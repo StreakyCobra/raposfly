@@ -50,6 +50,7 @@ class PurchaseItems(APIView):
         items = []
         for item in sent_items:
             try:
+                del item['image']
                 item = Item.objects.get(**item)
             except Item.DoesNotExist:
                 return Response({'status': 'Some items are not valid or '
