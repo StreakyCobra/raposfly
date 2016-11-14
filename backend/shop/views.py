@@ -4,12 +4,11 @@
 from django.utils import timezone
 from escpos.exceptions import Error, USBNotFoundError
 from escpos.printer import Usb
-from itertools import groupby
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from . import serializers
-from .models import Item, Purchase, Composition
+from .models import Composition, Item, Purchase
 
 
 class ListItems(APIView):
