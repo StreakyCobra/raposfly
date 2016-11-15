@@ -371,17 +371,10 @@ Finally we can set docker to start at boot:
     
 ### Install and configure the USB driver
 
-Get the identifiers of your USB printer:
+In order to allow access to USB devices to users of the `dialout` group, we need
+to create a new file `/etc/udev/rules.d/99-usb-dialout.rules`:
 
-    $ lsusb
-    Bus XXX Device XXX: ID 04b8:0e02 XXX
-    
-The vendor ID in this case is `04b8` and the product ID is `0e02`. This should
-be customized to your setup in the next step:
-
-Create a new `/etc/udev/rules.d/99-escpos.rules` file:
-
-    SUBSYSTEM=="usb", ATTRS{idVendor}=="04b8", ATTRS{idProduct}=="0e02", MODE="0664", GROUP="dialout"
+    SUBSYSTEM=="usb", DRIVER=="usb", MODE="0664", GROUP="dialout"
 
 You should now add yourself to the `dialout` group that has access now to the
 USB device:
