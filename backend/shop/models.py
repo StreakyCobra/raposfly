@@ -13,10 +13,31 @@ class Item(models.Model):
                               upload_to=UploadHashedTo('items'))
     description = models.TextField(blank=True, null=True)
     price = models.DecimalField(max_digits=8, decimal_places=2)
+    order = models.IntegerField(default=9999)
 
     def __str__(self):
         """Return the string representation of an Item."""
         return "{name}".format(**self.__dict__)
+
+    class Meta:
+        ordering = ('order',)
+
+
+class Category(models.Model):
+    """A category of the shop."""
+
+    name = models.CharField(max_length=255)
+    items = models.ManyToManyField(Item)
+    image = models.ImageField(blank=True, null=True,
+                              upload_to=UploadHashedTo('categories'))
+    order = models.IntegerField(default=9999)
+
+    def __str__(self):
+        """Return the string representation of a Category."""
+        return "{name}".format(**self.__dict__)
+
+    class Meta:
+        ordering = ('order',)
 
 
 class Purchase(models.Model):
