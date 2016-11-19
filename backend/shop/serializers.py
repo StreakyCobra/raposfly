@@ -3,7 +3,7 @@
 
 from rest_framework import serializers
 
-from .models import Item, Purchase
+from .models import Category, Item, Purchase
 
 
 class ItemSerializer(serializers.ModelSerializer):
@@ -11,6 +11,16 @@ class ItemSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Item
+        exclude = ()
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    """Serializer for a Category."""
+
+    items = ItemSerializer(many=True)
+
+    class Meta:
+        model = Category
         exclude = ()
 
 
