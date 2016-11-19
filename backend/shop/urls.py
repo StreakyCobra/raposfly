@@ -7,6 +7,7 @@ from . import views
 
 urlpatterns = [
     url(r'^items/', views.ListItems.as_view()),
+    url(r'^purchase/(?P<purchase_id>[0-9]+)/', views.PurchaseView.as_view()),
     url(r'^purchase/', views.PurchaseItems.as_view()),
     url(r'^purchases/', views.ListPurchases.as_view()),
     url(r'^stats/', views.Stats.as_view()),

@@ -33,6 +33,18 @@ class ListPurchases(APIView):
         return Response(serialized.data)
 
 
+class PurchaseView(APIView):
+    """Access a purchases of the shop."""
+
+    def delete(self, request, purchase_id):
+        """DELETE request to delete a purchases of the shop."""
+        try:
+            Purchase.objects.get(pk=purchase_id).delete()
+        except Purchase.DoesNotExist:
+            return Response("Purchase does not exist", status=400)
+        return Response("Purchase deleted")
+
+
 class PurchaseItems(APIView):
     """Purchase items in the shop."""
 
