@@ -3,8 +3,9 @@
 
 from django.contrib import admin
 
-from .models import Composition, Item, Purchase
+from .models import Category, Composition, Item, Purchase
 
+admin.site.register(Category)
 admin.site.register(Composition)
 admin.site.register(Item)
 admin.site.register(Purchase)
