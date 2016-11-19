@@ -3,7 +3,12 @@
         <h1 class="page-header">{{ $t('History') }}</h1>
         <template v-for="purchase in purchases">
             <div class="panel panel-info">
-                <div class="panel-heading">{{ purchase.date }}</div>
+                <div class="panel-heading">
+                    <div class="btn-group pull-right">
+                        <a class="btn btn-danger btn-sm" style="float: right;" @click="remove(purchase)">{{ $t('Delete') }}</a>
+                    </div>
+                    {{ purchase.date }}
+                </div>
                 <div class="panel-body">
                     <item v-for="item in purchase.items"
                           v-bind:item="item"/>
@@ -27,11 +32,23 @@
          }
      },
      mounted: function () {
-         this.$http.get('shop/purchases/').then((response) => {
-             this.purchases = response.body
-         }, (response) => {
-             this.$emit('error', 'Impossible to load history')
-         })
+         this.update()
+     },
+     methods: {
+         update: function () {
+             this.$http.get('shop/purchases/').then((response) => {
+                 this.purchases = response.body
+             }, (response) => {
+                 this.$emit('error', 'Impossible to load history')
+             })
+         },
+         remove: function (purchase) {
+             this.$http.delete('shop/purchase/' + purchase.id + '/').then((response) => {
+                 this.update()
+             }, (response) => {
+                 this.$emit('error', 'Impossible to delete purchase')
+             })
+         }
      }
  }
 </script>

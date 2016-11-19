@@ -19,5 +19,7 @@
     "Total Sales": "Ventes totales",
     "Sales History": "Historique des ventes",
     "Counts": "Décompte",
-    "Items purchased": "Achat effectué"
+    "Items purchased": "Achat effectué",
+    "Impossible to delete purchase": "Impossible de supprimer l'achat",
+    "Delete": "Supprimer"
 }
