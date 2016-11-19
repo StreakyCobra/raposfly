@@ -38,6 +38,7 @@ class Category(models.Model):
 
     class Meta:
         ordering = ('order',)
+        verbose_name_plural = "Categories"
 
 
 class Purchase(models.Model):
