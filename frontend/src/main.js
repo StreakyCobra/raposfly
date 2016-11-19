@@ -22,6 +22,7 @@ window.jQuery = window.$ = $
 // bootstrap
 require('bootstrap')
 import 'bootstrap/dist/css/bootstrap.css'
+import 'chartist/dist/chartist.css'
 
 // font-awesome
 import 'font-awesome/css/font-awesome.css'
