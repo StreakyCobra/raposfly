@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h1 class="page-header">History</h1>
+        <h1 class="page-header">{{ $t('History') }}</h1>
         <template v-for="purchase in purchases">
             <div class="bg-info">
                 <p>{{ purchase.date }}</p>

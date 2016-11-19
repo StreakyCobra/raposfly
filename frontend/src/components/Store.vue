@@ -1,11 +1,14 @@
 <template>
     <div>
-        <h1 class="page-header">Store</h1>
-        <item
-            add=true
-            v-for="(item, index) in items"
-            v-bind:item="item"
-            @add="add_item"/>
+        <div class="col-md-6"
+             v-for="(category, c_index) in items">
+            <h1 class="page-header">{{category.name}}</h1>
+            <item
+                add=true
+                v-for="(item, index) in category.items"
+                v-bind:item="item"
+                @add="add_item"/>
+        </div>
     </div>
 </template>
 

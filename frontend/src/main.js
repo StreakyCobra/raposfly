@@ -3,6 +3,7 @@ import App from './App'
 import History from './components/History'
 import Home from './components/Home'
 import Shop from './components/Shop'
+import Stats from './components/Stats'
 import VueI18n from 'vue-i18n'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
@@ -29,7 +30,8 @@ import 'font-awesome/css/font-awesome.css'
 const routes = [
     { path: '/', component: Home },
     { path: '/shop', component: Shop },
-    { path: '/history', component: History }
+    { path: '/history', component: History },
+    { path: '/stats', component: Stats }
 ]
 
 const router = new VueRouter({

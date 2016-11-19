@@ -18,10 +18,13 @@
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <router-link to="/shop" tag="li" active-class="active" exact data-toggle="collapse" data-target=".navbar-collapse.in">
-                            <router-link to="/shop">Shop</router-link>
+                            <router-link to="/shop">{{ $t('Shop') }}</router-link>
                         </router-link>
                         <router-link to="/history" tag="li" active-class="active" exact data-toggle="collapse" data-target=".navbar-collapse.in">
-                            <router-link to="/history">History</router-link>
+                            <router-link to="/history">{{ $t('History') }}</router-link>
+                        </router-link>
+                        <router-link to="/stats" tag="li" active-class="active" exact data-toggle="collapse" data-target=".navbar-collapse.in">
+                            <router-link to="/stats">{{ $t('Stats') }}</router-link>
                         </router-link>
                     </ul>
                     <div class="navbar-right">
@@ -30,7 +33,7 @@
                             <li><a @click="setLang('fr')">FR</a></li>
                         </ul>
                         <ul class="nav navbar-nav">
-                            <li><a href="//backend.raposfly.io/admin"><i class="fa fa-cog" aria-hidden="true"></i> Admin</a></li>
+                            <li><a href="//backend.raposfly.io/admin"><i class="fa fa-cog" aria-hidden="true"></i> {{ $t('Admin') }}</a></li>
                         </ul>
                     </div>
                 </div>

@@ -1,14 +1,14 @@
 <template>
     <div>
-        <h1 class="page-header">Cart</h1>
+        <h1 class="page-header">{{ $t('Cart') }}</h1>
         <item
             del=true
             v-for="(item, index) in items"
             v-bind:item="item"
             @remove="remove_item(item, index)"/>
         <p class="bold">Total: <span class="amount">{{ total }} CHF</span></p>
-        <button class="btn btn-success" @click="purchase">Purchase</button>
-        <button class="btn btn-warning" @click="reset">Discard</button>
+        <button class="btn btn-success" @click="purchase">{{ $t('Purchase') }}</button>
+        <button class="btn btn-warning" @click="reset">{{ $t('Discard') }}</button>
     </div>
 </template>
 

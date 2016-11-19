@@ -3,13 +3,13 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">{{title}}</h4>
+                    <h4 class="modal-title">{{ $t(title) }}</h4>
                 </div>
                 <div class="modal-body">
-                    {{message}}
+                    {{ $t(message) }}
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">{{button}}</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">{{ $t(button) }}</button>
                 </div>
             </div>
         </div>
