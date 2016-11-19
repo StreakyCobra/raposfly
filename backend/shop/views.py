@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from . import serializers
-from .models import Composition, Item, Purchase
+from .models import Category, Composition, Item, Purchase
 from .tickets import print_ticket, print_total
 
 
@@ -17,8 +17,9 @@ class ListItems(APIView):
 
     def get(self, request):
         """GET request to access the list of items of the shop."""
-        items = Item.objects.all()
-        return Response(serializers.ItemSerializer(items, many=True).data)
+        categories = Category.objects.all()
+        return Response(serializers.CategorySerializer(categories,
+                                                       many=True).data)
 
 
 class ListPurchases(APIView):
