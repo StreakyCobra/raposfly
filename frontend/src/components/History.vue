@@ -27,7 +27,9 @@
      mounted: function () {
          this.$http.get('shop/purchases/').then((response) => {
              this.purchases = response.body
-         }, null)
+         }, (response) => {
+             this.$emit('error', 'Impossible to load history')
+         })
      }
  }
 </script>

@@ -12,5 +12,8 @@
     "Discard": "Annuler",
     "Close": "Fermer",
     "Error": "Erreur",
-    "Impossible to purchase items": "Impossible d'acheter les objets."
+    "Impossible to purchase items": "Impossible d'acheter les objets",
+    "Impossible to load items": "Impossible de charger les objets",
+    "Impossible to load stats": "Impossible de charger les statistiques",
+    "Impossible to load history": "Impossible de charger l'historique"
 }
