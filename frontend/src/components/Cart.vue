@@ -9,11 +9,14 @@
         <p class="bold">Total: <span class="amount">{{ total }} CHF</span></p>
         <button class="btn btn-success" @click="purchase">{{ $t('Purchase') }}</button>
         <button class="btn btn-warning" @click="reset">{{ $t('Discard') }}</button>
+        <div id="alerts"></div>
     </div>
 </template>
 
 <script>
  import Item from './Item'
+
+ var $ = require('jquery')
 
  export default {
      name: 'cart',
@@ -58,9 +61,11 @@
                  this.$http.post('shop/purchase/', this.items).then((response) => {
                      this.$emit('purchase', this.items, this.total)
                  }, (response) => {
-                     this.$emit('error', 'Impossible to purchase the items')
+                     this.$emit('error', 'Impossible to purchase items')
                  })
              }
+             $('#alerts').append('<div class="alert alert-info fade in">' + this.$t('Items purchased') + '</div>')
+             $('.alert').delay(2000).slideUp(500)
              this.reset()
          },
          reset: function () {
@@ -77,5 +82,9 @@
 
  .amount {
      color: #287379
+ }
+
+ #alerts {
+     margin-top: 2em;
  }
 </style>

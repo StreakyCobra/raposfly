@@ -15,5 +15,9 @@
     "Impossible to purchase items": "Impossible d'acheter les objets",
     "Impossible to load items": "Impossible de charger les objets",
     "Impossible to load stats": "Impossible de charger les statistiques",
-    "Impossible to load history": "Impossible de charger l'historique"
+    "Impossible to load history": "Impossible de charger l'historique",
+    "Total Sales": "Ventes totales",
+    "Sales History": "Historique des ventes",
+    "Counts": "Décompte",
+    "Items purchased": "Achat effectué"
 }
