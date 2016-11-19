@@ -27,7 +27,7 @@ class Category(models.Model):
     """A category of the shop."""
 
     name = models.CharField(max_length=255)
-    items = models.ManyToManyField(Item)
+    items = models.ManyToManyField(Item, blank=True)
     image = models.ImageField(blank=True, null=True,
                               upload_to=UploadHashedTo('categories'))
     order = models.IntegerField(default=9999)
