@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Views for the shop application."""
 
+from django.db.models import Sum, Count
 from django.utils import timezone
 from escpos.exceptions import Error, USBNotFoundError
 from escpos.printer import Usb
@@ -90,3 +91,41 @@ class PurchaseItems(APIView):
             Composition(item=item, purchase=purchase, price=item.price).save()
 
         return Response({'status': 'ok'})
+
+
+class Stats(APIView):
+    """The stats of the shop."""
+
+    def get(self, request):
+        """GET request to access the stats of the shop."""
+        stats = dict()
+
+        # ------------------------------------------------------------------- #
+        # Total sales                                                         #
+        # ------------------------------------------------------------------- #
+
+        total_sales = Composition.objects.aggregate(Sum('price'))
+        stats['total_sales'] = total_sales['price__sum']
+
+        # ------------------------------------------------------------------- #
+        # Cumulative Sales                                                   #
+        # ------------------------------------------------------------------- #
+
+        purchases = Purchase.objects.annotate(total=Sum('items__price'))
+        running_total = 0
+        stats['cumulative_sales'] = []
+        for p in purchases:
+            running_total += p.total
+            stats['cumulative_sales'].append({'x': int(p.date.timestamp()),
+                                              'y': running_total})
+
+        # ------------------------------------------------------------------- #
+        # Count                                                               #
+        # ------------------------------------------------------------------- #
+
+        items = Item.objects.annotate(count=Count('items_set'))
+        stats['counts'] = dict()
+        stats['counts']['labels'] = [i.name for i in items]
+        stats['counts']['series'] = [i.count for i in items]
+
+        return Response(stats)

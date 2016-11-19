@@ -51,11 +51,14 @@ class Purchase(models.Model):
         """Return the string representation of a Purchase."""
         return "{id} - {date}".format(**self.__dict__)
 
+    class Meta:
+        ordering = ('date',)
+
 
 class Composition(models.Model):
     """The composition of a purchase in the shop."""
 
-    item = models.ForeignKey(Item)
+    item = models.ForeignKey(Item, related_name='items_set')
     purchase = models.ForeignKey(Purchase)
     price = models.DecimalField(max_digits=8, decimal_places=2)
 
