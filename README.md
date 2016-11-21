@@ -3,7 +3,7 @@
 _**» Raspberry Pi Point of Sale on the Fly.**_
 
 [![raspberry-badge](https://img.shields.io/badge/run%20on-Rasberry%20Pi%203-red.svg)](https://www.raspberrypi.org/)
-[![Propulsed by docker](https://img.shields.io/badge/propulsed%20by-docker-blue.svg)](https://www.docker.com/)
+[![Powered by docker](https://img.shields.io/badge/powered%20by-docker-blue.svg)](https://www.docker.com/)
 [![Built with Spacemacs](https://cdn.rawgit.com/syl20bnr/spacemacs/442d025779da2f62fc86c2082703697714db6514/assets/spacemacs-badge.svg)](http://spacemacs.org)
 [![License](https://img.shields.io/badge/license-GPLv3-yellow.svg)][LICENSE.md]
 
