@@ -10,7 +10,6 @@ _**» Raspberry Pi Point of Sale on the Fly.**_
 -----
 
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
-
 **Table of Contents**
 
 - [Presentation](#presentation)
@@ -27,7 +26,7 @@ _**» Raspberry Pi Point of Sale on the Fly.**_
         - [Verification](#verification)
     - [Deployement of the project](#deployement-of-the-project)
         - [Clone the project on the Raspberry PI](#clone-the-project-on-the-raspberry-pi)
-        - [Run the containers](#run-the-containers)
+        - [Build the containers](#build-the-containers)
         - [Autostart](#autostart)
         - [Verification](#verification)
 - [Version numbers](#version-numbers)
