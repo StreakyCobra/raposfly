@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=too-many-ancestors
 """Views for the shop application."""
 
 from django.db.models import Sum, Count
@@ -7,48 +8,41 @@ from escpos.exceptions import Error, USBNotFoundError
 from escpos.printer import Usb
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import viewsets
 
 from . import serializers
 from .models import Category, Composition, Item, Purchase
 from .tickets import print_ticket, print_total
 
 
-class ListItems(APIView):
-    """List the items of the shop."""
+class PurchaseViewSet(viewsets.ModelViewSet):
+    """Purchase viewset of the shop."""
+
+    serializer_class = serializers.PurchaseSerializer
+    queryset = Purchase.objects.all()
+
+
+class ItemViewSet(viewsets.ModelViewSet):
+    """Item viewset of the shop."""
+
+    serializer_class = serializers.ItemSerializer
+    queryset = Item.objects.all()
+
+
+class ShopItemsView(APIView):
+    """List the items of the shop grouped by categories."""
 
     def get(self, request):
-        """GET request to access the list of items of the shop."""
+        """GET request for items of the shop grouped by categories."""
         categories = [c for c in Category.objects.all() if c.item_set.all()]
         return Response(serializers.CategorySerializer(categories,
                                                        many=True).data)
 
 
-class ListPurchases(APIView):
-    """List the purchases of the shop."""
-
-    def get(self, request):
-        """GET request to access the list of purchases of the shop."""
-        purchases = Purchase.objects.order_by('date').reverse()
-        serialized = serializers.PurchaseSerializer(purchases, many=True)
-        return Response(serialized.data)
-
-
-class PurchaseView(APIView):
-    """Access a purchases of the shop."""
-
-    def delete(self, request, purchase_id):
-        """DELETE request to delete a purchases of the shop."""
-        try:
-            Purchase.objects.get(pk=purchase_id).delete()
-        except Purchase.DoesNotExist:
-            return Response("Purchase does not exist", status=400)
-        return Response("Purchase deleted")
-
-
-class PurchaseItems(APIView):
+class DoPurchaseItemsView(APIView):
     """Purchase items in the shop."""
 
-    serializer_class = serializers.ItemSerializer
+    serializer_class = serializers.PurchaseItemSerializer
 
     def post(self, request):
         """POST request to purcharse items in the shop."""
@@ -78,7 +72,8 @@ class PurchaseItems(APIView):
         # ------------------------------------------------------------------- #
 
         try:
-            printer = Usb(0x04b8, 0x0e15)
+            pass
+            # printer = Usb(0x04b8, 0x0e15)
         except USBNotFoundError:
             return Response({'status': 'Impossible to connect to the '
                                        'printer.'},
@@ -86,9 +81,10 @@ class PurchaseItems(APIView):
 
         try:
             # Each ticket
-            for item in items:
-                print_ticket(printer, item)
-            print_total(printer, items, total)
+            pass
+            # for item in items:
+            #     print_ticket(printer, item)
+            # print_total(printer, items, total)
         except Error:
             return Response({'status': 'Impossible to print the tickets'},
                             status=400)
@@ -105,7 +101,7 @@ class PurchaseItems(APIView):
         return Response({'status': 'ok'})
 
 
-class Stats(APIView):
+class ShopStatsView(APIView):
     """The stats of the shop."""
 
     def get(self, request):

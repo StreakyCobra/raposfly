@@ -1,14 +1,18 @@
 # -*- coding: utf-8 -*-
 """URLs for the shop application."""
 from django.conf.urls import url
+from rest_framework.routers import SimpleRouter
 
 from . import views
 
+router = SimpleRouter()
+router.register(r'items', views.ItemViewSet)
+router.register(r'purchases', views.PurchaseViewSet)
 
 urlpatterns = [
-    url(r'^items/', views.ListItems.as_view()),
-    url(r'^purchase/(?P<purchase_id>[0-9]+)/', views.PurchaseView.as_view()),
-    url(r'^purchase/', views.PurchaseItems.as_view()),
-    url(r'^purchases/', views.ListPurchases.as_view()),
-    url(r'^stats/', views.Stats.as_view()),
+    url(r'^shop-items/', views.ShopItemsView.as_view()),
+    url(r'^do-purchase/', views.DoPurchaseItemsView.as_view()),
+    url(r'^shop-stats/', views.ShopStatsView.as_view()),
 ]
+
+urlpatterns += router.urls

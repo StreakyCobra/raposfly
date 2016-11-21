@@ -14,6 +14,16 @@ class ItemSerializer(serializers.ModelSerializer):
         exclude = ()
 
 
+class PurchaseItemSerializer(serializers.ModelSerializer):
+    """Serializer for purchasing an Item."""
+
+    quantity = serializers.IntegerField()
+
+    class Meta:
+        model = Item
+        fields = ('name', 'price', 'quantity')
+
+
 class CategorySerializer(serializers.ModelSerializer):
     """Serializer for a Category."""
 
