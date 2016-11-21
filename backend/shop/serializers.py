@@ -17,7 +17,7 @@ class ItemSerializer(serializers.ModelSerializer):
 class CategorySerializer(serializers.ModelSerializer):
     """Serializer for a Category."""
 
-    items = ItemSerializer(many=True)
+    items = ItemSerializer(many=True, source='item_set')
 
     class Meta:
         model = Category

@@ -18,7 +18,7 @@ class ListItems(APIView):
 
     def get(self, request):
         """GET request to access the list of items of the shop."""
-        categories = Category.objects.all()
+        categories = [c for c in Category.objects.all() if c.item_set.all()]
         return Response(serializers.CategorySerializer(categories,
                                                        many=True).data)
 
