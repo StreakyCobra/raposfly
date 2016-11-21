@@ -6,30 +6,10 @@ from colorful.fields import RGBColorField
 from .utils import UploadHashedTo
 
 
-class Item(models.Model):
-    """An item of the shop."""
-
-    name = models.CharField(max_length=255)
-    image = models.ImageField(blank=True, null=True,
-                              upload_to=UploadHashedTo('items'))
-    description = models.TextField(blank=True, null=True)
-    price = models.DecimalField(max_digits=8, decimal_places=2)
-    color = RGBColorField(blank=True, null=True)
-    order = models.IntegerField(default=9999)
-
-    def __str__(self):
-        """Return the string representation of an Item."""
-        return "{name}".format(**self.__dict__)
-
-    class Meta:
-        ordering = ('order',)
-
-
 class Category(models.Model):
     """A category of the shop."""
 
     name = models.CharField(max_length=255)
-    items = models.ManyToManyField(Item, blank=True)
     image = models.ImageField(blank=True, null=True,
                               upload_to=UploadHashedTo('categories'))
     color = RGBColorField(blank=True, null=True)
@@ -42,6 +22,33 @@ class Category(models.Model):
     class Meta:
         ordering = ('order',)
         verbose_name_plural = "Categories"
+
+
+class Item(models.Model):
+    """An item of the shop."""
+
+    name = models.CharField(max_length=255)
+    category = models.ForeignKey(Category)
+    image = models.ImageField(blank=True, null=True,
+                              upload_to=UploadHashedTo('items'))
+    description = models.TextField(blank=True, null=True)
+    price = models.DecimalField(max_digits=8, decimal_places=2)
+    color = RGBColorField(blank=True, null=True)
+    order = models.IntegerField(default=9999)
+
+    def __str__(self):
+        """Return the string representation of an Item."""
+        return "{name}".format(**self.__dict__)
+
+    def get_color(self):
+        """Return the color of the category."""
+        if self.color:
+            return self.color
+        return category.color
+
+    class Meta:
+        ordering = ('order',)
+
 
 
 class Purchase(models.Model):
