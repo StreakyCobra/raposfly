@@ -41,7 +41,6 @@ class Item(models.Model):
         ordering = ('order',)
 
 
-
 class Purchase(models.Model):
     """A purchase in the shop."""
 
