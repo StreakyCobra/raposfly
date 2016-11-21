@@ -12,8 +12,9 @@ Vue.use(VueRouter)
 Vue.use(VueResource)
 
 // config
-var ROOT_URL = 'http://raposfly.io'
-var ROOT_BACKEND_URL = 'http://backend.raposfly.io/api'
+var ROOT_URL = 'http://localhost:8080'
+var ROOT_BACKEND_URL = 'http://localhost:8000'
+var ROOT_API_URL = ROOT_BACKEND_URL + '/api'
 
 // jquery
 var $ = require('jquery')
@@ -41,7 +42,7 @@ const router = new VueRouter({
 })
 
 // vue-resource
-Vue.url.options.root = ROOT_BACKEND_URL
+Vue.url.options.root = ROOT_API_URL
 
 // vue-i18n
 var language = require('./language')
@@ -52,6 +53,11 @@ Object.defineProperties(Vue.prototype, {
     $root_url: {
         get: function () {
             return ROOT_URL
+        }
+    },
+    $backend_url: {
+        get: function () {
+            return ROOT_BACKEND_URL
         }
     },
     $language: {
