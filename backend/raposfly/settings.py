@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework_docs',
     'corsheaders',
     'django_cleanup',
+    'colorful',
     'shop',
 ]
 
