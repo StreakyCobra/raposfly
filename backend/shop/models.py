@@ -2,6 +2,7 @@
 """Models for the shop application."""
 
 from django.db import models
+from colorful.fields import RGBColorField
 from .utils import UploadHashedTo
 
 
@@ -13,6 +14,7 @@ class Item(models.Model):
                               upload_to=UploadHashedTo('items'))
     description = models.TextField(blank=True, null=True)
     price = models.DecimalField(max_digits=8, decimal_places=2)
+    color = RGBColorField(blank=True, null=True)
     order = models.IntegerField(default=9999)
 
     def __str__(self):
@@ -30,6 +32,7 @@ class Category(models.Model):
     items = models.ManyToManyField(Item, blank=True)
     image = models.ImageField(blank=True, null=True,
                               upload_to=UploadHashedTo('categories'))
+    color = RGBColorField(blank=True, null=True)
     order = models.IntegerField(default=9999)
 
     def __str__(self):
