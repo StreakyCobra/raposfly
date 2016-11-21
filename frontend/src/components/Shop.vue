@@ -20,7 +20,7 @@
              this.$refs.cart.add_item(item)
          },
          error: function (msg) {
-             this.$emit('error', 'Impossible to purchase items')
+             this.$emit('error', msg)
          }
      }
  }
