@@ -26,7 +26,7 @@
          }
      },
      mounted: function () {
-         this.$http.get('shop/items/').then((response) => {
+         this.$http.get('shop/shop-items/').then((response) => {
              this.items = response.body
          }, (response) => {
              this.$emit('error', 'Impossible to load items')

@@ -10,8 +10,10 @@
                     {{ purchase.date }}
                 </div>
                 <div class="panel-body">
-                    <item v-for="item in purchase.items"
-                          v-bind:item="item"/>
+                    <item
+                        small=True
+                        v-for="item in purchase.items"
+                        v-bind:item="item"/>
                 </div>
             </div>
         </template>

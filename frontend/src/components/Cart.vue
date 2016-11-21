@@ -1,15 +1,18 @@
 <template>
     <div>
         <h1 class="page-header">{{ $t('Cart') }}</h1>
+        <div class="buttons btn-group">
+            <button class="btn btn-lg btn-success" @click="purchase">{{ $t('Purchase') }}</button>
+            <button class="btn btn-lg btn-danger" @click="reset">{{ $t('Discard') }}</button>
+        </div>
+        <p class="total">Total: <span class="amount">{{ total }} CHF</span></p>
+        <div id="alerts"></div>
         <item
             del=true
+            small=true
             v-for="(item, index) in items"
             v-bind:item="item"
             @remove="remove_item(item, index)"/>
-        <p class="bold">Total: <span class="amount">{{ total }} CHF</span></p>
-        <button class="btn btn-success" @click="purchase">{{ $t('Purchase') }}</button>
-        <button class="btn btn-warning" @click="reset">{{ $t('Discard') }}</button>
-        <div id="alerts"></div>
     </div>
 </template>
 
@@ -51,22 +54,32 @@
              this.total = this.get_items_total(this.items)
          },
          add_item: function (item) {
-             this.items.push(item)
+             var index = this.items.indexOf(item)
+             if (index !== -1) {
+                 this.items[index].quantity += 1
+             } else {
+                 item.quantity = 1
+                 this.items.push(item)
+             }
          },
          remove_item: function (item, index) {
-             this.items.splice(index, 1)
+             if (this.items[index].quantity > 1) {
+                 this.items[index].quantity -= 1
+             } else {
+                 this.items.splice(index, 1)
+             }
          },
          purchase: function () {
              if (this.items.length > 0) {
-                 this.$http.post('shop/purchase/', this.items).then((response) => {
+                 this.$http.post('shop/do-purchase/', this.items).then((response) => {
                      this.$emit('purchase', this.items, this.total)
                  }, (response) => {
                      this.$emit('error', 'Impossible to purchase items')
                  })
+                 $('#alerts').append('<div class="alert alert-info fade in">' + this.$t('Items purchased') + '</div>')
+                 $('.alert').delay(2000).slideUp(500)
+                 this.reset()
              }
-             $('#alerts').append('<div class="alert alert-info fade in">' + this.$t('Items purchased') + '</div>')
-             $('.alert').delay(2000).slideUp(500)
-             this.reset()
          },
          reset: function () {
              this.items = []
@@ -76,12 +89,23 @@
 </script>
 
 <style scoped>
- .bold {
-     font-weight: bold
+ .btn-group {
+     width: 100%;
+     margin-bottom: 1em;
+ }
+
+ .btn {
+     width: 50%;
+ }
+
+ .total {
+     font-weight: bold;
+     font-size: 1.5em;
  }
 
  .amount {
-     color: #287379
+     float: right;
+     color: #287379;
  }
 
  #alerts {

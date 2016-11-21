@@ -21,13 +21,11 @@
 
  export default {
      name: 'error',
-     props: {
-         title: {
-             default () { return 'Error' }
-         },
-         message: '',
-         button: {
-             default () { return 'Close' }
+     data: function () {
+         return {
+             title: 'Error',
+             message: '',
+             button: 'Close'
          }
      },
      methods: {

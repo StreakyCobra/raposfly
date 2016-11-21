@@ -1,11 +1,25 @@
 <template>
-    <div>
-        <p>
-            <a v-if="del" class="btn btn-danger" @click="$emit('remove', item)">x</a>
-            <a v-if="add" class="btn btn-primary" @click="$emit('add', item)">+</a>
-            <span class="price"> {{ item.price }} CHF</span>
-            <span>{{ item.name }}</span>
-        </p>
+    <div @click="clicked(item)">
+        <!-- Big display -->
+        <div v-if="!small"
+             class="big item panel panel-default">
+            <div class="panel-body" :style="{ backgroundColor: this.item.color }">
+                <span class="name">{{ item.name }}</span>
+                <img :src="item_image(item)"/>
+            </div>
+            <div class="panel-footer">
+                <span class="price"> {{ item.price }} CHF</span>
+            </div>
+        </div>
+        <!-- Small display -->
+        <div v-if="small"
+             class="small item panel panel-default">
+            <div class="panel-body" :style="{ backgroundColor: this.item.color }">
+                <span class="quantity">{{ String(item.quantity) }}×</span>
+                <span class="name">{{ item.name }}</span>
+                <span class="price">{{ item.quantity * item.price }} CHF</span>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -14,21 +28,73 @@
      name: 'item',
      props: {
          item: {},
+         small: {
+             default () { return false }
+         },
          del: {
              default () { return false }
          },
          add: {
              default () { return false }
          }
+     },
+     methods: {
+         clicked: function (item) {
+             if (this.add) {
+                 this.$emit('add', item)
+             } else if (this.del) {
+                 this.$emit('remove', item)
+             }
+         },
+         item_image: function (item) {
+             return this.$backend_url + item.image
+         }
      }
  }
 </script>
 
 <style scoped>
+ .item {
+     box-shadow: 5px 5px 5px -2px gray;
+ }
 
- .price {
-     width: 10em;
-     font-size: 0.8em;
+ .big .panel-body {
+     height: 100px;
+ }
+
+ .big .panel-footer {
+     overflow: auto;
+     padding: 3px;
+ }
+
+ .big .name {
+     font-size: 2em;
+ }
+
+ .big .price, .big .quantity {
+     font-size: 1em;
      font-weight: bold;
+ }
+
+ .big .price {
+     float: right;
+ }
+
+ .big img {
+     float: right;
+     height: 100%;
+ }
+
+ .small .panel-body {
+     height: 100%;
+ }
+
+ .small .quantity {
+     height: 100%;
+     vertical-align: middle;
+ }
+
+ .small .name {
+     font-size: 1.5em;
  }
 </style>
