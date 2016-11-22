@@ -11,7 +11,7 @@
                 </div>
                 <div class="panel-body">
                     <item
-                        small=True
+                        style=list
                         v-for="item in purchase.items"
                         v-bind:item="item"/>
                 </div>

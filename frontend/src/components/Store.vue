@@ -1,13 +1,12 @@
 <template>
     <div>
         <div class="col-md-6"
-             v-for="(category, c_index) in items">
+             v-for="category in items">
             <h1 class="page-header">{{category.name}}</h1>
-            <item
-                add=true
-                v-for="(item, index) in category.items"
-                v-bind:item="item"
-                @add="add_item"/>
+            <item v-for="item in category.items"
+                  :item="item"
+                  style=big
+                  @clicked="add_item(item)"/>
         </div>
     </div>
 </template>

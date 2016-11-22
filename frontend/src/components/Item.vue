@@ -1,7 +1,7 @@
 <template>
     <div @click="clicked(item)">
         <!-- Big display -->
-        <div v-if="!small"
+        <div v-if="style === 'big'"
              class="big item panel panel-default">
             <div class="panel-body" :style="{ backgroundColor: this.item.color }">
                 <span class="name">{{ item.name }}</span>
@@ -12,9 +12,18 @@
             </div>
         </div>
         <!-- Small display -->
-        <div v-if="small"
+        <div v-if="style == 'small'"
              class="small item panel panel-default">
             <div class="panel-body" :style="{ backgroundColor: this.item.color }">
+                <span class="quantity">{{ String(item.quantity) }}×</span>
+                <span class="name">{{ item.name }}</span>
+                <span class="price">{{ item.quantity * item.price }} CHF</span>
+            </div>
+        </div>
+        <!-- List display -->
+        <div v-if="style == 'list'"
+             class="small item panel panel-default">
+            <div :style="{ backgroundColor: this.item.color }">
                 <span class="quantity">{{ String(item.quantity) }}×</span>
                 <span class="name">{{ item.name }}</span>
                 <span class="price">{{ item.quantity * item.price }} CHF</span>
@@ -28,23 +37,13 @@
      name: 'item',
      props: {
          item: {},
-         small: {
-             default () { return false }
-         },
-         del: {
-             default () { return false }
-         },
-         add: {
-             default () { return false }
+         style: {
+             default () { return 'big' }
          }
      },
      methods: {
          clicked: function (item) {
-             if (this.add) {
-                 this.$emit('add', item)
-             } else if (this.del) {
-                 this.$emit('remove', item)
-             }
+             this.$emit('clicked', item)
          },
          item_image: function (item) {
              return this.$backend_url + item.image

@@ -8,11 +8,10 @@
         <p class="total">Total: <span class="amount">{{ total }} CHF</span></p>
         <div id="alerts"></div>
         <item
-            del=true
-            small=true
+            style=small
             v-for="(item, index) in items"
             v-bind:item="item"
-            @remove="remove_item(item, index)"/>
+            @clicked="remove_item(item, index)"/>
     </div>
 </template>
 
