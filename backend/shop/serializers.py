@@ -14,16 +14,6 @@ class ItemSerializer(serializers.ModelSerializer):
         exclude = ()
 
 
-class PurchaseItemSerializer(serializers.ModelSerializer):
-    """Serializer for purchasing an Item."""
-
-    quantity = serializers.IntegerField()
-
-    class Meta:
-        model = Item
-        fields = ('name', 'price', 'quantity')
-
-
 class CategorySerializer(serializers.ModelSerializer):
     """Serializer for a Category."""
 
@@ -34,18 +24,29 @@ class CategorySerializer(serializers.ModelSerializer):
         exclude = ()
 
 
+class PurchaseSerializer(serializers.ModelSerializer):
+    """Serializer for a Purchase."""
+
+    items = ItemSerializer(many=True)
+
+    class Meta:
+        model = Purchase
+        exclude = ()
+
+
 class CompositionSerializer(serializers.ModelSerializer):
     """Serializer for a Composition."""
 
     item = ItemSerializer()
+    purchase = PurchaseSerializer()
 
     class Meta:
         model = Composition
         exclude = ()
 
 
-class PurchaseSerializer(serializers.ModelSerializer):
-    """Serializer for a Purchase."""
+class HistorySerializer(serializers.ModelSerializer):
+    """Serializer for purchase history."""
 
     items = CompositionSerializer(many=True, read_only=True,
                                   source='composition_set')
@@ -53,3 +54,10 @@ class PurchaseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Purchase
         fields = ('id', 'date', 'items')
+
+
+class DoPurchaseItemSerializer(serializers.Serializer):
+    """Serializer for purchasing an Item."""
+
+    item = ItemSerializer()
+    quantity = serializers.IntegerField()

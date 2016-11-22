@@ -15,13 +15,6 @@ from .models import Category, Composition, Item, Purchase
 from .tickets import print_ticket, print_total
 
 
-class PurchaseViewSet(viewsets.ModelViewSet):
-    """Purchase viewset of the shop."""
-
-    serializer_class = serializers.PurchaseSerializer
-    queryset = Purchase.objects.all()
-
-
 class ItemViewSet(viewsets.ModelViewSet):
     """Item viewset of the shop."""
 
@@ -29,7 +22,14 @@ class ItemViewSet(viewsets.ModelViewSet):
     queryset = Item.objects.all()
 
 
-class ShopItemsView(APIView):
+class PurchaseViewSet(viewsets.ModelViewSet):
+    """Purchase viewset of the shop."""
+
+    serializer_class = serializers.PurchaseSerializer
+    queryset = Purchase.objects.all()
+
+
+class StoreView(APIView):
     """List the items of the shop grouped by categories."""
 
     def get(self, request):
@@ -39,10 +39,10 @@ class ShopItemsView(APIView):
                                                        many=True).data)
 
 
-class DoPurchaseItemsView(APIView):
-    """Purchase items in the shop."""
+class BuyView(APIView):
+    """Buy items in the shop."""
 
-    serializer_class = serializers.PurchaseItemSerializer
+    serializer_class = serializers.DoPurchaseItemSerializer
 
     def post(self, request):
         """POST request to purcharse items in the shop."""
@@ -101,7 +101,7 @@ class DoPurchaseItemsView(APIView):
         return Response({'status': 'ok'})
 
 
-class ShopStatsView(APIView):
+class StatsView(APIView):
     """The stats of the shop."""
 
     def get(self, request):

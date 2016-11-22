@@ -10,9 +10,9 @@ router.register(r'items', views.ItemViewSet)
 router.register(r'purchases', views.PurchaseViewSet)
 
 urlpatterns = [
-    url(r'^shop-items/', views.ShopItemsView.as_view()),
-    url(r'^do-purchase/', views.DoPurchaseItemsView.as_view()),
-    url(r'^shop-stats/', views.ShopStatsView.as_view()),
+    url(r'^buy/', views.BuyView.as_view()),
+    url(r'^stats/', views.StatsView.as_view()),
+    url(r'^store/', views.StoreView.as_view()),
 ]
 
 urlpatterns += router.urls
