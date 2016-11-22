@@ -1,7 +1,12 @@
 <template>
     <div>
-        <store ref="store" class="col-md-8" @add_item="add_item" @error="error"></store>
-        <cart ref="cart" class="col-md-4" @error="error"></cart>
+        <store ref="store"
+               class="col-md-8"
+               @add_item="add_item">
+        </store>
+        <cart ref="cart"
+              class="col-md-4">
+        </cart>
     </div>
 </template>
 
@@ -18,9 +23,6 @@
      methods: {
          add_item: function (item) {
              this.$refs.cart.add_item(item)
-         },
-         error: function (msg) {
-             this.$emit('error', msg)
          }
      }
  }

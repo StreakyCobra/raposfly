@@ -26,7 +26,7 @@
          this.$http.get('shop/shop-stats/').then((response) => {
              this.plot(response.body)
          }, (response) => {
-             this.$emit('error', 'Impossible to load stats')
+             this.$bus.$emit('error', 'Impossible to load stats')
          })
      },
      methods: {

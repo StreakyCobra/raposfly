@@ -43,14 +43,14 @@
              this.$http.get('shop/purchases/').then((response) => {
                  this.purchases = response.body
              }, (response) => {
-                 this.$emit('error', 'Impossible to load history')
+                 this.$bus.$emit('error', 'Impossible to load history')
              })
          },
          remove: function (purchase) {
              this.$http.delete('shop/purchases/' + purchase.id + '/').then((response) => {
                  this.update()
              }, (response) => {
-                 this.$emit('error', 'Impossible to delete purchase')
+                 this.$bus.$emit('error', 'Impossible to delete purchase')
              })
          },
          format_date: function (date) {

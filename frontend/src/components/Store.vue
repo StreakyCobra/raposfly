@@ -29,7 +29,7 @@
          this.$http.get('shop/shop-items/').then((response) => {
              this.items = response.body
          }, (response) => {
-             this.$emit('error', 'Impossible to load items')
+             this.$bus.$emit('error', 'Impossible to load items')
          })
      },
      methods: {

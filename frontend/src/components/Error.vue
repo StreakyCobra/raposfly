@@ -28,6 +28,9 @@
              button: 'Close'
          }
      },
+     mounted: function (msg) {
+         this.$bus.$on('error', this.alert)
+     },
      methods: {
          alert: function (msg) {
              this.message = msg

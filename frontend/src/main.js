@@ -48,8 +48,15 @@ Vue.url.options.root = ROOT_API_URL
 var language = require('./language')
 language.setLang('en')
 
+var busVue = new Vue()
+
 // properties
 Object.defineProperties(Vue.prototype, {
+    $bus: {
+        get: function () {
+            return busVue
+        }
+    },
     $root_url: {
         get: function () {
             return ROOT_URL
