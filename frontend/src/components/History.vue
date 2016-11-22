@@ -5,9 +5,9 @@
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <div class="btn-group pull-right">
-                        <a class="btn btn-danger btn-sm" style="float: right;" @click="remove(purchase)">{{ $t('Delete') }}</a>
+                        <a class="btn btn-danger btn-sm" @click="remove(purchase)">{{ $t('Delete') }}</a>
                     </div>
-                    {{ purchase.date }}
+                    {{ format_date(purchase.date) }}
                 </div>
                 <div class="panel-body">
                     <item
@@ -22,6 +22,8 @@
 
 <script>
  import Item from './Item'
+ var moment = require('moment')
+ moment.locale('fr-ch')
 
  export default {
      name: 'history',
@@ -50,6 +52,10 @@
              }, (response) => {
                  this.$emit('error', 'Impossible to delete purchase')
              })
+         },
+         format_date: function (date) {
+             var result = moment(date).format('LLLL')
+             return result.charAt(0).toUpperCase() + result.slice(1)
          }
      }
  }
