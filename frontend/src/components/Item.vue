@@ -1,5 +1,5 @@
 <template>
-    <div class="noselect" @click="clicked(item)">
+    <div @click="clicked(item)">
         <!-- Big display -->
         <div v-if="style === 'big'"
              class="big item panel panel-default">
