@@ -4,8 +4,9 @@
              v-for="category in items">
             <h1 class="page-header">{{category.name}}</h1>
             <item v-for="item in category.items"
-                  :item="item"
                   style=big
+                  :item="item"
+                  :show_quantity=false
                   @clicked="add_item(item)"/>
         </div>
     </div>

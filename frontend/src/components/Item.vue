@@ -3,28 +3,31 @@
         <!-- Big display -->
         <div v-if="style === 'big'"
              class="big item panel panel-default">
+            <div v-if="show_quantity" class="panel-heading">
+                <span class="quantity">{{ String(this.quantity) }}×</span>
+            </div>
             <div class="panel-body" :style="{ backgroundColor: this.item.color }">
                 <span class="name">{{ item.name }}</span>
                 <img :src="item_image(item)"/>
             </div>
             <div class="panel-footer">
-                <span class="price"> {{ item.price }} CHF</span>
+                <span class="price"> {{ item.quantity * item.price }} CHF</span>
             </div>
         </div>
         <!-- Small display -->
         <div v-if="style == 'small'"
              class="small item panel panel-default">
             <div class="panel-body" :style="{ backgroundColor: this.item.color }">
-                <span class="quantity">{{ String(item.quantity) }}×</span>
+                <span v-if="show_quantity" class="quantity">{{ String(this.quantity) }}×</span>
                 <span class="name">{{ item.name }}</span>
-                <span class="price">{{ item.quantity * item.price }} CHF</span>
+                <span class="price pull-right">{{ item.quantity * item.price }} CHF</span>
             </div>
         </div>
         <!-- List display -->
         <div v-if="style == 'list'"
              class="small item panel panel-default">
             <div :style="{ backgroundColor: this.item.color }">
-                <span class="quantity">{{ String(item.quantity) }}×</span>
+                <span v-if="show_quantity" class="quantity">{{ String(this.quantity) }}×</span>
                 <span class="name">{{ item.name }}</span>
                 <span class="price">{{ item.quantity * item.price }} CHF</span>
             </div>
@@ -37,8 +40,10 @@
      name: 'item',
      props: {
          item: {},
-         style: {
-             default () { return 'big' }
+         style: String,
+         show_quantity: {
+             type: Boolean,
+             default () { return true }
          }
      },
      methods: {
