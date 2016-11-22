@@ -12,6 +12,7 @@ router.register(r'purchases', views.PurchaseViewSet)
 urlpatterns = [
     url(r'^buy/', views.BuyView.as_view()),
     url(r'^stats/', views.StatsView.as_view()),
+    url(r'^history/', views.HistoryView.as_view()),
     url(r'^store/', views.StoreView.as_view()),
 ]
 

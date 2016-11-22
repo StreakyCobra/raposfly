@@ -3,7 +3,7 @@
 
 from rest_framework import serializers
 
-from .models import Category, Item, Purchase, Composition
+from .models import Category, Composition, Item, Purchase
 
 
 class ItemSerializer(serializers.ModelSerializer):
@@ -17,7 +17,7 @@ class ItemSerializer(serializers.ModelSerializer):
 class CategorySerializer(serializers.ModelSerializer):
     """Serializer for a Category."""
 
-    items = ItemSerializer(many=True, source='item_set')
+    items = ItemSerializer(many=True, read_only=True, source='item_set')
 
     class Meta:
         model = Category
@@ -27,7 +27,7 @@ class CategorySerializer(serializers.ModelSerializer):
 class PurchaseSerializer(serializers.ModelSerializer):
     """Serializer for a Purchase."""
 
-    items = ItemSerializer(many=True)
+    items = ItemSerializer(many=True, read_only=True)
 
     class Meta:
         model = Purchase
@@ -35,29 +35,28 @@ class PurchaseSerializer(serializers.ModelSerializer):
 
 
 class CompositionSerializer(serializers.ModelSerializer):
-    """Serializer for a Composition."""
+    """Serializer for a composition."""
 
-    item = ItemSerializer()
-    purchase = PurchaseSerializer()
+    item = ItemSerializer(read_only=True)
 
     class Meta:
         model = Composition
-        exclude = ()
+        exclude = ('purchase',)
 
 
 class HistorySerializer(serializers.ModelSerializer):
-    """Serializer for purchase history."""
+    """Serializer for purchases history."""
 
-    items = CompositionSerializer(many=True, read_only=True,
-                                  source='composition_set')
+    orders = CompositionSerializer(many=True, read_only=True,
+                                   source='composition_set')
 
     class Meta:
         model = Purchase
-        fields = ('id', 'date', 'items')
+        exclude = ('items',)
 
 
-class DoPurchaseItemSerializer(serializers.Serializer):
-    """Serializer for purchasing an Item."""
+class BuySerializer(serializers.Serializer):
+    """Serializer for buying a given quantity of an item."""
 
-    item = ItemSerializer()
+    item_id = serializers.IntegerField()
     quantity = serializers.IntegerField()

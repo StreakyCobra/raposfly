@@ -23,7 +23,7 @@
          }
      },
      mounted: function () {
-         this.$http.get('shop/shop-stats/').then((response) => {
+         this.$http.get('shop/stats/').then((response) => {
              this.plot(response.body)
          }, (response) => {
              this.$bus.$emit('error', 'Impossible to load stats')

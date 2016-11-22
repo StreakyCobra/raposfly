@@ -47,7 +47,7 @@
              function add (a, b) {
                  return a + b
              }
-             return items.map(item => parseFloat(item.price)).reduce(add, 0)
+             return items.map(item => parseFloat(item.price) * item.quantity).reduce(add, 0)
          },
          recompute_total: function () {
              this.total = this.get_items_total(this.items)

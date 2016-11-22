@@ -25,24 +25,36 @@ class ItemViewSet(viewsets.ModelViewSet):
 class PurchaseViewSet(viewsets.ModelViewSet):
     """Purchase viewset of the shop."""
 
-    serializer_class = serializers.PurchaseSerializer
+    serializer_class = serializers.HistorySerializer
     queryset = Purchase.objects.all()
 
 
 class StoreView(APIView):
     """List the items of the shop grouped by categories."""
 
+    serializer_class = serializers.CategorySerializer
+
     def get(self, request):
         """GET request for items of the shop grouped by categories."""
         categories = [c for c in Category.objects.all() if c.item_set.all()]
-        return Response(serializers.CategorySerializer(categories,
-                                                       many=True).data)
+        return Response(self.serializer_class(categories, many=True).data)
+
+
+class HistoryView(APIView):
+    """List the history of purchases of the shop."""
+
+    serializer_class = serializers.HistorySerializer
+
+    def get(self, request):
+        """GET request for the list the history of purchases of the shop."""
+        purchases = Purchase.objects.all()
+        return Response(self.serializer_class(purchases, many=True).data)
 
 
 class BuyView(APIView):
     """Buy items in the shop."""
 
-    serializer_class = serializers.DoPurchaseItemSerializer
+    serializer_class = serializers.BuySerializer
 
     def post(self, request):
         """POST request to purcharse items in the shop."""
