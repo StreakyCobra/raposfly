@@ -36,11 +36,11 @@
          }
      },
      mounted: function () {
-         this.update()
+         this.load()
      },
      methods: {
-         update: function () {
-             this.$http.get('shop/purchases/').then((response) => {
+         load: function () {
+             this.$http.get('shop/history/').then((response) => {
                  this.purchases = response.body
              }, (response) => {
                  this.$bus.$emit('error', 'Impossible to load history')
@@ -48,7 +48,7 @@
          },
          remove: function (purchase) {
              this.$http.delete('shop/purchases/' + purchase.id + '/').then((response) => {
-                 this.update()
+                 this.load()
              }, (response) => {
                  this.$bus.$emit('error', 'Impossible to delete purchase')
              })
