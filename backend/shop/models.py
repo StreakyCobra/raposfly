@@ -61,6 +61,7 @@ class Composition(models.Model):
     item = models.ForeignKey(Item, related_name='items_set')
     purchase = models.ForeignKey(Purchase)
     price = models.DecimalField(max_digits=8, decimal_places=2)
+    quantity = models.IntegerField()
 
     def __str__(self):
         """Return the string representation of a Composition."""
