@@ -119,7 +119,8 @@ class ShopStatsView(APIView):
         # Cumulative Sales                                                   #
         # ------------------------------------------------------------------- #
 
-        purchases = Purchase.objects.annotate(total=Sum('items__price'))
+        purchases = Purchase.objects.order_by('date')\
+                                    .annotate(total=Sum('items__price'))
         running_total = 0
         stats['cumulative_sales'] = []
         for p in purchases:
