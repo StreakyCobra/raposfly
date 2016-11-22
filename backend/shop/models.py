@@ -52,7 +52,7 @@ class Purchase(models.Model):
         return "{id} - {date}".format(**self.__dict__)
 
     class Meta:
-        ordering = ('date',)
+        ordering = ('-date',)
 
 
 class Composition(models.Model):
