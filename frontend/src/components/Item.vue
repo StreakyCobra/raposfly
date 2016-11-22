@@ -24,8 +24,7 @@
             </div>
         </div>
         <!-- List display -->
-        <div v-if="style == 'list'"
-             class="small item panel panel-default">
+        <div v-if="style == 'list'">
             <div :style="{ backgroundColor: this.item.color }">
                 <span v-if="show_quantity" class="quantity">{{ String(this.quantity) }}×</span>
                 <span class="name">{{ item.name }}</span>
