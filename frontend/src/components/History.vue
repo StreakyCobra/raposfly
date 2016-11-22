@@ -13,7 +13,7 @@
                     <item
                         style=list
                         v-for="item in purchase.items"
-                        v-bind:item="item"/>
+                        :item="item"/>
                 </div>
             </div>
         </template>

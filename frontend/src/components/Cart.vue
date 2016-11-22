@@ -10,7 +10,7 @@
         <item
             style=small
             v-for="(item, index) in items"
-            v-bind:item="item"
+            :item="item"
             @clicked="remove_item(item, index)"/>
     </div>
 </template>
