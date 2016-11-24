@@ -2,6 +2,7 @@
 # pylint: disable=too-many-ancestors
 """Views for the shop application."""
 
+from constance import config
 from django.db.models import Sum, Count
 from django.utils import timezone
 from escpos.exceptions import Error, USBNotFoundError
@@ -150,3 +151,13 @@ class StatsView(APIView):
         stats['counts']['series'] = [i.count for i in items]
 
         return Response(stats)
+
+
+class ConfigView(APIView):
+    """The config of the shop."""
+
+    def get(self, request):
+        """GET request to access the configuration of the shop."""
+        keys = list(config.__dir__())
+        confs = {k: config.__getattr__(k) for k in keys}
+        return Response(confs)
