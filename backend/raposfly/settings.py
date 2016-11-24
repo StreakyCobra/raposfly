@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_cleanup',
     'colorful',
+    'constance',
+    'constance.backends.database',
     'shop',
 ]
 
@@ -139,3 +141,8 @@ MEDIA_ROOT = '/srv/http/media/'
 
 INTERNAL_IPS = ['127.0.0.1']
 CORS_ORIGIN_ALLOW_ALL = True
+
+CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
+CONSTANCE_CONFIG = {
+    'EVENT': ('Nuit du badminton Zinal 2016', 'Name of the event.'),
+}
