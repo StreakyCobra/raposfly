@@ -72,12 +72,12 @@
              if (this.items.length > 0) {
                  this.$http.post('shop/do-purchase/', this.items).then((response) => {
                      this.$emit('purchase', this.items, this.total)
+                     $('#alerts').append('<div class="alert alert-info fade in">' + this.$t('Items purchased') + '</div>')
+                     $('.alert').delay(2000).slideUp(500)
+                     this.reset()
                  }, (response) => {
                      this.$bus.$emit('error', 'Impossible to purchase items')
                  })
-                 $('#alerts').append('<div class="alert alert-info fade in">' + this.$t('Items purchased') + '</div>')
-                 $('.alert').delay(2000).slideUp(500)
-                 this.reset()
              }
          },
          reset: function () {
