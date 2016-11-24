@@ -6,9 +6,13 @@
         <div v-if="show_quantity" class="panel-heading">
             <span class="quantity">{{ String(item.quantity) }}×</span>
         </div>
-        <div class="panel-body" :style="{ backgroundColor: this.item.color }">
+        <div class="panel-body" :style="{ backgroundColor: this.item.color,
+                                        backgroundImage: 'url(' + item_image(item) + ')',
+                                        backgroundRepeat: 'no-repeat',
+                                        backgroundPosition: 'right',
+                                        backgroundOrigin: 'content-box',
+                                        backgroundSize: 'auto 100%'}">
             <span class="name">{{ item.name }}</span>
-            <img :src="item_image(item)"/>
         </div>
         <div class="panel-footer">
             <span class="price"> {{ item.quantity * item.price }} CHF</span>

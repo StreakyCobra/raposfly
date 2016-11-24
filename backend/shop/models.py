@@ -10,6 +10,8 @@ class Category(models.Model):
     """A category of the shop."""
 
     name = models.CharField(max_length=255)
+    image = models.FileField(blank=True, null=True,
+                             upload_to=UploadHashedTo('categories'))
     order = models.IntegerField(default=9999)
 
     def __str__(self):
@@ -32,6 +34,12 @@ class Item(models.Model):
     price = models.DecimalField(max_digits=8, decimal_places=2)
     color = RGBColorField(blank=True, null=True, default="#ffffff")
     order = models.IntegerField(default=9999)
+
+    def image_item_or_categorie(self):
+        """Return the image of the item or of category if not existing."""
+        if self.image:
+            return self.image
+        return self.category.image
 
     def __str__(self):
         """Return the string representation of an Item."""

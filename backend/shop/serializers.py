@@ -9,6 +9,8 @@ from .models import Category, Composition, Item, Purchase
 class ItemSerializer(serializers.ModelSerializer):
     """Serializer for an Item."""
 
+    image = serializers.FileField(source='image_item_or_categorie')
+
     class Meta:
         model = Item
         exclude = ()
