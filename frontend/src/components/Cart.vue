@@ -1,17 +1,20 @@
 <template>
-    <div>
+    <div class="cart">
         <h1 class="page-header">{{ $t('Cart') }}</h1>
-        <div class="buttons btn-group">
-            <button class="btn btn-lg btn-success" @click="purchase">{{ $t('Purchase') }}</button>
-            <button class="btn btn-lg btn-danger" @click="reset">{{ $t('Discard') }}</button>
+        <div class="controls">
+            <p class="total">Total: <span class="amount">{{ total }} CHF</span></p>
+            <div class="buttons btn-group">
+                <button class="btn btn-lg btn-success" @click="purchase">{{ $t('Purchase') }}</button>
+                <button class="btn btn-lg btn-danger" @click="reset">{{ $t('Discard') }}</button>
+            </div>
         </div>
-        <p class="total">Total: <span class="amount">{{ total }} CHF</span></p>
-        <div id="alerts"></div>
+        <hr />
         <item
             display_style=small
             v-for="(item, index) in items"
             :item="item"
             @clicked="remove_item(item, index)"/>
+        <div id="alerts"></div>
     </div>
 </template>
 
@@ -73,7 +76,7 @@
                  this.$http.post('shop/do-purchase/', this.items).then((response) => {
                      this.$emit('purchase', this.items, this.total)
                      $('#alerts').append('<div class="alert alert-info fade in">' + this.$t('Items purchased') + '</div>')
-                     $('.alert').delay(2000).slideUp(500)
+                     $('.alert').delay(4000).slideUp(500)
                      this.reset()
                  }, (response) => {
                      this.$bus.$emit('error', 'Impossible to purchase items')
@@ -88,9 +91,11 @@
 </script>
 
 <style scoped>
+ .controls {
+     margin-bottom: 1em;
+ }
  .btn-group {
      width: 100%;
-     margin-bottom: 1em;
  }
 
  .btn {
@@ -98,13 +103,13 @@
  }
 
  .total {
-     font-weight: bold;
      font-size: 1.5em;
+     font-weight: bold;
  }
 
  .amount {
      float: right;
-     color: #287379;
+     text-decoration: underline;
  }
 
  #alerts {
