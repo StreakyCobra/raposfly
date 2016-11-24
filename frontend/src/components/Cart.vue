@@ -8,7 +8,7 @@
         <p class="total">Total: <span class="amount">{{ total }} CHF</span></p>
         <div id="alerts"></div>
         <item
-            style=small
+            display_style=small
             v-for="(item, index) in items"
             :item="item"
             @clicked="remove_item(item, index)"/>

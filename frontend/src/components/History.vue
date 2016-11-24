@@ -11,7 +11,7 @@
                 </div>
                 <div class="panel-body">
                     <item
-                        style=list
+                        display_style=list
                         v-for="item in purchase.items"
                         :item="item"/>
                 </div>

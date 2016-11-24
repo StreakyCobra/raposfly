@@ -1,35 +1,36 @@
 <template>
-    <div @click="clicked(item)">
-        <!-- Big display -->
-        <div v-if="style === 'big'"
-             class="big item panel panel-default">
-            <div v-if="show_quantity" class="panel-heading">
-                <span class="quantity">{{ String(this.quantity) }}×</span>
-            </div>
-            <div class="panel-body" :style="{ backgroundColor: this.item.color }">
-                <span class="name">{{ item.name }}</span>
-                <img :src="item_image(item)"/>
-            </div>
-            <div class="panel-footer">
-                <span class="price"> {{ item.quantity * item.price }} CHF</span>
-            </div>
+    <!-- Big display -->
+    <div v-if="display_style === 'big'"
+         class="big item panel panel-default"
+         @click="clicked">
+        <div v-if="show_quantity" class="panel-heading">
+            <span class="quantity">{{ String(item.quantity) }}×</span>
         </div>
-        <!-- Small display -->
-        <div v-if="style == 'small'"
-             class="small item panel panel-default">
-            <div class="panel-body" :style="{ backgroundColor: this.item.color }">
-                <span v-if="show_quantity" class="quantity">{{ String(this.quantity) }}×</span>
-                <span class="name">{{ item.name }}</span>
-                <span class="price pull-right">{{ item.quantity * item.price }} CHF</span>
-            </div>
+        <div class="panel-body" :style="{ backgroundColor: this.item.color }">
+            <span class="name">{{ item.name }}</span>
+            <img :src="item_image(item)"/>
         </div>
-        <!-- List display -->
-        <div v-if="style == 'list'">
-            <div :style="{ backgroundColor: this.item.color }">
-                <span v-if="show_quantity" class="quantity">{{ String(this.quantity) }}×</span>
-                <span class="name">{{ item.name }}</span>
-                <span class="price">{{ item.quantity * item.price }} CHF</span>
-            </div>
+        <div class="panel-footer">
+            <span class="price"> {{ item.quantity * item.price }} CHF</span>
+        </div>
+    </div>
+    <!-- Small display -->
+    <div v-else-if="display_style === 'small'"
+         class="small item panel panel-default"
+        @click="clicked">
+        <div class="panel-body" :style="{ backgroundColor: this.item.color }">
+            <span v-if="show_quantity" class="quantity">{{ String(this.quantity) }}×</span>
+            <span class="name">{{ item.name }}</span>
+            <span class="price pull-right">{{ item.quantity * item.price }} CHF</span>
+        </div>
+    </div>
+    <!-- List display -->
+    <div v-else-if="display_style === 'list'"
+         @click="clicked">
+        <div :style="{ backgroundColor: this.item.color }">
+            <span v-if="show_quantity" class="quantity">{{ String(this.quantity) }}×</span>
+            <span class="name">{{ item.name }}</span>
+            <span class="price">{{ item.quantity * item.price }} CHF</span>
         </div>
     </div>
 </template>
@@ -39,7 +40,7 @@
      name: 'item',
      props: {
          item: {},
-         style: String,
+         display_style: String,
          show_quantity: {
              type: Boolean,
              default () { return true }
