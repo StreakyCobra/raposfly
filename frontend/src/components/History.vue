@@ -1,5 +1,7 @@
 <template>
     <div class="container">
+        <h1>Counter</h1>
+        <counter></counter>
         <h1 class="page-header">{{ $t('History') }}</h1>
         <template v-for="purchase in purchases">
             <div class="panel panel-info">
@@ -22,13 +24,15 @@
 
 <script>
  import Item from './Item'
+ import Counter from './Counter'
  var moment = require('moment')
  moment.locale('fr-ch')
 
  export default {
      name: 'history',
      components: {
-         Item
+         Item,
+         Counter
      },
      data () {
          return {

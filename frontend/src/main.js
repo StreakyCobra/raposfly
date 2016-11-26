@@ -4,9 +4,13 @@ import History from './components/History'
 import Home from './components/Home'
 import Shop from './components/Shop'
 import Stats from './components/Stats'
+import Vuex from 'vuex'
 import VueI18n from 'vue-i18n'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
+import store from './store'
+
+Vue.use(Vuex)
 Vue.use(VueI18n)
 Vue.use(VueRouter)
 Vue.use(VueResource)
@@ -81,6 +85,7 @@ Object.defineProperties(Vue.prototype, {
 new Vue({
     el: '#app',
     template: '<App/>',
+    store,
     components: {
         App
     },
