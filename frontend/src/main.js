@@ -15,9 +15,18 @@ Vue.use(VueI18n)
 Vue.use(VueRouter)
 Vue.use(VueResource)
 
-// config
-var ROOT_URL = 'http://localhost:8080'
-var ROOT_BACKEND_URL = 'http://localhost:8000'
+// Check for production
+const production = process.env.NODE_ENV === 'production'
+
+// Dev urls
+var DEV_ROOT_URL = 'http://localhost:8080'
+var DEV_ROOT_BACKEND_URL = 'http://localhost:8000'
+// Production urls
+var PROD_ROOT_URL = 'http://raposfly.shop'
+var PROD_ROOT_BACKEND_URL = 'http://backend.raposfly.shop'
+// Urls
+var ROOT_URL = production ? PROD_ROOT_URL : DEV_ROOT_URL
+var ROOT_BACKEND_URL = production ? PROD_ROOT_BACKEND_URL : DEV_ROOT_BACKEND_URL
 var ROOT_API_URL = ROOT_BACKEND_URL + '/api'
 
 // jquery
