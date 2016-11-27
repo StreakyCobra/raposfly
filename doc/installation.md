@@ -1,5 +1,10 @@
 # Installation
 
+First you can go through the list of requirements to be sure that you have
+everything. Then you can follow the section explaining how to prepare your
+Raspberry Pi, and finally follow the section about deploying the project on the
+device.
+
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
 **Table of Contents**
 
@@ -21,12 +26,6 @@
         - [Verification](#verification)
 
 <!-- markdown-toc end -->
-
-
-First you can go through the list of requirements to be sure that you have
-everything. Then you can follow the section explaining how to prepare your
-Raspberry Pi, and finally follow the section about deploying the project on the
-device.
 
 ## Requirements
 
