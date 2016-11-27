@@ -290,8 +290,8 @@ Edit ``/etc/dnsmasq.conf`` to uncomment and change the following lines:
 
     domain-needed
     bogus-priv
-    local=/raposfly.io/
-    domain=raposfly.io
+    local=/raposfly.shop/
+    domain=raposfly.shop
     interface=wlan0
 
 Add also this at the end of the file so that all URLs will redirect to the
@@ -299,7 +299,7 @@ Rapsberry Pi:
 
 .. code-block:: cfg
 
-    address=/raposfly.io/192.168.42.1
+    address=/raposfly.shop/192.168.42.1
 
 Finally enable the DNS server at boot:
 
@@ -546,5 +546,5 @@ After the green led has turned off completly, unplug the ethernet cable and the
 power cable, and restart the Raspberry Pi by pluging again the power cable (not
 the ethernet cable though). With this you would be in a situation that
 
-You should now be able to access the store website by typing ``raposfly.io`` in
+You should now be able to access the store website by typing ``raposfly.shop`` in
 a browser from a client connected through the Wifi!

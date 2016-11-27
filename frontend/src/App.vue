@@ -33,7 +33,7 @@
                             <li><a @click="setLang('fr')">FR</a></li>
                         </ul>
                         <ul class="nav navbar-nav">
-                            <li><a href="//backend.raposfly.io/admin"><i class="fa fa-cog" aria-hidden="true"></i> {{ $t('Admin') }}</a></li>
+                            <li><a href="//backend.raposfly.shop/admin"><i class="fa fa-cog" aria-hidden="true"></i> {{ $t('Admin') }}</a></li>
                         </ul>
                     </div>
                 </div>
