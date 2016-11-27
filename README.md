@@ -114,10 +114,7 @@ See [LICENSE.md][] for the complete license.
 [git-branching]:   http://nvie.com/posts/a-successful-git-branching-model/
 [git-messages]:    http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
 [installation]:    doc/installation.md
-[ip-address]:      https://www.raspberrypi.org/documentation/remote-access/ip-address.md
 [logo]:            resources/images/logo.png
 [python-escpos]:   https://github.com/python-escpos/python-escpos
 [semver]:          http://semver.org/spec/v2.0.0.html
-[ssh]:             https://www.raspberrypi.org/documentation/remote-access/ssh/
-[write-img]:       https://www.raspberrypi.org/documentation/installation/installing-images/README.md
 

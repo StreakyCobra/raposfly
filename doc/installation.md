@@ -434,3 +434,8 @@ the ethernet cable though). With this you would be in a situation that
 
 You should now be able to access the store website by typing `raposfly.io` in a
 browser from a client connected through the Wifi!
+
+
+[ip-address]:      https://www.raspberrypi.org/documentation/remote-access/ip-address.md
+[ssh]:             https://www.raspberrypi.org/documentation/remote-access/ssh/
+[write-img]:       https://www.raspberrypi.org/documentation/installation/installing-images/README.md
