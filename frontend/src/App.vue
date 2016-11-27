@@ -66,8 +66,7 @@
              this.$refs.error.alert(msg)
          },
          setLang: function (lang) {
-             console.log(this.$mylang)
-             this.$language = lang
+             this.$language.set(lang)
          }
      }
  }

@@ -1,47 +1,65 @@
+// ------------------------------------------------------------------------- //
+// IMPORTS                                                                   //
+// ------------------------------------------------------------------------- //
+
+// Vue imports
 import Vue from 'vue'
-import App from './App'
-import History from './components/History'
-import Home from './components/Home'
-import Shop from './components/Shop'
-import Stats from './components/Stats'
-import Vuex from 'vuex'
-import VueI18n from 'vue-i18n'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
+
+// Components imports
+import App from './App'
+import Home from './components/Home'
+import Shop from './components/Shop'
+import History from './components/History'
+import Stats from './components/Stats'
+
+// Code imports
 import store from './store'
+import language from './language'
 
-Vue.use(Vuex)
-Vue.use(VueI18n)
-Vue.use(VueRouter)
-Vue.use(VueResource)
+// ------------------------------------------------------------------------- //
+// URLS                                                                      //
+// ------------------------------------------------------------------------- //
 
-// Check for production
+// Check for prod/dev status
 const production = process.env.NODE_ENV === 'production'
 
-// Dev urls
+// DEV urls
 var DEV_ROOT_URL = 'http://localhost:8080'
 var DEV_ROOT_BACKEND_URL = 'http://localhost:8000'
-// Production urls
+
+// PROD urls
 var PROD_ROOT_URL = 'http://raposfly.shop'
 var PROD_ROOT_BACKEND_URL = 'http://backend.raposfly.shop'
-// Urls
+
+// URLs
 var ROOT_URL = production ? PROD_ROOT_URL : DEV_ROOT_URL
 var ROOT_BACKEND_URL = production ? PROD_ROOT_BACKEND_URL : DEV_ROOT_BACKEND_URL
 var ROOT_API_URL = ROOT_BACKEND_URL + '/api'
 
-// jquery
+// ------------------------------------------------------------------------- //
+// EXTERNAL LIBRARIES                                                        //
+// ------------------------------------------------------------------------- //
+
+// Load jquery
 var $ = require('jquery')
 window.jQuery = window.$ = $
 
-// bootstrap
+// Load bootstrap
 require('bootstrap')
 import 'bootstrap/dist/css/bootstrap.css'
 import 'chartist/dist/chartist.css'
 
-// font-awesome
+// Load font-awesome
 import 'font-awesome/css/font-awesome.css'
 
+// ------------------------------------------------------------------------- //
+// VUE CONFIGURATION                                                         //
+// ------------------------------------------------------------------------- //
+
 // vue-router
+Vue.use(VueRouter)
 const routes = [
     { path: '/', component: Home },
     { path: '/shop', component: Shop },
@@ -55,15 +73,13 @@ const router = new VueRouter({
 })
 
 // vue-resource
+Vue.use(VueResource)
 Vue.url.options.root = ROOT_API_URL
 
-// vue-i18n
-var language = require('./language')
-language.setLang('en')
-
+// Create a bus for global events
 var busVue = new Vue()
 
-// properties
+// vue properties
 Object.defineProperties(Vue.prototype, {
     $bus: {
         get: function () {
@@ -82,13 +98,14 @@ Object.defineProperties(Vue.prototype, {
     },
     $language: {
         get: function () {
-            return Vue.config.lang
-        },
-        set: function (lang) {
-            language.setLang(lang)
+            return language
         }
     }
 })
+
+// ------------------------------------------------------------------------- //
+// EXPORT                                                                    //
+// ------------------------------------------------------------------------- //
 
 /* eslint-disable no-new */
 new Vue({
