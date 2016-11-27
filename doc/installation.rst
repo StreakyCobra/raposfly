@@ -85,8 +85,8 @@ You may want to install ``vim`` if you prefer this over ``nano``:
 
     sudo apt install -y vim
 
-Whenever you need to edit or create a file, depending on your
-preferences you will need to either use:
+Whenever you need to edit or create a file, depending on your preferences you
+will need to either use:
 
 .. code-block:: console
 
@@ -98,32 +98,30 @@ or
 
     sudo vim /path/to/filename
 
-Before going further, be sure to restart your Raspberry Pi in order to
-reload the kernel as it has probably be updated:
+Before going further, be sure to restart your Raspberry Pi in order to reload
+the kernel as it has probably be updated:
 
 .. code-block:: console
 
     sudo reboot
 
-Wait one minute then reconnect to your Rasberry Pi with SSH after for
-continuing the installation procedure.
+Wait one minute then reconnect to your Rasberry Pi with SSH after for continuing
+the installation procedure.
 
 Install and configure the WIFI access-point
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In order to use the Raspberry Pi as an access point, ``hostapd`` need to
-be installed, as well as ``iptables-persistent`` that is needed to
-restore the defined routes at each boot:
+In order to use the Raspberry Pi as an access point, ``hostapd`` need to be
+installed, as well as ``iptables-persistent`` that is needed to restore the
+defined routes at each boot:
 
 .. code-block:: console
 
     sudo apt install -y hostapd iptables-persistent
 
-Answer ``No`` to the 2 questions that are asked about
-``iptables-persistent``.
+Answer ``No`` to the 2 questions that are asked about ``iptables-persistent``.
 
-Create the file ``/etc/hostapd/hostapd.conf`` and add the following
-content:
+Create the file ``/etc/hostapd/hostapd.conf`` and add the following content:
 
 .. code-block:: cfg
 
@@ -144,12 +142,12 @@ content:
     wme_enabled=1
 
 Be sure to personalize this to set a custom ``ssid`` and a custom
-``wpa_passphrase``. This will allow you to identify more easily your
-Raspberry Pi network, and prevent other people to connect to your
-network with the default credential.
+``wpa_passphrase``. This will allow you to identify more easily your Raspberry
+Pi network, and prevent other people to connect to your network with the default
+credential.
 
-Then you need to edit the file ``/etc/default/hostapd`` to indicate
-where to find the configuration file we just created:
+Then you need to edit the file ``/etc/default/hostapd`` to indicate where to
+find the configuration file we just created:
 
 .. code-block:: cfg
 
@@ -171,8 +169,7 @@ forwarding:
 
     net.ipv4.ip_forward=1
 
-Run this command to activate it for the current session without
-rebooting:
+Run this command to activate it for the current session without rebooting:
 
 .. code-block:: console
 
@@ -207,8 +204,8 @@ And finally make ``hostapd`` to start at boot:
 Install and configure the DHCP server
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In order to get an IP address when connecting to the Wifi, a DHCP server
-is needed. The ``isc-dhcp-server`` package should be installed for this:
+In order to get an IP address when connecting to the Wifi, a DHCP server is
+needed. The ``isc-dhcp-server`` package should be installed for this:
 
 .. code-block:: console
 
@@ -230,7 +227,6 @@ And in the same file uncomment the ``authoritative`` line:
     # network, the authoritative directive should be uncommented.
     authoritative;
      
-
 And finally, at the end of the same file, add the following lines:
 
 .. code-block:: cfg
@@ -245,16 +241,16 @@ And finally, at the end of the same file, add the following lines:
         option domain-name-servers 192.168.42.1;
     }
 
-Then edit ``/etc/default/isc-dhcp-server`` and set ``INTERFACES`` to
-``wlan0`` so that the DCHP server is listening on the Wifi:
+Then edit ``/etc/default/isc-dhcp-server`` and set ``INTERFACES`` to ``wlan0``
+so that the DCHP server is listening on the Wifi:
 
 .. code-block:: cfg
 
     INTERFACES="wlan0"
 
-The Raspberry Pi should have a fixed address, so not getting it through
-DHCP. For this edit the file ``/etc/network/interfaces`` to comment out
-the following ``wlan0`` related lines and add subsequent ones:
+The Raspberry Pi should have a fixed address, so not getting it through DHCP.
+For this edit the file ``/etc/network/interfaces`` to comment out the following
+``wlan0`` related lines and add subsequent ones:
 
 .. code-block:: cfg
 
@@ -280,9 +276,9 @@ And finally make ``isc-dhcp-server`` to start at boot:
 Install and configure the DNS server
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Now that we have a DHCP server, we need a name server that will allow us
-to access ``raposfly`` from the clients directly with a name, not with a
-IP address. For this the ``dnsmasq`` package should be installed:
+Now that we have a DHCP server, we need a name server that will allow us to
+access ``raposfly`` from the clients directly with a name, not with a IP
+address. For this the ``dnsmasq`` package should be installed:
 
 .. code-block:: console
 
@@ -298,8 +294,8 @@ Edit ``/etc/dnsmasq.conf`` to uncomment and change the following lines:
     domain=raposfly.io
     interface=wlan0
 
-Add also this at the end of the file so that all URLs will redirect to
-the Rapsberry Pi:
+Add also this at the end of the file so that all URLs will redirect to the
+Rapsberry Pi:
 
 .. code-block:: cfg
 
@@ -314,8 +310,7 @@ Finally enable the DNS server at boot:
 Install and configure the UFW firewall
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In order to install a firewall, the ``ufw`` package should be install
-with:
+In order to install a firewall, the ``ufw`` package should be install with:
 
 .. code-block:: console
 
@@ -361,8 +356,8 @@ Set UFW to start on boot:
 Install and configure the Docker engine
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In order to run the code, a docker engine is needed. You can obtain and
-install docker with:
+In order to run the code, a docker engine is needed. You can obtain and install
+docker with:
 
 .. code-block:: console
 
@@ -374,8 +369,8 @@ Your user need to be in the docker group to be able to use docker:
 
     sudo gpasswd -a $USER docker
 
-In order to manage the docker containers with simplicity,
-``docker-compose`` should be installed:
+In order to manage the docker containers with simplicity, ``docker-compose``
+should be installed:
 
 .. code-block:: console
 
@@ -386,18 +381,17 @@ In order to manage the docker containers with simplicity,
     sudo apt update
     sudo apt install -y docker-compose
 
-Docker has the bad habit to play with iptables, what have a tendency to
-break UFW rules, so we need the following steps to prevent this:
+Docker has the bad habit to play with iptables, what have a tendency to break
+UFW rules, so we need the following steps to prevent this:
 
-Edit ``/etc/default/ufw`` in order to allow UFW to forward request to
-docker:
+Edit ``/etc/default/ufw`` in order to allow UFW to forward request to docker:
 
 .. code-block:: cfg
 
     DEFAULT_FORWARD_POLICY="ACCEPT"
 
-Modify the file ``/etc/systemd/system/docker.service.d/overlay.conf`` in
-order to prevent docker to play with iptables:
+Modify the file ``/etc/systemd/system/docker.service.d/overlay.conf`` in order
+to prevent docker to play with iptables:
 
 .. code-block:: cfg
 
@@ -405,8 +399,8 @@ order to prevent docker to play with iptables:
     ExecStart=
     ExecStart=/usr/bin/dockerd --storage-driver overlay -H fd:// --iptables=false
 
-Add the following block on the top of ``/etc/ufw/before.rules`` in order
-to allow docker to access the outside world:
+Add the following block on the top of ``/etc/ufw/before.rules`` in order to
+allow docker to access the outside world:
 
 .. code-block:: cfg
 
@@ -439,16 +433,15 @@ Finally we can set docker to start at boot:
 Install and configure the USB driver
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In order to allow access to USB devices to users of the ``dialout``
-group, we need to create a new file
-``/etc/udev/rules.d/99-usb-dialout.rules``:
+In order to allow access to USB devices to users of the ``dialout`` group, we
+need to create a new file ``/etc/udev/rules.d/99-usb-dialout.rules``:
 
 .. code-block:: cfg
 
     SUBSYSTEM=="usb", DRIVER=="usb", MODE="0664", GROUP="dialout"
 
-You should now add yourself to the ``dialout`` group that has access now
-to the USB device:
+You should now add yourself to the ``dialout`` group that has access now to the
+USB device:
 
 .. code-block:: console
 
@@ -457,8 +450,8 @@ to the USB device:
 Verification
 ~~~~~~~~~~~~
 
-Now that everything has been done, it's time to reboot to see if
-everything is working as excepted:
+Now that everything has been done, it's time to reboot to see if everything is
+working as excepted:
 
 .. code-block:: console
 
@@ -477,8 +470,8 @@ If yes, you are on the good way!
 Deployement of the project
 --------------------------
 
-Now that the base of the Raspberry Pi is configured, we can put the code
-on it and start the deploying the application.
+Now that the base of the Raspberry Pi is configured, we can put the code on it
+and start the deploying the application.
 
 For this we will first need to install ``git``:
 
@@ -495,8 +488,8 @@ Get the project on the rapsberry with the following command:
 
     git clone https://github.com/StreakyCobra/raposfly.git
 
-If you have your own version of the code, for instance if you have made
-some modifications in a fork, you can simply change the URL to your one.
+If you have your own version of the code, for instance if you have made some
+modifications in a fork, you can simply change the URL to your one.
 
 Build the containers
 ~~~~~~~~~~~~~~~~~~~~
@@ -530,8 +523,8 @@ In order to have raposfly starting at boot, we need to create the file
     [Install]
     WantedBy=default.target
 
-Be sure to change the line ``WorkingDirectory=/home/pi/raposfly/`` with
-the current path to the ``raposfly`` folder (user and folder name!).
+Be sure to change the line ``WorkingDirectory=/home/pi/raposfly/`` with the
+current path to the ``raposfly`` folder (user and folder name!).
 
 Then enable the service to start at boot:
 
@@ -542,17 +535,16 @@ Then enable the service to start at boot:
 Verification
 ~~~~~~~~~~~~
 
-In order to verify that everything is working correctly, shutdown the
-Raspberry Pi:
+In order to verify that everything is working correctly, shutdown the Raspberry
+Pi:
 
 .. code-block:: console
 
     sudo shutdown -h now
 
-After the green led has turned off completly, unplug the ethernet cable
-and the power cable, and restart the Raspberry Pi by pluging again the
-power cable (not the ethernet cable though). With this you would be in a
-situation that
+After the green led has turned off completly, unplug the ethernet cable and the
+power cable, and restart the Raspberry Pi by pluging again the power cable (not
+the ethernet cable though). With this you would be in a situation that
 
-You should now be able to access the store website by typing
-``raposfly.io`` in a browser from a client connected through the Wifi!
+You should now be able to access the store website by typing ``raposfly.io`` in
+a browser from a client connected through the Wifi!
