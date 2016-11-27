@@ -237,7 +237,7 @@ And finally, at the end of the same file, add the following lines:
         option routers 192.168.42.1;
         default-lease-time 600;
         max-lease-time 7200;
-        option domain-name "raposfly.local";
+        option domain-name "raposfly.shop";
         option domain-name-servers 192.168.42.1;
     }
 
