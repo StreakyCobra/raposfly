@@ -26,7 +26,7 @@ class Category(models.Model):
 class Item(models.Model):
     """An item of the shop."""
 
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, unique=True)
     category = models.ForeignKey(Category)
     image = models.FileField(blank=True, null=True,
                              upload_to=UploadHashedTo('items'))
