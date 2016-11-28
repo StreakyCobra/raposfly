@@ -6,14 +6,15 @@
             <item v-for="item in category.items"
                   display_style=big
                   :item="item"
-                  :show_quantity=false />
+                  :show_quantity=false
+                  @clicked="addToCart(item)"/>
         </div>
     </div>
 </template>
 
 <script>
  import Item from './Item'
- import { mapGetters } from 'vuex'
+ import { mapActions, mapGetters } from 'vuex'
 
  export default {
      name: 'store',
@@ -22,6 +23,9 @@
      },
      computed: mapGetters([
          'items'
+     ]),
+     methods: mapActions([
+         'addToCart'
      ]),
      mounted: function () {
          this.$store.dispatch('getItems')

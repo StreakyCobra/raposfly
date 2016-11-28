@@ -13,6 +13,9 @@ export default new Vuex.Store({
     mutations: {
         RECEIVED: function (state, { items }) {
             state.items = items.items
+        },
+        ADDTOCART: function (state, { id }) {
+            console.log(id)
         }
     },
     getters: {
@@ -25,6 +28,9 @@ export default new Vuex.Store({
                     commit('RECEIVED', { items })
                 },
                 () => {})
+        },
+        addToCart: function ({ commit }, item) {
+            commit('ADDTOCART', { id: item.id })
         }
     }
 })
