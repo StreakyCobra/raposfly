@@ -13,17 +13,16 @@
 
 <script>
  import Item from './Item'
+ import { mapGetters } from 'vuex'
 
  export default {
      name: 'store',
      components: {
          Item
      },
-     computed: {
-         items: function () {
-             return this.$store.getters.getItems
-         }
-     },
+     computed: mapGetters([
+         'items'
+     ]),
      mounted: function () {
          this.$store.dispatch('getItems')
      }

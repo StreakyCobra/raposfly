@@ -16,7 +16,7 @@ export default new Vuex.Store({
         }
     },
     getters: {
-        getItems: state => state.items
+        items: state => state.items
     },
     actions: {
         getItems: function ({ commit }) {
