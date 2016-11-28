@@ -9,6 +9,13 @@ export default new Vue({
             }, (response) => {
                 errorCb()
             })
+        },
+        purchaseItems: function (cart, cb, errorCb) {
+            this.$http.post('shop/buy/', cart).then((response) => {
+                cb(cart)
+            }, (response) => {
+                errorCb()
+            })
         }
     }
 })

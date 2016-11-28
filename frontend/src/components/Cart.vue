@@ -4,42 +4,47 @@
         <div class="controls">
             <p class="total">Total: <span class="amount">{{ total }} CHF</span></p>
             <div class="buttons btn-group">
-                <button class="btn btn-lg btn-success">{{ $t('Purchase') }}</button>
-                <button class="btn btn-lg btn-danger">{{ $t('Discard') }}</button>
+                <button class="btn btn-lg btn-success" @click="purchaseCart">{{ $t('Purchase') }}</button>
+                <button class="btn btn-lg btn-danger" @click="discardCart">{{ $t('Discard') }}</button>
             </div>
         </div>
         <hr />
-        <item
-            display_style=small
-            v-for="(item, index) in added"
-            :item="item" />
+        <template
+            v-for="entry in cart">
+            {{ entry.quantity }} × {{ entry.item.price }} = {{ entry.quantity * entry.item.price }} CHF
+            <item display_style=small
+                  :item="entry.item"
+                  @clicked="removeFromCart(entry.item)"/>
+        </template>
         <div id="alerts"></div>
     </div>
 </template>
 
 <script>
  import Item from './Item'
- import { mapGetters } from 'vuex'
+ import { mapActions, mapGetters } from 'vuex'
 
  export default {
      name: 'cart',
      components: {
          Item
      },
-     computed: mapGetters([
-         'added'
-     ]),
-     methods: {
-         get_items_total: function (items) {
+     computed: {
+         total: function () {
              function add (a, b) {
                  return a + b
              }
-             return items.map(item => parseFloat(item.price) * item.quantity).reduce(add, 0)
+             return this.cart.map(entry => parseFloat(entry.item.price) * entry.quantity).reduce(add, 0)
          },
-         recompute_total: function () {
-             this.total = this.get_items_total(this.items)
-         }
-     }
+         ...mapGetters([
+             'cart'
+         ])
+     },
+     methods: mapActions([
+         'discardCart',
+         'purchaseCart',
+         'removeFromCart'
+     ])
  }
 </script>
 

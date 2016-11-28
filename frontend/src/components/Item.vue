@@ -3,9 +3,6 @@
     <div v-if="display_style === 'big'"
          class="big item panel panel-default"
          @click="clicked">
-        <div v-if="show_quantity" class="panel-heading">
-            <span class="quantity">{{ String(item.quantity) }}×</span>
-        </div>
         <div class="panel-body" :style="{ backgroundColor: this.item.color,
                                         backgroundImage: 'url(' + item_image(item) + ')',
                                         backgroundRepeat: 'no-repeat',
@@ -15,7 +12,7 @@
             <span class="name">{{ item.name }}</span>
         </div>
         <div class="panel-footer">
-            <span class="price"> {{ item.quantity * item.price }} CHF</span>
+            <span class="price"> {{ item.price }} CHF</span>
         </div>
     </div>
     <!-- Small display -->
@@ -23,18 +20,16 @@
          class="small item panel panel-default"
         @click="clicked">
         <div class="panel-body" :style="{ backgroundColor: this.item.color }">
-            <span v-if="show_quantity" class="quantity">{{ String(this.quantity) }}×</span>
             <span class="name">{{ item.name }}</span>
-            <span class="price pull-right">{{ item.quantity * item.price }} CHF</span>
+            <span class="price pull-right">{{ item.price }} CHF</span>
         </div>
     </div>
     <!-- List display -->
     <div v-else-if="display_style === 'list'"
          @click="clicked">
         <div :style="{ backgroundColor: this.item.color }">
-            <span v-if="show_quantity" class="quantity">{{ String(this.quantity) }}×</span>
             <span class="name">{{ item.name }}</span>
-            <span class="price">{{ item.quantity * item.price }} CHF</span>
+            <span class="price">{{ item.price }} CHF</span>
         </div>
     </div>
 </template>
@@ -44,11 +39,7 @@
      name: 'item',
      props: {
          item: {},
-         display_style: String,
-         show_quantity: {
-             type: Boolean,
-             default () { return true }
-         }
+         display_style: String
      },
      methods: {
          clicked: function (item) {
@@ -79,7 +70,7 @@
      font-size: 2em;
  }
 
- .big .price, .big .quantity {
+ .big .price {
      font-size: 1em;
      font-weight: bold;
  }
@@ -95,11 +86,6 @@
 
  .small .panel-body {
      height: 100%;
- }
-
- .small .quantity {
-     height: 100%;
-     vertical-align: middle;
  }
 
  .small .name {
