@@ -4,24 +4,21 @@
         <div class="controls">
             <p class="total">Total: <span class="amount">{{ total }} CHF</span></p>
             <div class="buttons btn-group">
-                <button class="btn btn-lg btn-success" @click="purchase">{{ $t('Purchase') }}</button>
-                <button class="btn btn-lg btn-danger" @click="reset">{{ $t('Discard') }}</button>
+                <button class="btn btn-lg btn-success">{{ $t('Purchase') }}</button>
+                <button class="btn btn-lg btn-danger">{{ $t('Discard') }}</button>
             </div>
         </div>
         <hr />
         <item
             display_style=small
             v-for="(item, index) in items"
-            :item="item"
-            @clicked="remove_item(item, index)"/>
+            :item="item" />
         <div id="alerts"></div>
     </div>
 </template>
 
 <script>
  import Item from './Item'
-
- var $ = require('jquery')
 
  export default {
      name: 'cart',
@@ -69,18 +66,6 @@
                  this.items[index].quantity -= 1
              } else {
                  this.items.splice(index, 1)
-             }
-         },
-         purchase: function () {
-             if (this.items.length > 0) {
-                 this.$http.post('shop/do-purchase/', this.items).then((response) => {
-                     this.$emit('purchase', this.items, this.total)
-                     $('#alerts').append('<div class="alert alert-info fade in">' + this.$t('Items purchased') + '</div>')
-                     $('.alert').delay(4000).slideUp(500)
-                     this.reset()
-                 }, (response) => {
-                     this.$bus.$emit('error', 'Impossible to purchase items')
-                 })
              }
          },
          reset: function () {

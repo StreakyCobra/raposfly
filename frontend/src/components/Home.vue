@@ -13,10 +13,13 @@
             {{ $t('And finally access stats through') }}:<br />
             <router-link to="/history" tag="a" class="btn btn-info" style="width: 150px;">{{ $t('Stats') }}</router-link>
         </p>
+        <button class="btn btn-info" @click="test">Test</button>
     </div>
 </template>
 
 <script>
+ import shop from '../api/shop'
+
  export default {
      name: 'home',
      data: function () {
@@ -30,6 +33,11 @@
          }, (response) => {
              this.$bus.$emit('error', 'Impossible to connect to the database')
          })
+     },
+     methods: {
+         test: function () {
+             shop.get_items()
+         }
      }
  }
 </script>

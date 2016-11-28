@@ -6,8 +6,7 @@
             <item v-for="item in category.items"
                   display_style=big
                   :item="item"
-                  :show_quantity=false
-                  @clicked="add_item(item)"/>
+                  :show_quantity=false />
         </div>
     </div>
 </template>
@@ -20,22 +19,13 @@
      components: {
          Item
      },
-     data () {
-         return {
-             items: []
+     computed: {
+         items: function () {
+             return this.$store.getters.getItems
          }
      },
      mounted: function () {
-         this.$http.get('shop/store/').then((response) => {
-             this.items = response.body
-         }, (response) => {
-             this.$bus.$emit('error', 'Impossible to load items')
-         })
-     },
-     methods: {
-         add_item: function (item) {
-             this.$emit('add_item', item)
-         }
+         this.$store.dispatch('getItems')
      }
  }
 </script>

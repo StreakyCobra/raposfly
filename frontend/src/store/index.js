@@ -1,34 +1,30 @@
-// ------------------------------------------------------------------------- //
-// IMPORTS                                                                   //
-// ------------------------------------------------------------------------- //
-
 import Vue from 'vue'
 import Vuex from 'vuex'
-import * as actions from './actions'
-import * as getters from './getters'
-import cart from './modules/cart'
-import products from './modules/products'
 
-// ------------------------------------------------------------------------- //
-// CONFIGURATION                                                             //
-// ------------------------------------------------------------------------- //
+import shop from '../api/shop'
 
 // Use vuex
 Vue.use(Vuex)
 
-// Check for prod/dev status
-const debug = process.env.NODE_ENV !== 'production'
-
-// ------------------------------------------------------------------------- //
-// EXPORT                                                                    //
-// ------------------------------------------------------------------------- //
-
 export default new Vuex.Store({
-    actions,
-    getters,
-    modules: {
-        cart,
-        products
+    state: {
+        items: []
     },
-    strict: debug
+    mutations: {
+        RECEIVED: function (state, { items }) {
+            state.items = items.items
+        }
+    },
+    getters: {
+        getItems: state => state.items
+    },
+    actions: {
+        getItems: function ({ commit }) {
+            shop.get_items(
+                (items) => {
+                    commit('RECEIVED', { items })
+                },
+                () => {})
+        }
+    }
 })
