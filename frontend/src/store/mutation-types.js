@@ -1,0 +1,2 @@
+export const ADD_TO_CART = 'ADDTOCART'
+export const RECEIVE_ITEMS = 'RECEIVEITEMS'
