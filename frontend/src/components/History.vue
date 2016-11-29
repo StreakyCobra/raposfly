@@ -18,7 +18,7 @@
                     </template>
                 </div>
                 <div class="panel-footer">
-                    Total
+                    Total: {{ compute_total(purchase) }} CHF
                 </div>
             </div>
         </template>
@@ -45,6 +45,13 @@
          this.load()
      },
      methods: {
+         compute_total: function (purchase) {
+             console.log(purchase)
+             function add (a, b) {
+                 return a + b
+             }
+             return purchase.orders.map(order => parseFloat(order.item.price) * order.quantity).reduce(add, 0)
+         },
          load: function () {
              this.$http.get('shop/history/').then((response) => {
                  this.purchases = response.body
