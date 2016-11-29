@@ -55,14 +55,14 @@ class HistoryView(APIView):
 class BuyView(APIView):
     """Buy items in the shop."""
 
-    serializer_class = serializers.BuySerializer
+    serializer_class = serializers.OrderSerializer
 
     def post(self, request):
         """POST request to purcharse items in the shop."""
         serializer = self.serializer_class(data=request.data, many=True)
         serializer.is_valid(raise_exception=True)
 
-        entries = serializer.validated_data
+        orders = serializer.validated_data
 
         # ------------------------------------------------------------------- #
         # Verify that items are valid and haven't changed                     #
@@ -70,14 +70,14 @@ class BuyView(APIView):
 
         items = []
         total = 0
-        for entry in entries:
+        for order in orders:
             try:
-                item = Item.objects.get(id=entry['item_id'])
+                item = Item.objects.get(id=order['item_id'])
             except Item.DoesNotExist:
                 return Response({'status': 'Some items are not valid or '
                                            'have changed in the database.'},
                                 status=400)
-            items.append((item, entry['quantity']))
+            items.append((item, order['quantity']))
 
         # ------------------------------------------------------------------- #
         # Print the tickets                                                   #
