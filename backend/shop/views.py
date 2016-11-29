@@ -62,7 +62,7 @@ class BuyView(APIView):
         serializer = self.serializer_class(data=request.data, many=True)
         serializer.is_valid(raise_exception=True)
 
-        sent_items = serializer.validated_data
+        entries = serializer.validated_data
 
         # ------------------------------------------------------------------- #
         # Verify that items are valid and haven't changed                     #
@@ -70,15 +70,14 @@ class BuyView(APIView):
 
         items = []
         total = 0
-        for item in sent_items:
+        for entry in entries:
             try:
-                item = Item.objects.get(name=item['name'], price=item['price'])
-                total += item.price
+                item = Item.objects.get(id=entry['item_id'])
             except Item.DoesNotExist:
                 return Response({'status': 'Some items are not valid or '
                                            'have changed in the database.'},
                                 status=400)
-            items.append(item)
+            items.append((item, entry['quantity']))
 
         # ------------------------------------------------------------------- #
         # Print the tickets                                                   #
@@ -95,8 +94,9 @@ class BuyView(APIView):
         try:
             # Each ticket
             pass
-            # for item in items:
+            # for (item, quantity) in items:
             #     print_ticket(printer, item)
+            #     total += item.price * quantity
             # print_total(printer, items, total)
         except Error:
             return Response({'status': 'Impossible to print the tickets'},
@@ -108,8 +108,11 @@ class BuyView(APIView):
 
         purchase = Purchase(date=timezone.now())
         purchase.save()
-        for item in items:
-            Composition(item=item, purchase=purchase, price=item.price).save()
+        for (item, quantity) in items:
+            Composition(item=item,
+                        purchase=purchase,
+                        price=item.price,
+                        quantity=quantity).save()
 
         return Response({'status': 'ok'})
 
