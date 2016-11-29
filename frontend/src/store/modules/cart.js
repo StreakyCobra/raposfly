@@ -40,7 +40,9 @@ const mutations = {
     [types.PURCHASE_CART]: function (state) {
         shop.purchaseItems(
             state.cart,
-            (items) => {},
+            (items) => {
+                state.cart = []
+            },
             () => {})
     }
 }
