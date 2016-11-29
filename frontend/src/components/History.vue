@@ -12,10 +12,15 @@
                     {{ format_date(purchase.date) }}
                 </div>
                 <div class="panel-body">
-                    <item
-                        display_style="list"
-                        v-for="item in purchase.orders"
-                        :item="item"/>
+                    <template v-for="order in purchase.orders">
+                        {{ order.quantity }} ×
+                        <item
+                            display_style="list"
+                            :item="order.item"/>
+                    </template>
+                </div>
+                <div class="panel-footer">
+                    Total
                 </div>
             </div>
         </template>
