@@ -11,7 +11,11 @@ export default new Vue({
             })
         },
         purchaseItems: function (cart, cb, errorCb) {
-            this.$http.post('shop/buy/', cart).then((response) => {
+            var body = cart.map((entry) => ({
+                item_id: entry.item.id,
+                quantity: entry.quantity
+            }))
+            this.$http.post('shop/buy/', body).then((response) => {
                 cb(cart)
             }, (response) => {
                 errorCb()
