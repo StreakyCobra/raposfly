@@ -25,7 +25,6 @@ const mutations = {
     },
     [types.REMOVE_FROM_CART]: function (state, item) {
         var index = state.cart.findIndex((elm) => elm.item === item)
-        console.log(item)
         if (index !== -1) {
             if (state.cart[index].quantity > 1) {
                 state.cart[index].quantity--

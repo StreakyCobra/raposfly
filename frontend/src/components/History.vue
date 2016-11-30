@@ -4,21 +4,22 @@
         <template v-for="purchase in purchases">
             <div class="panel panel-info">
                 <div class="panel-heading clearfix">
-                    <div class="btn-group pull-right">
+                    <div class="pull-right">
+                        <a class="btn btn-primary btn-xs" @click="receipt(purchase)">{{ $t('Receipt') }}</a>
                         <a class="btn btn-danger btn-xs" @click="remove(purchase)">{{ $t('Delete') }}</a>
                     </div>
                     {{ format_date(purchase.date) }}
                 </div>
                 <div class="panel-body">
                     <template v-for="order in purchase.orders">
-                        {{ order.quantity }} ×
                         <item
                             display_style="list"
+                            :quantity="order.quantity"
                             :item="order.item"/>
                     </template>
                 </div>
                 <div class="panel-footer">
-                    Total: {{ compute_total(purchase) }} CHF
+                    Total: <span class="pull-right">{{ compute_total(purchase) }} CHF</span>
                 </div>
             </div>
         </template>
@@ -46,7 +47,6 @@
      },
      methods: {
          compute_total: function (purchase) {
-             console.log(purchase)
              function add (a, b) {
                  return a + b
              }
@@ -77,5 +77,9 @@
 <style scoped>
  .panel-heading {
      line-height: 22px;
+ }
+
+ .panel-footer {
+     font-weight: bold;
  }
 </style>

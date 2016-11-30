@@ -8,12 +8,24 @@
                 <button class="btn btn-lg btn-danger" @click="discardCart">{{ $t('Discard') }}</button>
             </div>
         </div>
+        <div class="form-group">
+            <input type="checkbox" autocomplete="off" name="fancy-checkbox" id="fancy-checkbox" />
+            <div class="btn-group">
+                <label for="fancy-checkbox" class="mychk btn btn-warning">
+                    <span class="[ glyphicon glyphicon-ok ]"></span>
+                    <span> </span>
+                </label>
+                <label for="fancy-checkbox" class="desc btn btn-default active">
+                    Print Receipt
+                </label>
+            </div>
+        </div>
         <hr />
         <template
             v-for="entry in cart">
-            {{ entry.quantity }} × {{ entry.item.price }} = {{ entry.quantity * entry.item.price }} CHF
             <item display_style=small
                   :item="entry.item"
+                  :quantity="entry.quantity"
                   @clicked="removeFromCart(entry.item)"/>
         </template>
         <div id="alerts"></div>
@@ -52,11 +64,11 @@
  .controls {
      margin-bottom: 1em;
  }
- .btn-group {
+ .controls .btn-group {
      width: 100%;
  }
 
- .btn {
+ .controls .btn {
      width: 50%;
  }
 
@@ -67,10 +79,48 @@
 
  .amount {
      float: right;
-     text-decoration: underline;
  }
 
  #alerts {
      margin-top: 2em;
+ }
+
+ .form-group {
+     width: 100%;
+ }
+
+ .form-group .btn-group {
+     width: 100%;
+ }
+
+ .form-group .mychk {
+     float: left;
+ }
+
+ .form-group .desc {
+     float: left;
+     width: calc(100% - 45px);
+ }
+
+ .form-group input[type="checkbox"] {
+     display: none;
+ }
+
+ .form-group input[type="checkbox"] + .btn-group > label span {
+     width: 20px;
+ }
+
+ .form-group input[type="checkbox"] + .btn-group > label span:first-child {
+     display: none;
+ }
+ .form-group input[type="checkbox"] + .btn-group > label span:last-child {
+     display: inline-block;
+ }
+
+ .form-group input[type="checkbox"]:checked + .btn-group > label span:first-child {
+     display: inline-block;
+ }
+ .form-group input[type="checkbox"]:checked + .btn-group > label span:last-child {
+     display: none;
  }
 </style>

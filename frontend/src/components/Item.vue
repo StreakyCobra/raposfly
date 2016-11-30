@@ -9,6 +9,7 @@
                                         backgroundPosition: 'right',
                                         backgroundOrigin: 'content-box',
                                         backgroundSize: 'auto 100%'}">
+            <span class="quantity btn-xs" v-if="quantity">{{ quantity }}×</span>
             <span class="name">{{ item.name }}</span>
         </div>
         <div class="panel-footer">
@@ -20,16 +21,23 @@
          class="small item panel panel-default"
         @click="clicked">
         <div class="panel-body" :style="{ backgroundColor: this.item.color }">
-            <span class="name">{{ item.name }}</span>
             <span class="price pull-right">{{ item.price }} CHF</span>
+            <span class="quantity btn-xs" v-if="quantity">{{ quantity }}×</span>
+            <span class="name">{{ item.name }}</span>
         </div>
     </div>
     <!-- List display -->
     <div v-else-if="display_style === 'list'"
+         class="list"
          @click="clicked">
-        <div :style="{ backgroundColor: this.item.color }">
+        <div>
+            <span class="price pull-right">{{ quantity * item.price }} CHF</span>
+            <span v-if="quantity"
+                  class="quantity btn-xs"
+                  :style="{ backgroundColor: this.item.color }">
+                {{ quantity }}×
+            </span>
             <span class="name">{{ item.name }}</span>
-            <span class="price">{{ item.price }} CHF</span>
         </div>
     </div>
 </template>
@@ -39,7 +47,11 @@
      name: 'item',
      props: {
          item: {},
-         display_style: String
+         display_style: String,
+         quantity: {
+             type: Number,
+             default () { return 0 }
+         }
      },
      methods: {
          clicked: function (item) {
@@ -59,6 +71,8 @@
 
  .big .panel-body {
      height: 100px;
+     white-space: nowrap;
+     overflow: hidden;
  }
 
  .big .panel-footer {
@@ -68,6 +82,10 @@
 
  .big .name {
      font-size: 2em;
+ }
+
+ .big .quantity {
+     font-size: 1.5em;
  }
 
  .big .price {
@@ -86,9 +104,22 @@
 
  .small .panel-body {
      height: 100%;
+     white-space: nowrap;
+     overflow: hidden;
+ }
+
+ .quantity {
+     border: solid 1px #222222;
+     margin-right: 0.5em;
+ }
+
+ .small .quantity, .small .name, .small .price {
+     font-size: 1.5em;
  }
 
  .small .name {
-     font-size: 1.5em;
+     display: inline;
+     overflow: hidden;
  }
+
 </style>
