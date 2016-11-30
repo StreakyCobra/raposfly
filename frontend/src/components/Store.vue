@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <div class="col-md-6"
+    <div class="row">
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"
              v-for="category in items">
             <h1 class="page-header">{{category.name}}</h1>
             <item v-for="item in category.items"

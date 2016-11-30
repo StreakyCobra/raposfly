@@ -2,7 +2,7 @@
     <div class="noselect">
         <!-- NAVBAR -->
         <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                         <span class="sr-only">Toggle navigation</span>
@@ -43,7 +43,7 @@
         <error ref="error"></error>
 
         <!-- APPLICATION -->
-        <div id="view" class="container" style="padding-top: 50px;">
+        <div id="view" class="container-fluid" style="padding-top: 50px;">
             <router-view @error="error"></router-view>
         </div>
     </div>
