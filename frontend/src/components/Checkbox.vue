@@ -4,15 +4,15 @@
                autocomplete="off"
                name="fancy-checkbox"
                id="fancy-checkbox"
-               :checked="receipt"
+               :checked="checked"
                @change="$emit('change')"/>
         <div class="btn-group">
-            <label for="fancy-checkbox" class="lblchk btn btn-info">
+            <label for="fancy-checkbox" :class="'lblchk btn btn-' + color">
                 <span class="glyphicon glyphicon-ok"></span>
                 <span> </span>
             </label>
             <label for="fancy-checkbox" class="lbldesc btn btn-default active">
-                Print client receipt
+                {{ label }}
             </label>
         </div>
     </div>
@@ -21,9 +21,16 @@
 <script>
  export default {
      name: 'checkbox',
+     props: {
+         label: String,
+         color: {
+             type: String,
+             default () { return 'info' }
+         }
+     },
      data: function () {
          return {
-             receipt: false
+             checked: false
          }
      }
  }
@@ -45,6 +52,7 @@
  .form-group .lbldesc {
      float: left;
      width: calc(100% - 45px);
+     overflow: hidden;
  }
 
  .form-group input[type="checkbox"] {
