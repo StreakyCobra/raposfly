@@ -10,6 +10,7 @@
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
+    "bignumber.js": "^3.0.1",
     "bootstrap": "^3.3.7",
     "chartist": "^0.10.1",
     "font-awesome": "^4.7.0",

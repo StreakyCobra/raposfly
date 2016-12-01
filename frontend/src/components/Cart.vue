@@ -2,7 +2,7 @@
     <div class="cart">
         <h1 class="page-header">{{ $t('Cart') }}</h1>
         <div class="controls">
-            <p class="total">Total: <span class="amount">{{ total }} CHF</span></p>
+            <p class="total">Total: <span class="amount">{{ total.toFormat(2) }} CHF</span></p>
             <div class="buttons btn-group">
                 <button class="btn btn-lg btn-success" @click="purchaseCart">{{ $t('Purchase') }}</button>
                 <button class="btn btn-lg btn-danger" @click="discardCart">{{ $t('Discard') }}</button>
@@ -24,6 +24,7 @@
  import Item from './Item'
  import Checkbox from './Checkbox'
  import { mapActions, mapGetters } from 'vuex'
+ import BigNumber from '../math.js'
 
  export default {
      name: 'cart',
@@ -33,10 +34,9 @@
      },
      computed: {
          total: function () {
-             function add (a, b) {
-                 return a + b
-             }
-             return this.cart.map(entry => parseFloat(entry.item.price) * entry.quantity).reduce(add, 0)
+             return this.cart.map(entry => {
+                 return new BigNumber(entry.item.price).times(entry.quantity)
+             }).reduce((a, b) => a.plus(b), new BigNumber(0))
          },
          ...mapGetters([
              'cart',

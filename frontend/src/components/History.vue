@@ -19,7 +19,7 @@
                     </template>
                 </div>
                 <div class="panel-footer">
-                    Total: <span class="pull-right">{{ compute_total(purchase) }} CHF</span>
+                    Total: <span class="pull-right">{{ compute_total(purchase).toFormat(2) }} CHF</span>
                 </div>
             </div>
         </template>
@@ -28,6 +28,7 @@
 
 <script>
  import Item from './Item'
+ import BigNumber from '../math.js'
 
  var moment = require('moment')
  moment.locale('fr-ch')
@@ -47,10 +48,9 @@
      },
      methods: {
          compute_total: function (purchase) {
-             function add (a, b) {
-                 return a + b
-             }
-             return purchase.orders.map(order => parseFloat(order.item.price) * order.quantity).reduce(add, 0)
+             return purchase.orders.map(entry => {
+                 return new BigNumber(entry.item.price).times(entry.quantity)
+             }).reduce((a, b) => a.plus(b), new BigNumber(0))
          },
          load: function () {
              this.$http.get('shop/history/').then((response) => {

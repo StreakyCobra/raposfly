@@ -13,7 +13,7 @@
             <span class="name">{{ item.name }}</span>
         </div>
         <div class="panel-footer">
-            <span class="price"> {{ item.price }} CHF</span>
+            <span class="price"> {{ total_price.toFormat(2) }} CHF</span>
         </div>
     </div>
     <!-- Small display -->
@@ -21,7 +21,7 @@
          class="small item panel panel-default"
         @click="clicked">
         <div class="panel-body" :style="{ backgroundColor: this.item.color }">
-            <span class="price pull-right">{{ item.price }} CHF</span>
+            <span class="price pull-right">{{ total_price.toFormat(2) }} CHF</span>
             <span class="quantity btn-xs" v-if="quantity">{{ quantity }}×</span>
             <span class="name">{{ item.name }}</span>
         </div>
@@ -31,7 +31,7 @@
          class="list"
          @click="clicked">
         <div>
-            <span class="price pull-right">{{ quantity * item.price }} CHF</span>
+            <span class="price pull-right">{{ total_price.toFormat(2) }} CHF</span>
             <span v-if="quantity"
                   class="quantity btn-xs"
                   :style="{ backgroundColor: this.item.color }">
@@ -43,6 +43,8 @@
 </template>
 
 <script>
+ import BigNumber from '../math.js'
+
  export default {
      name: 'item',
      props: {
@@ -51,6 +53,12 @@
          quantity: {
              type: Number,
              default () { return 0 }
+         }
+     },
+     computed: {
+         total_price: function () {
+             if (this.quantity <= 0) return new BigNumber(this.item.price)
+             return new BigNumber(this.item.price).times(this.quantity)
          }
      },
      methods: {
