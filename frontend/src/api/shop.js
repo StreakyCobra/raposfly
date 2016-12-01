@@ -10,11 +10,15 @@ export default new Vue({
                 errorCb()
             })
         },
-        purchaseItems: function (cart, cb, errorCb) {
-            var body = cart.map((entry) => ({
-                item_id: entry.item.id,
-                quantity: entry.quantity
-            }))
+        purchaseItems: function (cart, receipt, cb, errorCb) {
+            var body = {
+                orders: cart.map((entry) => ({
+                    item_id: entry.item.id,
+                    quantity: entry.quantity
+                })),
+                receipt: receipt
+            }
+            console.log(body)
             this.$http.post('shop/buy/', body).then((response) => {
                 cb(cart)
             }, (response) => {

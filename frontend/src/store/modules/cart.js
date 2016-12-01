@@ -44,6 +44,7 @@ const mutations = {
     [types.PURCHASE_CART]: function (state) {
         shop.purchaseItems(
             state.cart,
+            state.receipt,
             (items) => {
                 state.cart = []
             },
