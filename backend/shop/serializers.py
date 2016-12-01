@@ -4,7 +4,7 @@
 
 from rest_framework import serializers
 
-from .models import Category, Composition, Item, Purchase
+from .models import Category, Order, Item, Purchase
 
 
 class ItemSerializer(serializers.ModelSerializer):
@@ -37,21 +37,20 @@ class PurchaseSerializer(serializers.ModelSerializer):
         exclude = ()
 
 
-class CompositionSerializer(serializers.ModelSerializer):
+class OrderSerializer(serializers.ModelSerializer):
     """Serializer for a composition."""
 
     item = ItemSerializer(read_only=True)
 
     class Meta:
-        model = Composition
+        model = Order
         exclude = ('purchase',)
 
 
 class HistorySerializer(serializers.ModelSerializer):
     """Serializer for purchases history."""
 
-    orders = CompositionSerializer(many=True, read_only=True,
-                                   source='composition_set')
+    orders = OrderSerializer(many=True, read_only=True)
 
     class Meta:
         model = Purchase

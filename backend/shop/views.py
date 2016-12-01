@@ -3,7 +3,7 @@
 """Views for the shop application."""
 
 from constance import config
-from django.db.models import Count, Sum
+from django.db.models import Count, Sum, F
 from django.utils import timezone
 from escpos.exceptions import Error, USBNotFoundError
 from rest_framework import viewsets
@@ -11,7 +11,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from . import serializers
-from .models import Category, Composition, Item, Purchase
+from .models import Category, Order, Item, Purchase
 
 
 class ItemViewSet(viewsets.ModelViewSet):
@@ -108,7 +108,7 @@ class BuyView(APIView):
         purchase = Purchase(date=timezone.now())
         purchase.save()
         for (item, quantity) in items:
-            Composition(item=item,
+            Order(item=item,
                         purchase=purchase,
                         price=item.price,
                         quantity=quantity).save()
@@ -127,15 +127,16 @@ class StatsView(APIView):
         # Total sales                                                         #
         # ------------------------------------------------------------------- #
 
-        total_sales = Composition.objects.aggregate(Sum('price'))
-        stats['total_sales'] = total_sales['price__sum']
+        total_sales = Order.objects.aggregate(
+            total=Sum(F('price') * F('quantity')))
+        stats['total_sales'] = total_sales['total']
 
         # ------------------------------------------------------------------- #
         # Cumulative Sales                                                   #
         # ------------------------------------------------------------------- #
 
-        purchases = Purchase.objects.order_by('date')\
-                                    .annotate(total=Sum('items__price'))
+        purchases = Purchase.objects.order_by('date').annotate(
+            total=Sum(F('orders__price')*F('orders__quantity')))
         running_total = 0
         stats['cumulative_sales'] = []
         for p in purchases:
@@ -147,7 +148,7 @@ class StatsView(APIView):
         # Count                                                               #
         # ------------------------------------------------------------------- #
 
-        items = Item.objects.annotate(count=Count('items_set'))
+        items = Item.objects.annotate(count=Sum(F('orders__price')*F('orders__quantity')))
         stats['counts'] = dict()
         stats['counts']['labels'] = [i.name for i in items]
         stats['counts']['series'] = [i.count for i in items]

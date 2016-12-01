@@ -52,7 +52,7 @@ class Item(models.Model):
 class Purchase(models.Model):
     """A purchase in the shop."""
 
-    items = models.ManyToManyField(Item, through='Composition')
+    items = models.ManyToManyField(Item, through='Order')
     date = models.DateTimeField()
 
     def __str__(self):
@@ -63,14 +63,14 @@ class Purchase(models.Model):
         ordering = ('-date',)
 
 
-class Composition(models.Model):
-    """The composition of a purchase in the shop."""
+class Order(models.Model):
+    """An order in the shop."""
 
-    item = models.ForeignKey(Item, related_name='items_set')
-    purchase = models.ForeignKey(Purchase)
+    item = models.ForeignKey(Item, related_name='orders')
+    purchase = models.ForeignKey(Purchase, related_name='orders')
     price = models.DecimalField(max_digits=8, decimal_places=2)
     quantity = models.IntegerField()
 
     def __str__(self):
-        """Return the string representation of a Composition."""
+        """Return the string representation of a Order."""
         return "{} | {}".format(self.purchase, self.item)
