@@ -3,17 +3,15 @@
 """Views for the shop application."""
 
 from constance import config
-from django.db.models import Sum, Count
+from django.db.models import Count, Sum
 from django.utils import timezone
 from escpos.exceptions import Error, USBNotFoundError
-from escpos.printer import Usb
+from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework import viewsets
 
 from . import serializers
 from .models import Category, Composition, Item, Purchase
-from .tickets import print_ticket, print_total
 
 
 class ItemViewSet(viewsets.ModelViewSet):
@@ -55,21 +53,21 @@ class HistoryView(APIView):
 class BuyView(APIView):
     """Buy items in the shop."""
 
-    serializer_class = serializers.OrderSerializer
+    serializer_class = serializers.BuySerializer
 
     def post(self, request):
         """POST request to purcharse items in the shop."""
-        serializer = self.serializer_class(data=request.data, many=True)
+        serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        orders = serializer.validated_data
+        orders = serializer.validated_data['orders']
+        receipt = serializer.validated_data['receipt']
 
         # ------------------------------------------------------------------- #
         # Verify that items are valid and haven't changed                     #
         # ------------------------------------------------------------------- #
 
         items = []
-        total = 0
         for order in orders:
             try:
                 item = Item.objects.get(id=order['item_id'])
@@ -97,7 +95,8 @@ class BuyView(APIView):
             # for (item, quantity) in items:
             #     print_ticket(printer, item)
             #     total += item.price * quantity
-            # print_total(printer, items, total)
+            # if receipt:
+            #     print_total(printer, items, total)
         except Error:
             return Response({'status': 'Impossible to print the tickets'},
                             status=400)

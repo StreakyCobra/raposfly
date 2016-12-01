@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=abstract-method
 """Serializers for the shop application."""
 
 from rest_framework import serializers
@@ -62,3 +63,10 @@ class OrderSerializer(serializers.Serializer):
 
     item_id = serializers.IntegerField()
     quantity = serializers.IntegerField()
+
+
+class BuySerializer(serializers.Serializer):
+    """Serializer for doing a purchase."""
+
+    orders = OrderSerializer(many=True)
+    receipt = serializers.BooleanField()
