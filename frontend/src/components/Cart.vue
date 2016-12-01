@@ -8,7 +8,7 @@
                 <button class="btn btn-lg btn-danger" @click="discardCart">{{ $t('Discard') }}</button>
             </div>
         </div>
-        <checkbox label="Print client receipt" @change="toggleReceipt"></checkbox>
+        <checkbox label="Print client receipt" :checked="receipt" @change="toggleReceipt"></checkbox>
         <hr />
         <template
             v-for="entry in cart">

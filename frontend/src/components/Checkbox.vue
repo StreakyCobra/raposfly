@@ -23,14 +23,10 @@
      name: 'checkbox',
      props: {
          label: String,
+         checked: false,
          color: {
              type: String,
              default () { return 'info' }
-         }
-     },
-     data: function () {
-         return {
-             checked: false
          }
      }
  }
