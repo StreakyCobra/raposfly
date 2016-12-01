@@ -11,7 +11,7 @@
         <div class="form-group">
             <input type="checkbox" autocomplete="off" name="fancy-checkbox" id="fancy-checkbox" />
             <div class="btn-group">
-                <label for="fancy-checkbox" class="mychk btn btn-warning">
+                <label for="fancy-checkbox" class="mychk btn btn-info">
                     <span class="[ glyphicon glyphicon-ok ]"></span>
                     <span> </span>
                 </label>

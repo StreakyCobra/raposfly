@@ -1,11 +1,11 @@
 <template>
     <div class="container">
         <h1 class="page-header">{{ $t('Stats') }}</h1>
-        <h2 class="">{{ $t('Total Sales') }}</h2>
-        <p class="btn btn-success">{{ total_sales }} CHF</p>
-        <h2 class="">{{ $t('Sales History') }}</h2>
+        <h2>{{ $t('Total Sales') }}</h2>
+        <p class="btn btn-primary">{{ total_sales }} CHF</p>
+        <h2>{{ $t('Sales History') }}</h2>
         <div class="chart-cumulative-sales ct-minor-eleventh"></div>
-        <h2 class="">{{ $t('Counts') }}</h2>
+        <h2>{{ $t('Counts') }}</h2>
         <div class="chart-counts ct-square"></div>
     </div>
 </template>
