@@ -11,7 +11,7 @@
         </p>
         <p>
             {{ $t('And finally access stats through') }}:<br />
-            <router-link to="/history" tag="a" class="btn btn-info" style="width: 150px;">{{ $t('Stats') }}</router-link>
+            <router-link to="/stats" tag="a" class="btn btn-info" style="width: 150px;">{{ $t('Stats') }}</router-link>
         </p>
     </div>
 </template>
