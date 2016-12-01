@@ -148,7 +148,7 @@ class StatsView(APIView):
         # Count                                                               #
         # ------------------------------------------------------------------- #
 
-        items = Item.objects.annotate(count=Sum(F('orders__price')*F('orders__quantity')))
+        items = Item.objects.annotate(count=Sum('orders__quantity'))
         stats['counts'] = dict()
         stats['counts']['labels'] = [i.name for i in items]
         stats['counts']['series'] = [i.count for i in items]
