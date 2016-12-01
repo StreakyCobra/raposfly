@@ -69,6 +69,10 @@
      box-shadow: 5px 5px 5px -2px gray;
  }
 
+ .panel-body {
+     border-radius: 4px;
+ }
+
  .big .panel-body {
      height: 100px;
      white-space: nowrap;
