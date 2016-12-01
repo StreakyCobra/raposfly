@@ -2,12 +2,16 @@ import shop from '../../api/shop'
 import * as types from '../mutation-types'
 
 const state = {
-    cart: []
+    cart: [],
+    receipt: false
 }
 
 const getters = {
     cart: function (state) {
         return state.cart
+    },
+    receipt: function (state) {
+        return state.receipt
     }
 }
 
@@ -35,6 +39,7 @@ const mutations = {
     },
     [types.DISCARD_CART]: function (state) {
         state.cart = []
+        state.receipt = false
     },
     [types.PURCHASE_CART]: function (state) {
         shop.purchaseItems(
@@ -43,6 +48,10 @@ const mutations = {
                 state.cart = []
             },
             () => {})
+        state.receipt = false
+    },
+    [types.TOGGLE_RECEIPT]: function (state) {
+        state.receipt = !state.receipt
     }
 }
 
@@ -58,6 +67,9 @@ const actions = {
     },
     purchaseCart: function ({ commit }) {
         commit(types.PURCHASE_CART)
+    },
+    toggleReceipt: function ({ commit }) {
+        commit(types.TOGGLE_RECEIPT)
     }
 }
 

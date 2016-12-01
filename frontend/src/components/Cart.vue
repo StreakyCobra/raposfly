@@ -9,14 +9,19 @@
             </div>
         </div>
         <div class="form-group">
-            <input type="checkbox" autocomplete="off" name="fancy-checkbox" id="fancy-checkbox" />
+            <input type="checkbox"
+                   autocomplete="off"
+                   name="fancy-checkbox"
+                   id="fancy-checkbox"
+                   :checked="receipt"
+                   @change="toggleReceipt"/>
             <div class="btn-group">
                 <label for="fancy-checkbox" class="mychk btn btn-info">
                     <span class="[ glyphicon glyphicon-ok ]"></span>
                     <span> </span>
                 </label>
                 <label for="fancy-checkbox" class="desc btn btn-default active">
-                    Print Receipt
+                    Print client receipt
                 </label>
             </div>
         </div>
@@ -49,13 +54,15 @@
              return this.cart.map(entry => parseFloat(entry.item.price) * entry.quantity).reduce(add, 0)
          },
          ...mapGetters([
-             'cart'
+             'cart',
+             'receipt'
          ])
      },
      methods: mapActions([
          'discardCart',
          'purchaseCart',
-         'removeFromCart'
+         'removeFromCart',
+         'toggleReceipt'
      ])
  }
 </script>
