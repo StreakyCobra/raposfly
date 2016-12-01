@@ -42,14 +42,16 @@ const mutations = {
         state.receipt = false
     },
     [types.PURCHASE_CART]: function (state) {
-        shop.purchaseItems(
-            state.cart,
-            state.receipt,
-            (items) => {
-                state.cart = []
-            },
-            () => {})
-        state.receipt = false
+        if (state.cart.length) {
+            shop.purchaseItems(
+                state.cart,
+                state.receipt,
+                (items) => {
+                    state.cart = []
+                },
+                () => {})
+            state.receipt = false
+        }
     },
     [types.TOGGLE_RECEIPT]: function (state) {
         state.receipt = !state.receipt
