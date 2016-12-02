@@ -42,10 +42,6 @@ var ROOT_API_URL = ROOT_BACKEND_URL + '/api'
 // EXTERNAL LIBRARIES                                                        //
 // ------------------------------------------------------------------------- //
 
-// Load jquery
-var $ = require('jquery')
-window.jQuery = window.$ = $
-
 // Load bootstrap
 require('bootstrap')
 import 'bootstrap/dist/css/bootstrap.css'
