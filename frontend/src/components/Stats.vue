@@ -1,8 +1,8 @@
 <template>
     <div class="container">
-        <h1 class="page-header">{{ $t('Stats') }}</h1>
+        <h1 class="page-header">{{ $t('Stats') }}<span class="pull-right btn btn-warning" @click="getStats">{{ $t('Refresh') }}</span></h1>
         <h2>{{ $t('Total Sales') }}</h2>
-        <p class="btn btn-primary">{{ total_sales }} CHF</p>
+        <p class="btn btn-primary">{{ stats.total_sales }} CHF</p>
         <h2>{{ $t('Sales History') }}</h2>
         <div class="chart-cumulative-sales ct-minor-eleventh"></div>
         <h2>{{ $t('Counts') }}</h2>
@@ -11,23 +11,23 @@
 </template>
 
 <script>
- var Chartist = require('chartist')
+ import { mapActions, mapGetters } from 'vuex'
+ import Chartist from 'chartist'
  var moment = require('moment')
  moment.locale('fr-ch')
 
  export default {
      name: 'stats',
-     data: function () {
-         return {
-             'total_sales': 0
-         }
-     },
+     computed: mapGetters([
+         'stats'
+     ]),
      mounted: function () {
-         this.$http.get('shop/stats/').then((response) => {
-             this.plot(response.body)
-         }, (response) => {
-             this.$bus.$emit('error', 'Impossible to load stats')
-         })
+         this.$store.dispatch('getStats')
+     },
+     watch: {
+         stats: function (stats) {
+             this.plot(stats)
+         }
      },
      methods: {
          plot: function (stats) {
@@ -63,7 +63,10 @@
                      onlyInteger: true
                  }
              })
-         }
+         },
+         ...mapActions([
+             'getStats'
+         ])
      }
  }
 </script>
@@ -78,6 +81,6 @@
  }
 
  .chart-counts .ct-bar {
-    stroke-width: 20px;
+     stroke-width: 20px;
  }
 </style>

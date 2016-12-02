@@ -46,6 +46,13 @@ export default new Vue({
             }, (response) => {
                 errorCb()
             })
+        },
+        getStats: function (cb, errorCb) {
+            this.$http.get('shop/stats/').then((response) => {
+                cb(response.body)
+            }, (response) => {
+                errorCb()
+            })
         }
     }
 })

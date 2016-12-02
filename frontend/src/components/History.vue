@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h1 class="page-header">{{ $t('History') }}</h1>
+        <h1 class="page-header">{{ $t('History') }}<span class="pull-right btn btn-warning" @click="getHistory">{{ $t('Refresh') }}</span></h1>
         <template v-for="purchase in history">
             <div class="panel panel-info">
                 <div class="panel-heading clearfix">
@@ -56,6 +56,7 @@
              return result.charAt(0).toUpperCase() + result.slice(1)
          },
          ...mapActions([
+             'getHistory',
              'deletePurchase',
              'printReceipt'
          ])
