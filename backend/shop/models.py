@@ -46,6 +46,8 @@ class Item(models.Model):
     description = models.TextField(blank=True, null=True)
     price = models.DecimalField(max_digits=8, decimal_places=2)
     color = RGBColorField(blank=True, null=True, default="#000000")
+    individual_ticket = models.BooleanField(verbose_name="Print individual "
+                                            "ticket", default=True)
     order = models.IntegerField(default=9999)
 
     def image_item_or_categorie(self):

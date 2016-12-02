@@ -93,7 +93,8 @@ class BuyView(APIView):
             # Each ticket
             pass
             # for (item, quantity) in items:
-            #     print_ticket(printer, item)
+            #     if item.individual_ticket:
+            #         print_ticket(printer, item)
             #     total += item.price * quantity
             # if receipt:
             #     print_total(printer, items, total)
