@@ -26,7 +26,7 @@
      },
      mounted: function () {
          this.$http.get('shop/config/').then((response) => {
-             this.event = response.body['EVENT']
+             this.event = response.body['EVENT_NAME']
          }, (response) => {
              this.$bus.$emit('error', 'Impossible to connect to the database')
          })
