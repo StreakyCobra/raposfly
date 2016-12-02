@@ -3,7 +3,7 @@
 """Views for the shop application."""
 
 from constance import config
-from django.db.models import Count, Sum, F
+from django.db.models import F, Sum
 from django.utils import timezone
 from escpos.exceptions import Error, USBNotFoundError
 from rest_framework import viewsets
@@ -11,7 +11,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from . import serializers
-from .models import Category, Order, Item, Purchase
+from .models import Category, Item, Order, Purchase
 
 
 class ItemViewSet(viewsets.ModelViewSet):
@@ -109,10 +109,31 @@ class BuyView(APIView):
         purchase.save()
         for (item, quantity) in items:
             Order(item=item,
-                        purchase=purchase,
-                        price=item.price,
-                        quantity=quantity).save()
+                  purchase=purchase,
+                  price=item.price,
+                  quantity=quantity).save()
 
+        return Response({'status': 'ok'})
+
+
+class PrintReceiptView(APIView):
+    """Print a receipt for a purchase."""
+
+    serializer_class = serializers.PrintReceiptSerializer
+
+    def post(self, request):
+        """POST request to print a receipt."""
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        purchase_id = serializer.validated_data['purchase_id']
+
+        try:
+            purchase = Purchase.objects.get(pk=purchase_id)
+        except Purchase.DoesNotExist:
+            return Response({'status': 'failed'}, status=404)
+        print("Print receipt " + str(purchase))
+        # TODO print receipt
         return Response({'status': 'ok'})
 
 

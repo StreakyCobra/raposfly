@@ -69,3 +69,9 @@ class BuySerializer(serializers.Serializer):
 
     orders = OrderSerializer(many=True)
     receipt = serializers.BooleanField()
+
+
+class PrintReceiptSerializer(serializers.Serializer):
+    """Serializer for printing a receipt."""
+
+    purchase_id = serializers.IntegerField()
