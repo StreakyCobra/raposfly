@@ -98,6 +98,8 @@ class BuyView(APIView):
             #     total += item.price * quantity
             # if receipt:
             #     print_total(printer, items, total)
+            # if config.VENDOR_RECEIPT:
+            #     print_total(printer, items, total)
         except Error:
             return Response({'status': 'Impossible to print the tickets'},
                             status=400)
