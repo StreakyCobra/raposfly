@@ -11,7 +11,7 @@
                 <span class="glyphicon glyphicon-ok"></span>
                 <span> </span>
             </label>
-            <label for="fancy-checkbox" class="lbldesc btn btn-default active">
+            <label for="fancy-checkbox" :class="'lbldesc active btn btn-' + (checked ? color : 'default')">
                 {{ label }}
             </label>
         </div>
