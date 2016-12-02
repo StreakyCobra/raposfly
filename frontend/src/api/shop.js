@@ -4,8 +4,7 @@ export default new Vue({
     methods: {
         getItems: function (cb, errorCb) {
             this.$http.get('shop/store/').then((response) => {
-                var items = response.body
-                cb(items)
+                cb(response.body)
             }, (response) => {
                 errorCb()
             })
@@ -18,9 +17,32 @@ export default new Vue({
                 })),
                 receipt: receipt
             }
-            console.log(body)
             this.$http.post('shop/buy/', body).then((response) => {
                 cb(cart)
+            }, (response) => {
+                errorCb()
+            })
+        },
+        getHistory: function (cb, errorCb) {
+            this.$http.get('shop/history/').then((response) => {
+                cb(response.body)
+            }, (response) => {
+                errorCb()
+            })
+        },
+        deletePurchase: function (purchase, cb, errorCb) {
+            this.$http.delete('shop/purchases/' + purchase.id + '/').then((response) => {
+                cb(purchase)
+            }, (response) => {
+                errorCb()
+            })
+        },
+        printReceipt: function (purchase, cb, errorCb) {
+            var body = {
+                purchase_id: purchase.id
+            }
+            this.$http.post('shop/print-receipt/', body).then((response) => {
+                cb(purchase)
             }, (response) => {
                 errorCb()
             })

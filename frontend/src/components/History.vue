@@ -1,12 +1,12 @@
 <template>
     <div class="container">
         <h1 class="page-header">{{ $t('History') }}</h1>
-        <template v-for="purchase in purchases">
+        <template v-for="purchase in history">
             <div class="panel panel-info">
                 <div class="panel-heading clearfix">
                     <div class="pull-right">
-                        <a class="btn btn-primary btn-xs" @click="receipt(purchase)">{{ $t('Receipt') }}</a>
-                        <a class="btn btn-danger btn-xs" @click="remove(purchase)">{{ $t('Delete') }}</a>
+                        <a class="btn btn-primary btn-xs" @click="printReceipt(purchase)">{{ $t('Receipt') }}</a>
+                        <a class="btn btn-danger btn-xs" @click="deletePurchase(purchase)">{{ $t('Delete') }}</a>
                     </div>
                     {{ format_date(purchase.date) }}
                 </div>
@@ -29,6 +29,7 @@
 <script>
  import Item from './Item'
  import BigNumber from '../math.js'
+ import { mapActions, mapGetters } from 'vuex'
 
  var moment = require('moment')
  moment.locale('fr-ch')
@@ -38,13 +39,11 @@
      components: {
          Item
      },
-     data () {
-         return {
-             purchases: []
-         }
-     },
+     computed: mapGetters([
+         'history'
+     ]),
      mounted: function () {
-         this.load()
+         this.$store.dispatch('getHistory')
      },
      methods: {
          compute_total: function (purchase) {
@@ -52,24 +51,14 @@
                  return new BigNumber(entry.item.price).times(entry.quantity)
              }).reduce((a, b) => a.plus(b), new BigNumber(0))
          },
-         load: function () {
-             this.$http.get('shop/history/').then((response) => {
-                 this.purchases = response.body
-             }, (response) => {
-                 this.$bus.$emit('error', 'Impossible to load history')
-             })
-         },
-         remove: function (purchase) {
-             this.$http.delete('shop/purchases/' + purchase.id + '/').then((response) => {
-                 this.load()
-             }, (response) => {
-                 this.$bus.$emit('error', 'Impossible to delete purchase')
-             })
-         },
          format_date: function (date) {
              var result = moment(date).format('LLLL')
              return result.charAt(0).toUpperCase() + result.slice(1)
-         }
+         },
+         ...mapActions([
+             'deletePurchase',
+             'printReceipt'
+         ])
      }
  }
 </script>
