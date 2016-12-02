@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h1 class="page-header">{{ $t('Stats') }}<span class="pull-right btn btn-warning" @click="getStats">{{ $t('Refresh') }}</span></h1>
+        <h1 class="page-header">{{ $t('Stats') }}<span class="pull-right btn btn-info" @click="getStats">{{ $t('Refresh') }}</span></h1>
         <h2>{{ $t('Total Sales') }}</h2>
         <p class="btn btn-primary">{{ stats.total_sales }} CHF</p>
         <h2>{{ $t('Sales History') }}</h2>
