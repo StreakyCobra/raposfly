@@ -11,6 +11,7 @@ class ItemSerializer(serializers.ModelSerializer):
     """Serializer for an Item."""
 
     image = serializers.FileField(source='image_item_or_categorie')
+    color = serializers.CharField(source='color_item_or_categorie')
 
     class Meta:
         model = Item

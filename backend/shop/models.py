@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Models for the shop application."""
 
+from constance import config
 from django.db import models
 from colorful.fields import RGBColorField
 from .utils import UploadHashedTo
@@ -12,7 +13,19 @@ class Category(models.Model):
     name = models.CharField(max_length=255)
     image = models.FileField(blank=True, null=True,
                              upload_to=UploadHashedTo('categories'))
+    color = RGBColorField(blank=True, null=True, default="#000000")
     order = models.IntegerField(default=9999)
+
+    def clean(self):
+        """Clean the model."""
+        if self.color == '#000000':
+            self.color = None
+
+    def color_categorie_or_default(self):
+        """Return the color of the item or of category if not existing."""
+        if self.color:
+            return self.color
+        return config.DEFAULT_ITEM_COLOR
 
     def __str__(self):
         """Return the string representation of a Category."""
@@ -32,7 +45,7 @@ class Item(models.Model):
                              upload_to=UploadHashedTo('items'))
     description = models.TextField(blank=True, null=True)
     price = models.DecimalField(max_digits=8, decimal_places=2)
-    color = RGBColorField(blank=True, null=True, default="#ffffff")
+    color = RGBColorField(blank=True, null=True, default="#000000")
     order = models.IntegerField(default=9999)
 
     def image_item_or_categorie(self):
@@ -40,6 +53,17 @@ class Item(models.Model):
         if self.image:
             return self.image
         return self.category.image
+
+    def color_item_or_categorie(self):
+        """Return the color of the item or of category if not existing."""
+        if self.color:
+            return self.color
+        return self.category.color_categorie_or_default()
+
+    def clean(self):
+        """Clean the model."""
+        if self.color == '#000000':
+            self.color = None
 
     def __str__(self):
         """Return the string representation of an Item."""

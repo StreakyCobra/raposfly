@@ -145,4 +145,5 @@ CORS_ORIGIN_ALLOW_ALL = True
 CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
 CONSTANCE_CONFIG = {
     'EVENT': ('Nuit du badminton Zinal 2016', 'Name of the event.'),
+    'DEFAULT_ITEM_COLOR': ('', 'Default color for the items.')
 }
