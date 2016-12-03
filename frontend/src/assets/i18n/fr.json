@@ -18,8 +18,11 @@
     "Impossible to load history": "Impossible de charger l'historique",
     "Total Sales": "Ventes totales",
     "Sales History": "Historique des ventes",
-    "Counts": "Décompte",
+    "Counts": "Décomptes",
     "Items purchased": "Achat effectué",
     "Impossible to delete purchase": "Impossible de supprimer l'achat",
-    "Delete": "Supprimer"
+    "Delete": "Supprimer",
+    "Receipt": "Quittance",
+    "Refresh": "Rafraîchir",
+    "Print client receipt": "Quittance pour le client"
 }
