@@ -1,5 +1,6 @@
 package app.raposfly.com.raposfly;
 
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -68,5 +69,10 @@ public class Raposfly extends AppCompatActivity {
         webSettings.setJavaScriptEnabled(true);
 
         mWebView.loadUrl("http://raposfly.shop");
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig){
+        super.onConfigurationChanged(newConfig);
     }
 }
