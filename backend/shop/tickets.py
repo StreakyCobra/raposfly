@@ -11,12 +11,13 @@ def print_headline(printer):
     printer.text("SOIREE DU BADMINTON ZINAL 2016\n\n")
 
 
-def print_item(printer, item):
+def print_item(printer, item, quantity=1):
     """Print an item."""
     spacing = WIDTH - 3 - len(item.name) - 5 - 4
-    printer.text('1x {}{}{: >5.2f} CHF\n'.format(item.name,
-                                                   ' ' * spacing,
-                                                   item.price))
+    printer.text('{}x {}{}{: >5.2f} CHF\n'.format(quantity,
+                                                  item.name,
+                                                  ' ' * spacing,
+                                                  quantity * item.price))
 
 def print_ticket(printer, item):
     """Print an item ticket."""
@@ -40,8 +41,9 @@ def print_total(printer, items, total):
     printer.text('Quittance:\n\n')
     # Print each item
     printer.set()
-    for item in items:
-        print_item(printer, item)
+    print(items)
+    for (item, quantity) in items:
+        print_item(printer, item, quantity)
     # Print total line
     printer.set('left', 'A', 'B')
     printer.text('\n')
