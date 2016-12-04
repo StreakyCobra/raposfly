@@ -114,7 +114,7 @@ See [LICENSE.md][] for the complete license.
 [git-branching]:   http://nvie.com/posts/a-successful-git-branching-model/
 [git-messages]:    http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
 [installation]:    doc/installation.rst
-[logo]:            resources/images/logo.png
+[logo]:            resources/images/logo_full.png
 [python-escpos]:   https://github.com/python-escpos/python-escpos
 [semver]:          http://semver.org/spec/v2.0.0.html
 
