@@ -14,7 +14,7 @@ const mutations = {
         state.history = purchases
     },
     [types.DELETE_PURCHASE]: function (state, purchase) {
-        var index = state.history.indexOf(purchase)
+        var index = state.history.findIndex((elm) => elm === purchase)
         if (index !== -1) {
             state.history.splice(index, 1)
         }
