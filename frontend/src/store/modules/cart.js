@@ -1,5 +1,6 @@
 import shop from '../../api/shop'
 import * as types from '../mutation-types'
+import arrayFindIndex from 'array-find-index'
 
 const state = {
     cart: [],
@@ -17,7 +18,7 @@ const getters = {
 
 const mutations = {
     [types.ADD_TO_CART]: function (state, item) {
-        var index = state.cart.findIndex((elm) => elm.item === item)
+        var index = arrayFindIndex(state.cart, (elm) => elm.item === item)
         if (index !== -1) {
             state.cart[index].quantity++
         } else {
@@ -28,7 +29,7 @@ const mutations = {
         }
     },
     [types.REMOVE_FROM_CART]: function (state, item) {
-        var index = state.cart.findIndex((elm) => elm.item === item)
+        var index = arrayFindIndex(state.cart, (elm) => elm.item === item)
         if (index !== -1) {
             if (state.cart[index].quantity > 1) {
                 state.cart[index].quantity--
