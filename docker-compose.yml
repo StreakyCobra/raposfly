@@ -22,4 +22,5 @@ services:
     volumes:
       - /dev/bus/usb:/dev/bus/usb
       - /home/pi/db.sqlite3:/app/db.sqlite3
+      - /run/systemd:/run/systemd
     privileged: true

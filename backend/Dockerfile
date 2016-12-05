@@ -6,6 +6,7 @@ RUN echo "deb http://ftp.debian.org/debian jessie-backports main" >> /etc/apt/so
   && apt-get install -t jessie-backports --no-install-recommends --no-install-suggests -y \
             nginx \
   && apt-get install --no-install-recommends --no-install-suggests -y \
+            sudo \
             supervisor \
             libjpeg-dev \
             python-dev \
@@ -31,6 +32,7 @@ RUN ln -s /usr/lib/arm-linux-gnueabihf/libfreetype.so /usr/lib/
 RUN ln -s /usr/lib/arm-linux-gnueabihf/libz.so /usr/lib/
 
 COPY ./ /app
+COPY sudoers.conf /etc/sudoers.d/raposfly
 COPY nginx.conf /etc/nginx/sites-enabled/default
 COPY supervisord.conf /etc/supervisor/conf.d/
 COPY uwsgi.ini /etc/uwsgi/uwsgi.ini

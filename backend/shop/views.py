@@ -2,6 +2,8 @@
 # pylint: disable=too-many-ancestors
 """Views for the shop application."""
 
+from subprocess import call
+
 from constance import config
 from django.db.models import F, Sum
 from django.utils import timezone
@@ -9,10 +11,9 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .tickets import print_ticket, print_total
-
 from . import serializers
 from .models import Category, Item, Order, Purchase
+from .tickets import print_ticket, print_total
 
 
 class ItemViewSet(viewsets.ModelViewSet):
@@ -170,6 +171,14 @@ class StatsView(APIView):
         stats['counts']['series'] = [i.count for i in items]
 
         return Response(stats)
+
+
+class ShutdownView(APIView):
+    """Shutdown the shop."""
+
+    def get(self, request):
+        """GET request to shutdown the shop."""
+        call(["sudo", "systemctl", "poweroff"])
 
 
 class ConfigView(APIView):
