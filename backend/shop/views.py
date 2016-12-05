@@ -5,8 +5,6 @@
 from constance import config
 from django.db.models import F, Sum
 from django.utils import timezone
-from escpos.exceptions import Error, USBNotFoundError
-from escpos.printer import Usb
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -84,27 +82,16 @@ class BuyView(APIView):
         # Print the tickets                                                   #
         # ------------------------------------------------------------------- #
 
-        try:
-            printer = Usb(0x04b8, 0x0e15)
-        except USBNotFoundError:
-            return Response({'status': 'Impossible to connect to the '
-                                       'printer.'},
-                            status=400)
-
-        try:
-            total=0
-            for (item, quantity) in items:
-                if item.individual_ticket:
-                    for _ in range(quantity):
-                        print_ticket(printer, item)
-                total += item.price * quantity
-            if receipt:
-                print_total(printer, items, total)
-            if config.VENDOR_RECEIPT:
-                print_total(printer, items, total)
-        except Error:
-            return Response({'status': 'Impossible to print the tickets'},
-                            status=400)
+        total = 0
+        for (item, quantity) in items:
+            if item.individual_ticket:
+                for _iterate in range(quantity):
+                    print_ticket(item)
+            total += item.price * quantity
+        if receipt:
+            print_total(items, total)
+        if config.VENDOR_RECEIPT:
+            print_total(items, total)
 
         # ------------------------------------------------------------------- #
         # Store the purchase                                                 #

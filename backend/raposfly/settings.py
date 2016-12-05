@@ -147,4 +147,5 @@ CONSTANCE_CONFIG = {
     'EVENT_NAME': ('Raposfly', 'Name of the event.'),
     'DEFAULT_ITEM_COLOR': ('', 'Default color for the items.'),
     'VENDOR_RECEIPT': (False, 'Prince a vendor receipt for all purchases.'),
+    'PRINTER_ADDR': ('', 'Printer USB address (emtpy if missing)'),
 }
