@@ -85,25 +85,23 @@ class BuyView(APIView):
         # ------------------------------------------------------------------- #
 
         try:
-            pass
-            # printer = Usb(0x04b8, 0x0e15)
+            printer = Usb(0x04b8, 0x0e15)
         except USBNotFoundError:
             return Response({'status': 'Impossible to connect to the '
                                        'printer.'},
                             status=400)
 
         try:
-            pass
-            # total=0
-            # for (item, quantity) in items:
-            #     if item.individual_ticket:
-            #         for _ in range(quantity):
-            #             print_ticket(printer, item)
-            #     total += item.price * quantity
-            # if receipt:
-            #     print_total(printer, items, total)
-            # if config.VENDOR_RECEIPT:
-            #     print_total(printer, items, total)
+            total=0
+            for (item, quantity) in items:
+                if item.individual_ticket:
+                    for _ in range(quantity):
+                        print_ticket(printer, item)
+                total += item.price * quantity
+            if receipt:
+                print_total(printer, items, total)
+            if config.VENDOR_RECEIPT:
+                print_total(printer, items, total)
         except Error:
             return Response({'status': 'Impossible to print the tickets'},
                             status=400)
