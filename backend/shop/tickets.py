@@ -63,13 +63,13 @@ def print_item(item, quantity=1):
 
 
 @guard_printer
-def print_ticket(item):
+def print_ticket(item, quantity=1):
     """Print an item ticket."""
     # Print headline
     print_headline()
     # Print the item
     PRINTER.set('left', 'A', 'B', 1, 2)
-    print_item(item)
+    print_item(item, quantity)
     # Cut the ticket
     PRINTER.cut()
 

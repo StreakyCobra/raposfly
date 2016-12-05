@@ -84,9 +84,12 @@ class BuyView(APIView):
 
         total = 0
         for (item, quantity) in items:
-            if item.individual_ticket and config.INDIVIDUAL_TICKETS:
-                for _iterate in range(quantity):
-                    print_ticket(item)
+            if item.individual_tickets and config.INDIVIDUAL_TICKETS:
+                if item.group_tickets:
+                    print_ticket(item, quantity)
+                else:
+                    for _iterate in range(quantity):
+                        print_ticket(item)
             total += item.price * quantity
         if receipt:
             print_total(items, total)
