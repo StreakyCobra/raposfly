@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 """Tickets printing for the application."""
 
+from constance import config
+
 
 WIDTH = 42
 
@@ -8,7 +10,7 @@ WIDTH = 42
 def print_headline(printer):
     """Print the headline."""
     printer.set('center', 'A', 'U')
-    printer.text("SOIREE DU BADMINTON ZINAL 2016\n\n")
+    printer.text(config.EVENT_NAME + "\n\n")
 
 
 def print_item(printer, item, quantity=1):
