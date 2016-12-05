@@ -53,6 +53,13 @@ export default new Vue({
             }, (response) => {
                 errorCb()
             })
+        },
+        shutdown: function (cb, errorCb) {
+            this.$http.get('shop/shutdown/').then((response) => {
+                cb(response.body)
+            }, (response) => {
+                errorCb()
+            })
         }
     }
 })

@@ -24,5 +24,9 @@
     "Delete": "Supprimer",
     "Receipt": "Quittance",
     "Refresh": "Rafraîchir",
-    "Print client receipt": "Quittance pour le client"
+    "Print client receipt": "Quittance pour le client",
+    "Usage": "Utilisation",
+    "Administration": "Administration",
+    "Shutdown the device": "Éteindre l'appareil",
+    "Shutdown": "Éteindre"
 }
