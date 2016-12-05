@@ -179,6 +179,7 @@ class ShutdownView(APIView):
     def get(self, request):
         """GET request to shutdown the shop."""
         call(["sudo", "systemctl", "poweroff"])
+        return Response({'status': 'success'})
 
 
 class ConfigView(APIView):
