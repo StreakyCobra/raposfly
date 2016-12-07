@@ -1,5 +1,6 @@
-Installation
-============
+==============
+ Installation
+==============
 
 First you can go through the list of requirements to be sure that you have
 everything. Then you can follow the section explaining how to prepare your
