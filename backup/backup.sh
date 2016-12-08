@@ -4,7 +4,7 @@
 LOG=/var/log/cron.log
 
 # Number of backups to keep
-N=2 # TODO Set to a plausible value
+N=32
 
 # Copy from:
 FROM=/var/lib/raposfly

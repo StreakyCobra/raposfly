@@ -1,1 +1,1 @@
-* * * * * root /usr/lib/raposfly/backup.sh
+*/15 * * * * root /usr/lib/raposfly/backup.sh
