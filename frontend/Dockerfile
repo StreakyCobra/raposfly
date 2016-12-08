@@ -20,10 +20,10 @@ RUN echo "deb http://ftp.debian.org/debian jessie-backports main" >> /etc/apt/so
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
   && ln -sf /dev/stderr /var/log/nginx/error.log
 
-COPY ./ /app
+COPY ./ /usr/lib/raposfly/
 COPY nginx.conf /etc/nginx/sites-enabled/default
 
-WORKDIR /app
+WORKDIR /usr/lib/raposfly/
 RUN npm install && npm run build
 
 EXPOSE 80
