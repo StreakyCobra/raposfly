@@ -39,6 +39,7 @@ COPY uwsgi.ini /etc/uwsgi/uwsgi.ini
 
 WORKDIR /usr/lib/raposfly/
 RUN pip install --no-cache-dir -r requirements.txt
+RUN python manage.py migrate
 RUN python manage.py collectstatic --noinput
 RUN chown www-data:www-data -R /usr/lib/raposfly/
 
