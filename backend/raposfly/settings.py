@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os
 
+# Check if running in production mode
+PRODUCTION = 'RAPOSFLY_PRODUCTION' in os.environ
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -24,7 +27,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'mlfd-5wkib#9vo_pw81@%x2#0tju7osr-qc&f^sg=&4b@k8m+q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = not PRODUCTION
 
 ALLOWED_HOSTS = ['localhost', 'backend.raposfly.shop']
 
@@ -85,10 +88,15 @@ WSGI_APPLICATION = 'raposfly.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
+if PRODUCTION:
+    DATABASE_PATH = '/var/lib/raposfly/db.sqlite3'
+else:
+    DATABASE_PATH = os.path.join(BASE_DIR, 'db.sqlite3')
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': DATABASE_PATH,
     }
 }
 

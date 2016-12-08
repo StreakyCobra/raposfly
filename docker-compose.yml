@@ -17,10 +17,19 @@ services:
   backend:
     build: backend
     container_name: backend
+    environment:
+      - RAPOSFLY_PRODUCTION=1
     ports:
       - 8002:80
     volumes:
       - /dev/bus/usb:/dev/bus/usb
-      - /home/pi/db.sqlite3:/app/db.sqlite3
       - /run/systemd:/run/systemd
+      - /var/lib/raposfly/db.sqlite3:/var/lib/raposfly/db.sqlite3
     privileged: true
+
+  backup:
+    build: backup
+    container_name: backup
+    volumes:
+      - /var/lib/raposfly/backups/:/var/lib/raposfly/backups/
+      - /var/lib/raposfly/db.sqlite3:/var/lib/raposfly/db.sqlite3
