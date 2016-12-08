@@ -1,19 +1,28 @@
 #!/bin/bash
 
-# Number of backup to keep
-N=100
+# Log file
+LOG=/var/log/cron.log
 
-# Name of the file
-NAME=db.sqlite3
+# Number of backups to keep
+N=2 # TODO Set to a plausible value
 
-# Copy from place
-FROM=/app
+# Copy from:
+FROM=/var/lib/raposfly
 
-# Copy to place
-TO=/mnt
+# Copy to:
+TO=/var/lib/raposfly/backups
+
+# From name:
+F_NAME=db.sqlite3
+
+# To name:
+T_NAME=$(date +%Y-%m-%d"_"%H-%M-%S).sqlite3
 
 # Do the copy
-cp -a "${FROM}/${NAME}" "${TO}/$(date +%Y-%m-%d"_"%H-%M-%S).sqlite3"
+cp -a "${FROM}/${F_NAME}" "${TO}/${T_NAME}" 2>>${LOG} && echo "Backup saved to ${T_NAME}" >> ${LOG}
 
-# Keep only the last N backups
-comm -23 <(ls) <(ls -dtr * | tail -n -${N}) | xargs rm -rf
+# Get the list of backups to remove
+REMOVE=$(comm -23 <(ls -d ${TO}/*) <(ls -dtr ${TO}/* | head -n ${N} | sort) 2>>${LOG})
+
+# Remove extra backups
+[ -n "${REMOVE}" ] && echo "${REMOVE}" | xargs rm -rf 2>>${LOG} && echo "Backups removed: ${REMOVE}" >> ${LOG}

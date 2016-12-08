@@ -6,12 +6,15 @@ RUN apt-get update \
       cron \
     && rm -rf /var/lib/apt/lists/*
 
-RUN echo '*/5 * * * * /opt/backup.sh' >> /tmp/crontab \
-    && crontab /tmp/crontab \
-    && rm /tmp/crontab
+COPY crontab /etc/cron.d/raposfly
+RUN chmod 0644 /etc/cron.d/raposfly
+RUN touch /var/log/cron.log
 
-COPY backup.sh /opt/backup.sh
+COPY backup.sh /usr/lib/raposfly/backup.sh
+RUN chmod +x /usr/lib/raposfly/backup.sh
+RUN mkdir -p /var/lib/raposfly/backups/
 
-VOLUME /app
+VOLUME /var/lib/raposfly/backups/
+VOLUME /var/lib/raposfly/db.sqlite3
 
-CMD ["/usr/bin/cron", "-f"]
+CMD /usr/sbin/cron -L 15 && tail -f /var/log/cron.log
