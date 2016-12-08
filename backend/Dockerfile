@@ -31,16 +31,16 @@ RUN ln -s /usr/lib/arm-linux-gnueabihf/libjpeg.so /usr/lib/
 RUN ln -s /usr/lib/arm-linux-gnueabihf/libfreetype.so /usr/lib/
 RUN ln -s /usr/lib/arm-linux-gnueabihf/libz.so /usr/lib/
 
-COPY ./ /app
+COPY ./ /usr/lib/raposfly/
 COPY sudoers.conf /etc/sudoers.d/raposfly
 COPY nginx.conf /etc/nginx/sites-enabled/default
 COPY supervisord.conf /etc/supervisor/conf.d/
 COPY uwsgi.ini /etc/uwsgi/uwsgi.ini
 
-WORKDIR /app
+WORKDIR /usr/lib/raposfly/
 RUN pip install --no-cache-dir -r requirements.txt
 RUN python manage.py collectstatic --noinput
-RUN chown www-data:www-data -R /app
+RUN chown www-data:www-data -R /usr/lib/raposfly/
 
 EXPOSE 80
 
