@@ -492,6 +492,16 @@ Get the project on the rapsberry with the following command:
 If you have your own version of the code, for instance if you have made some
 modifications in a fork, you can simply change the URL to your one.
 
+Prepare database and file structure
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The sqlite database file and the backup folder should be created with::
+
+.. code-block:: console
+
+   sudo mkdir -p /var/lib/raposfly/backups/
+   sudo touch /var/lib/raposfly/db.sqlite3
+
 Build the containers
 ~~~~~~~~~~~~~~~~~~~~
 
