@@ -1,4 +1,4 @@
-FROM debian:jessie-backports
+FROM armhf/debian:jessie
 MAINTAINER Fabien Dubosson <fabien.dubosson@gmail.com>
 
 RUN apt-get update \
