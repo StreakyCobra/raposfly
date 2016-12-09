@@ -501,6 +501,7 @@ The sqlite database file and the backup folder should be created with::
 
    sudo mkdir -p /var/lib/raposfly/backups/
    sudo touch /var/lib/raposfly/db.sqlite3
+   sudo chown -R www-data:www-data /var/lib/raposfly/
 
 Build the containers
 ~~~~~~~~~~~~~~~~~~~~
