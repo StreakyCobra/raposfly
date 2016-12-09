@@ -34,10 +34,6 @@ def constance_updated(sender, updated_key, new_value, **kwargs):
         update_printer()
 
 
-# Call update_printer one first time
-update_printer()
-
-
 @decorator
 def guard_printer(func, *args, **kw):
     """."""
