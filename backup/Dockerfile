@@ -2,7 +2,7 @@ FROM armhf/debian:jessie
 MAINTAINER Fabien Dubosson <fabien.dubosson@gmail.com>
 
 RUN apt-get update \
-    && apt-get upgrade \
+    && apt-get upgrade -y \
     && apt-get install -y \
       cron \
       rsyslog \
