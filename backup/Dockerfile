@@ -12,7 +12,6 @@ RUN touch /var/log/cron.log
 
 COPY backup.sh /usr/lib/raposfly/backup.sh
 RUN chmod +x /usr/lib/raposfly/backup.sh
-RUN mkdir -p /var/lib/raposfly/backups/
 
 VOLUME /var/lib/raposfly/
 

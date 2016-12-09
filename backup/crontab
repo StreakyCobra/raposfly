@@ -1,1 +1,1 @@
-*/15 * * * * www-data /usr/lib/raposfly/backup.sh
+* * * * * root /usr/lib/raposfly/backup.sh
