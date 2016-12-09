@@ -24,12 +24,11 @@ services:
     volumes:
       - /dev/bus/usb:/dev/bus/usb
       - /run/systemd:/run/systemd
-      - /var/lib/raposfly/db.sqlite3:/var/lib/raposfly/db.sqlite3
+      - /var/lib/raposfly/:/var/lib/raposfly/
     privileged: true
 
   backup:
     build: backup
     container_name: backup
     volumes:
-      - /var/lib/raposfly/backups/:/var/lib/raposfly/backups/
-      - /var/lib/raposfly/db.sqlite3:/var/lib/raposfly/db.sqlite3
+      - /var/lib/raposfly/:/var/lib/raposfly/

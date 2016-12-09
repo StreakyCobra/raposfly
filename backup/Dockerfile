@@ -14,7 +14,6 @@ COPY backup.sh /usr/lib/raposfly/backup.sh
 RUN chmod +x /usr/lib/raposfly/backup.sh
 RUN mkdir -p /var/lib/raposfly/backups/
 
-VOLUME /var/lib/raposfly/backups/
-VOLUME /var/lib/raposfly/db.sqlite3
+VOLUME /var/lib/raposfly/
 
 CMD /usr/sbin/cron -L 15 && tail -f /var/log/cron.log
