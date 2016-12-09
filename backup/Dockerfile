@@ -15,4 +15,4 @@ RUN chmod +x /usr/lib/raposfly/backup.sh
 
 VOLUME /var/lib/raposfly/
 
-CMD ["/usr/sbin/cron", "-L", "15"]
+CMD ["/usr/sbin/cron", "-f", "-L", "15"]
