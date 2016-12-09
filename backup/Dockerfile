@@ -6,9 +6,10 @@ RUN apt-get update \
       cron \
     && rm -rf /var/lib/apt/lists/*
 
-COPY crontab /etc/cron.d/raposfly
-RUN chmod 0644 /etc/cron.d/raposfly
 RUN touch /var/log/cron.log
+
+COPY crontab /tmp/crontab
+RUN crontab /tmp/crontab && rm /tmp/crontab
 
 COPY backup.sh /usr/lib/raposfly/backup.sh
 RUN chmod +x /usr/lib/raposfly/backup.sh
