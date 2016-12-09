@@ -31,6 +31,9 @@ RUN ln -s /usr/lib/arm-linux-gnueabihf/libjpeg.so /usr/lib/
 RUN ln -s /usr/lib/arm-linux-gnueabihf/libfreetype.so /usr/lib/
 RUN ln -s /usr/lib/arm-linux-gnueabihf/libz.so /usr/lib/
 
+RUN mkdir /var/lib/raposfly/
+RUN chown -R www-data:www-data /var/lib/raposfly/
+
 COPY ./ /usr/lib/raposfly/
 COPY sudoers.conf /etc/sudoers.d/raposfly
 COPY nginx.conf /etc/nginx/sites-enabled/default
@@ -43,6 +46,7 @@ RUN python manage.py migrate
 RUN python manage.py collectstatic --noinput
 RUN chown www-data:www-data -R /usr/lib/raposfly/
 
+VOLUME /var/lib/raposfly/
 EXPOSE 80
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
