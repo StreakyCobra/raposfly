@@ -1,5 +1,4 @@
 FROM armhf/python:3.5
-MAINTAINER Fabien Dubosson <fabien.dubosson@qadmium.com>
 
 RUN echo "deb http://ftp.debian.org/debian jessie-backports main" >> /etc/apt/sources.list.d/jessie-backports.list \
   && apt-get update \
