@@ -6,7 +6,7 @@ RUN echo "deb http://ftp.debian.org/debian jessie-backports main" >> /etc/apt/so
   && apt-get install -y --no-install-recommends --no-install-suggests \
     curl \
     ca-certificates \
-  && curl -sL https://deb.nodesource.com/setup_6.x | bash - \
+  && curl -sL https://deb.nodesource.com/setup_7.x | bash - \
   && apt-get install -y -t jessie-backports --no-install-recommends --no-install-suggests \
     nginx \
   && apt-get install -y --no-install-recommends --no-install-suggests \
