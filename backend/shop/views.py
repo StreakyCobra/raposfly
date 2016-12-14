@@ -13,7 +13,7 @@ from rest_framework.views import APIView
 
 from . import serializers
 from .models import Category, Item, Order, Purchase
-from .tickets import print_ticket, print_total
+from .tickets import print_ticket, print_total, update_printer
 
 
 class ItemViewSet(viewsets.ModelViewSet):
@@ -82,6 +82,9 @@ class BuyView(APIView):
         # ------------------------------------------------------------------- #
         # Print the tickets                                                   #
         # ------------------------------------------------------------------- #
+
+        # Update the printer
+        update_printer()
 
         total = 0
         for (item, quantity) in items:
