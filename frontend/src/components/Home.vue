@@ -18,16 +18,21 @@
         <h2>{{ $t('Administration') }}</h2>
         <p>
             {{ $t('Shutdown the device') }}:<br />
-            <a class="btn btn-danger" style="width: 150px;" @click="shutdown"><i class="fa fa-power-off"></i> {{ $t('Shutdown') }}</a>
+            <twiceButton button="Shutdown" confirmation="Are you sure?" type="btn-danger" icon="fa-power-off" @click="shutdown"></twiceButton>
         </p>
     </div>
 </template>
 
 <script>
  import shop from '../api/shop.js'
+ import TwiceButton from './TwiceButton'
+ var $ = require('jquery')
 
  export default {
      name: 'home',
+     components: {
+         TwiceButton
+     },
      data: function () {
          return {
              event: 'Welcome to raposfly'
@@ -42,7 +47,9 @@
      },
      methods: {
          shutdown: function () {
-             shop.shutdown(() => {}, () => {})
+             shop.shutdown(() => {
+                 $('#splash').fadeIn()
+             }, () => {})
          }
      }
  }
