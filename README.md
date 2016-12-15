@@ -1,4 +1,4 @@
-![logo][]
+![logo](resources/images/logo.png)
 
 _**» Raspberry Pi Point of Sale on the Fly.**_
 
@@ -33,9 +33,17 @@ through tickets that will then be exchanged at the different desks.
 The project is build on top of the _Raspberry Pi 3_ and support all printers
 that are supported by the [`python-escpos`][python-escpos] library.
 
+[python-escpos]:   https://github.com/python-escpos/python-escpos
+
+
 # Documentation
 
 - [Installation][installation]
+- [Milestones][milestones]
+
+[installation]:    doc/installation.rst
+[milestones]:      doc/milestones.rst
+
 
 # Version numbers
 
@@ -52,6 +60,9 @@ Any part may also be incremented freely at any time for any reason.
 
 *Note*: `MAJOR` version `0` is for initial development and does not follow the
 `MINOR` and `PATCH` schema. Do not expect any stability during this period.
+
+[semver]:          http://semver.org/spec/v2.0.0.html
+
 
 # Contributing
 
@@ -81,6 +92,10 @@ Commit messages may be reworded before being merged. Original author's name will
 be kept and commit will be signed-off. The author name will be added to the list
 of contributors.
 
+[git-branching]:   http://nvie.com/posts/a-successful-git-branching-model/
+[git-messages]:    http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
+
+
 # License
 
 This software is licensed under the term of the [GPL v3.0][] license:
@@ -103,18 +118,11 @@ This software is licensed under the term of the [GPL v3.0][] license:
 
 See [LICENSE.md][] for the complete license.
 
+[GPL v3.0]:        https://www.gnu.org/licenses/gpl-3.0.html
+[LICENSE.md]:      LICENSE.md
+
+
 # Legal
 
 - _Raspberry Pi_ is a trademark of the Raspberry Pi Foundation:
   http://www.raspberrypi.org
-
-
-[GPL v3.0]:        https://www.gnu.org/licenses/gpl-3.0.html
-[LICENSE.md]:      LICENSE.md
-[git-branching]:   http://nvie.com/posts/a-successful-git-branching-model/
-[git-messages]:    http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
-[installation]:    doc/installation.rst
-[logo]:            resources/images/logo.png
-[python-escpos]:   https://github.com/python-escpos/python-escpos
-[semver]:          http://semver.org/spec/v2.0.0.html
-
