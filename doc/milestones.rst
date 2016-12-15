@@ -4,7 +4,7 @@
 
 .. |R| replace:: *raposfly*
 
-This page list in more details the milestones_ of |R|. Keep in mind that these
+This page lists in more details the milestones_ of |R|. Keep in mind that these
 milestones are only plannifications and could be subject to changes at any time.
 
 .. _milestones: https://github.com/StreakyCobra/raposfly/milestones
