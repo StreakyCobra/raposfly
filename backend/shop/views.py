@@ -129,8 +129,11 @@ class PrintReceiptView(APIView):
             purchase = Purchase.objects.get(pk=purchase_id)
         except Purchase.DoesNotExist:
             return Response({'status': 'failed'}, status=404)
-        print("Print receipt " + str(purchase))
-        # TODO print receipt
+
+        items = [(o.item, o.quantity)
+                 for o in Order.objects.filter(purchase=purchase)]
+        print_total(items)
+
         return Response({'status': 'ok'})
 
 
