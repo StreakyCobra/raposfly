@@ -86,7 +86,6 @@ class BuyView(APIView):
         # Update the printer
         update_printer()
 
-        total = 0
         for (item, quantity) in items:
             if item.individual_tickets and config.INDIVIDUAL_TICKETS:
                 if item.group_tickets:
@@ -94,11 +93,10 @@ class BuyView(APIView):
                 else:
                     for _iterate in range(quantity):
                         print_ticket(item)
-            total += item.price * quantity
         if receipt:
-            print_total(items, total)
+            print_total(items)
         if config.VENDOR_RECEIPT:
-            print_total(items, total)
+            print_total(items)
 
         # ------------------------------------------------------------------- #
         # Store the purchase                                                 #

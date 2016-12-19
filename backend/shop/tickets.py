@@ -71,7 +71,7 @@ def print_ticket(item, quantity=1):
 
 
 @guard_printer
-def print_total(items, total):
+def print_total(items):
     """Print the sum ticket."""
     # Print headline
     print_headline()
@@ -82,9 +82,10 @@ def print_total(items, total):
     PRINTER.text('Quittance:\n\n')
     # Print each item
     PRINTER.set()
-    print(items)
+    total = 0
     for (item, quantity) in items:
         print_item(item, quantity)
+        total += item.price * quantity
     # Print total line
     PRINTER.set('left', 'A', 'B')
     PRINTER.text('\n')
