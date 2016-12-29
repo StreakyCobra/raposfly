@@ -10,8 +10,12 @@ const getters = {
 }
 
 const mutations = {
-    [types.RECEIVE_HISTORY]: function (state, { purchases }) {
-        state.history = purchases
+    [types.RECEIVE_HISTORY]: function (state, { purchases, append }) {
+        if (append) {
+            state.history = state.history.concat(purchases)
+        } else {
+            state.history = purchases
+        }
     },
     [types.DELETE_PURCHASE]: function (state, purchase) {
         var index = state.history.indexOf(purchase)
@@ -25,6 +29,11 @@ const actions = {
     getHistory: function ({ commit }) {
         shop.getHistory((purchases) => {
             commit(types.RECEIVE_HISTORY, { purchases })
+        }, () => {})
+    },
+    getMoreHistory: function ({ state, commit }) {
+        shop.getMoreHistory(state.history.length, (purchases) => {
+            commit(types.RECEIVE_HISTORY, { purchases, append: true })
         }, () => {})
     },
     deletePurchase: function ({ commit }, purchase) {

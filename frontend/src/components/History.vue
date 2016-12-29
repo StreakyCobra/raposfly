@@ -23,6 +23,7 @@
                 </div>
             </div>
         </template>
+        <a id="more" class="btn btn-info" @click='getMoreHistory'>Load more</a>
     </div>
 </template>
 
@@ -57,6 +58,7 @@
          },
          ...mapActions([
              'getHistory',
+             'getMoreHistory',
              'deletePurchase',
              'printReceipt'
          ])

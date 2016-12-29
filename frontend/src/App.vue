@@ -98,4 +98,8 @@
      user-select: none; /* Non-prefixed version, currently
                            not supported by any browser */
  }
+
+ .container {
+     margin-bottom: 1em;
+ }
 </style>

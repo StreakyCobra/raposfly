@@ -24,7 +24,14 @@ export default new Vue({
             })
         },
         getHistory: function (cb, errorCb) {
-            this.$http.get('shop/history/').then((response) => {
+            this.$http.get('shop/history/?limit=10&offset=1').then((response) => {
+                cb(response.body)
+            }, (response) => {
+                errorCb()
+            })
+        },
+        getMoreHistory: function (num, cb, errorCb) {
+            this.$http.get('shop/history/?limit=10&offset=' + num).then((response) => {
                 cb(response.body)
             }, (response) => {
                 errorCb()

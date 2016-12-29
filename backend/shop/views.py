@@ -10,6 +10,7 @@ from django.utils import timezone
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.pagination import LimitOffsetPagination
 
 from . import serializers
 from .models import Category, Item, Order, Purchase
@@ -49,7 +50,9 @@ class HistoryView(APIView):
     def get(self, request):
         """GET request for the list the history of purchases of the shop."""
         purchases = Purchase.objects.all()
-        return Response(self.serializer_class(purchases, many=True).data)
+        paginator = LimitOffsetPagination()
+        result_page = paginator.paginate_queryset(purchases, request)
+        return Response(self.serializer_class(result_page, many=True).data)
 
 
 class BuyView(APIView):
