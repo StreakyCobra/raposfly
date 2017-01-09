@@ -75,6 +75,7 @@
 <style scoped>
  .item {
      box-shadow: 5px 5px 5px -2px gray;
+     cursor: pointer;
  }
 
  .panel-body {
