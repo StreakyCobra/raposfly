@@ -102,7 +102,7 @@ class BuyView(APIView):
             print_total(items)
 
         # ------------------------------------------------------------------- #
-        # Store the purchase                                                 #
+        # Store the purchase                                                  #
         # ------------------------------------------------------------------- #
 
         purchase = Purchase(date=timezone.now())
@@ -156,17 +156,19 @@ class StatsView(APIView):
         stats['total_sales'] = total_sales['total']
 
         # ------------------------------------------------------------------- #
-        # Cumulative Sales                                                   #
+        # Cumulative Sales                                                    #
         # ------------------------------------------------------------------- #
 
         purchases = Purchase.objects.order_by('date').annotate(
             total=Sum(F('orders__price')*F('orders__quantity')))
         running_total = 0
         stats['cumulative_sales'] = []
-        for p in purchases:
-            running_total += p.total
-            stats['cumulative_sales'].append({'x': int(p.date.timestamp()),
-                                              'y': running_total})
+        for purchase in purchases:
+            running_total += purchase.total
+            stats['cumulative_sales'].append({
+                'x': int(purchase.date.timestamp()),
+                'y': running_total
+            })
 
         # ------------------------------------------------------------------- #
         # Count                                                               #

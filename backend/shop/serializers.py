@@ -58,13 +58,6 @@ class HistorySerializer(serializers.ModelSerializer):
         exclude = ('items',)
 
 
-class OrderSerializer(serializers.Serializer):
-    """Serializer for buying a given quantity of an item."""
-
-    item_id = serializers.IntegerField()
-    quantity = serializers.IntegerField()
-
-
 class BuySerializer(serializers.Serializer):
     """Serializer for doing a purchase."""
 
