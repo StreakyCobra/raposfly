@@ -4,7 +4,7 @@
 
 from rest_framework import serializers
 
-from .models import Category, Order, Item, Purchase
+from .models import Category, Item, Order, Purchase
 
 
 class ItemSerializer(serializers.ModelSerializer):

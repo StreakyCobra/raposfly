@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 """Models for the shop application."""
 
+from colorful.fields import RGBColorField
 from constance import config
 from django.db import models
-from colorful.fields import RGBColorField
+
 from .utils import UploadHashedTo
 
 

@@ -3,7 +3,7 @@
 
 from django.contrib import admin
 
-from .models import Category, Order, Item, Purchase
+from .models import Category, Item, Order, Purchase
 
 admin.site.register(Category)
 admin.site.register(Order)
