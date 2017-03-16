@@ -38,8 +38,8 @@ have to be done once.
 
 This procedure has been tested on the version:
 
-.. figure:: https://img.shields.io/badge/raspbian--lite-September%202016-brightgreen.svg
-   :alt: September 2016
+.. figure:: https://img.shields.io/badge/raspbian--lite-Mars%202017-brightgreen.svg
+   :alt: Mars 2017
 
 Install and configure the rasbian-lite distribution
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -391,14 +391,12 @@ Edit ``/etc/default/ufw`` in order to allow UFW to forward request to docker:
 
     DEFAULT_FORWARD_POLICY="ACCEPT"
 
-Modify the file ``/etc/systemd/system/docker.service.d/overlay.conf`` in order
-to prevent docker to play with iptables:
+Modify the file ``/etc/systemd/system/multi-user.target.wants/docker.service``
+in order to prevent docker to play with iptables:
 
 .. code-block:: cfg
 
-    [Service]
-    ExecStart=
-    ExecStart=/usr/bin/dockerd --storage-driver overlay -H fd:// --iptables=false
+    ExecStart=/usr/bin/dockerd -H fd:// --iptables=false
 
 Add the following block on the top of ``/etc/ufw/before.rules`` in order to
 allow docker to access the outside world:
