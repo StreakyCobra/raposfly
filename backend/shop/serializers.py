@@ -38,6 +38,8 @@ class PurchaseSerializer(serializers.ModelSerializer):
         exclude = ()
 
 
+# TODO This, or the next definition of OrderSerializer, should be
+# removed/merged
 class OrderSerializer(serializers.ModelSerializer):
     """Serializer for a composition."""
 
@@ -56,6 +58,13 @@ class HistorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Purchase
         exclude = ('items',)
+
+
+class OrderSerializer(serializers.Serializer):
+    """Serializer for buying a given quantity of an item."""
+
+    item_id = serializers.IntegerField()
+    quantity = serializers.IntegerField()
 
 
 class BuySerializer(serializers.Serializer):
