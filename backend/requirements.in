@@ -1,0 +1,30 @@
+# Django
+django
+django-cleanup
+django-colorful
+django-constance
+django-cors-headers
+django-debug-toolbar
+django-picklefield
+djangorestframework
+drfdocs
+
+# Thermal printer support
+python-escpos
+
+# Python
+decorator
+ipython
+
+# Linting
+autoflake
+isort
+pep257
+pep8
+pyflakes
+pylint
+pylint-django
+
+# Pip management
+pip-review
+pip-tools
