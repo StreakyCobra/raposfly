@@ -4,55 +4,58 @@
 #
 #    pip-compile --output-file requirements.txt requirements.in
 #
-appdirs==1.4.0            # via python-escpos, setuptools
-argcomplete==1.7.0        # via python-escpos
+appdirs==1.4.3            # via python-escpos, setuptools
+argcomplete==1.8.2        # via python-escpos
 argparse==1.4.0           # via python-escpos
 astroid==1.4.9            # via pylint, pylint-plugin-utils
 autoflake==0.6.6
 click==6.7                # via pip-tools
-decorator==4.0.10
+decorator==4.0.11
 django-cleanup==0.4.2
 django-colorful==1.2
-django-constance==1.3.4
-django-cors-headers==1.3.1
-django-debug-toolbar==1.6
+django-constance==2.0.0
+django-cors-headers==2.0.2
+django-debug-toolbar==1.7
 django-picklefield==0.3.2
-django==1.10.4
-djangorestframework==3.5.3
+django==1.11
+djangorestframework==3.6.2
 drfdocs==0.0.11
 first==2.0.1              # via pip-tools
-ipython-genutils==0.1.0   # via traitlets
-ipython==5.1.0
+ipython-genutils==0.2.0   # via traitlets
+ipython==5.3.0
 isort==4.2.5
 lazy-object-proxy==1.2.2  # via astroid
-mccabe==0.5.3             # via pylint
+mccabe==0.6.1             # via pylint
+olefile==0.44             # via pillow
 packaging==16.8           # via pip-review, setuptools
 pep257==0.7.0
 pep8==1.7.0
 pexpect==4.2.1            # via ipython
 pickleshare==0.7.4        # via ipython
-pillow==3.4.2             # via python-escpos
-pip-review==0.5
-pip-tools==1.8.0
-prompt-toolkit==1.0.9     # via ipython
+Pillow==4.1.0             # via python-escpos
+pip-review==0.5.2
+pip-tools==1.8.2
+prompt-toolkit==1.0.14    # via ipython
 ptyprocess==0.5.1         # via pexpect
-pyflakes==1.3.0
-pygments==2.1.3           # via ipython
+pyflakes==1.5.0
+pygments==2.2.0           # via ipython
 pylint-django==0.7.2
-pylint-plugin-utils==0.2.4  # via pylint-django
-pylint==1.6.4
-pyparsing==2.1.10         # via packaging
-pyserial==3.2.1           # via python-escpos
+pylint-plugin-utils==0.2.6  # via pylint-django
+pylint==1.6.5
+pyparsing==2.2.0          # via packaging
+pyserial==3.3             # via python-escpos
 python-escpos==2.2.0
+pytz==2017.2              # via django
 pyusb==1.0.0              # via python-escpos
 pyyaml==3.12              # via python-escpos
 qrcode==5.3               # via python-escpos
 simplegeneric==0.8.1      # via ipython
 six==1.10.0               # via astroid, packaging, pip-tools, prompt-toolkit, pylint, python-escpos, qrcode, setuptools, traitlets
-sqlparse==0.2.2           # via django-debug-toolbar
-traitlets==4.3.1          # via ipython
+sqlparse==0.2.3           # via django-debug-toolbar
+traitlets==4.3.2          # via ipython
 wcwidth==0.1.7            # via prompt-toolkit
-wrapt==1.10.8             # via astroid
+wrapt==1.10.10            # via astroid
 
 # The following packages are considered to be unsafe in a requirements file:
+# pip                       # via pip-review
 # setuptools                # via ipython
