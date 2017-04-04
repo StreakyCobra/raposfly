@@ -23,7 +23,7 @@
                 </div>
             </div>
         </template>
-        <a id="more" class="btn btn-info" @click='getMoreHistory'>Load more</a>
+        <a id="more" class="btn btn-info" @click='getMoreHistory'>{{ $t('Load more') }}</a>
     </div>
 </template>
 
