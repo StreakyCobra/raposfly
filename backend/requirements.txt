@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file requirements.txt requirements.in
 #
-appdirs==1.4.3            # via python-escpos, setuptools
+appdirs==1.4.3            # via python-escpos
 argcomplete==1.8.2        # via python-escpos
 argparse==1.4.0           # via pip-review, python-escpos
 astroid==1.5.2            # via pylint, pylint-plugin-utils
@@ -28,7 +28,7 @@ jedi==0.10.2              # via ipython
 lazy-object-proxy==1.2.2  # via astroid
 mccabe==0.6.1             # via pylint
 olefile==0.44             # via pillow
-packaging==16.8           # via pip-review, setuptools
+packaging==16.8           # via pip-review
 pep257==0.7.0
 pep8==1.7.0
 pexpect==4.2.1            # via ipython
@@ -51,12 +51,8 @@ pyusb==1.0.0              # via python-escpos
 pyyaml==3.12              # via python-escpos
 qrcode==5.3               # via python-escpos
 simplegeneric==0.8.1      # via ipython
-six==1.10.0               # via astroid, packaging, pip-tools, prompt-toolkit, pylint, python-escpos, qrcode, setuptools, traitlets
+six==1.10.0               # via astroid, packaging, pip-tools, prompt-toolkit, pylint, python-escpos, qrcode, traitlets
 sqlparse==0.2.3           # via django-debug-toolbar
 traitlets==4.3.2          # via ipython
 wcwidth==0.1.7            # via prompt-toolkit
 wrapt==1.10.10            # via astroid
-
-# The following packages are considered to be unsafe in a requirements file:
-# pip                       # via pip-review
-# setuptools                # via ipython
