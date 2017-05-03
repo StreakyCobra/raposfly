@@ -27,9 +27,9 @@
             </div>
             <div :class="'toReturn alert alert-' + (to_return.gt(0) || given.eq(0) || given.eq(last_total) ? 'success' : 'danger')" @click="exitNumpad"><i class="fa fa-sign-in"></i>&nbsp;{{ to_return.toFormat(2) }} CHF</div>
             <hr />
-        <numpad ref="numpad" v-model="given"></numpad>
-        <hr />
-    </div>
+            <numpad ref="numpad" v-model="given"></numpad>
+            <hr />
+        </div>
     </div>
 </template>
 

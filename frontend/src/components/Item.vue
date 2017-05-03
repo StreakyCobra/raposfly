@@ -19,7 +19,7 @@
     <!-- Small display -->
     <div v-else-if="display_style === 'small'"
          class="small item panel panel-default"
-        @click="clicked">
+         @click="clicked">
         <div class="panel-body" :style="{ backgroundColor: this.item.color }">
             <span class="price pull-right">{{ total_price.toFormat(2) }} CHF</span>
             <span class="quantity btn-xs" v-if="quantity">{{ quantity }}×</span>
