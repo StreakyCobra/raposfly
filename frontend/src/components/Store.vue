@@ -6,6 +6,7 @@
             <item v-for="item in category.items"
                   display_style=big
                   :item="item"
+                  :key="item.id"
                   @clicked="addToCart(item)"/>
         </div>
     </div>
