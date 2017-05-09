@@ -32,5 +32,7 @@
     "Shutdown": "Éteindre",
     "Load more": "Afficher plus",
     "Cashed": "Encaissé",
-    "To pay": "À payer"
+    "To pay": "À payer",
+    "Database administration": "Administration de la base de données",
+    "Access the database administration": "Accéder à l'administration de la base de données"
 }

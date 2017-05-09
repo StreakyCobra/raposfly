@@ -1,9 +1,6 @@
 {
     "Raposfly": "Raposfly",
     "Welcome to raposfly": "Welcome to raposfly",
-    "You can directly access the shop": "You can directly access the shop",
-    "Or see the history from": "Or see the history from",
-    "And finally access stats through": "And finally access stats through",
     "Shop": "Shop",
     "History": "History",
     "Stats": "Stats",
@@ -32,5 +29,7 @@
     "Shutdown": "Shutdown",
     "Load more": "Load more",
     "Cashed": "Cashed",
-    "To pay": "To pay"
+    "To pay": "To pay",
+    "Database administration": "Database administration",
+    "Access the database administration": "Access the database administration"
 }

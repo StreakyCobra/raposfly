@@ -13,6 +13,7 @@ import Home from './components/Home'
 import Shop from './components/Shop'
 import History from './components/History'
 import Stats from './components/Stats'
+import Admin from './components/Admin'
 
 // Code imports
 import store from './store'
@@ -63,7 +64,8 @@ const routes = [
     { path: '/', component: Home },
     { path: '/shop', component: Shop },
     { path: '/history', component: History },
-    { path: '/stats', component: Stats }
+    { path: '/stats', component: Stats },
+    { path: '/admin', component: Admin }
 ]
 
 const router = new VueRouter({

@@ -36,9 +36,9 @@
                                     <li><a @click="setLang('fr')">FR</a></li>
                                 </ul>
                             </li>
-                        </ul>
-                        <ul class="nav navbar-nav">
-                            <li><a :href="this.$backend_url + '/admin'"><i class="fa fa-cog" aria-hidden="true"></i> {{ $t('Admin') }}</a></li>
+                            <router-link to="/admin" tag="li" active-class="active" exact data-toggle="collapse" data-target=".navbar-collapse.in">
+                                <router-link to="/admin"><i class="fa fa-cog" aria-hidden="true"></i> {{ $t('Administration') }}</router-link>
+                            </router-link>
                         </ul>
                     </div>
                 </div>

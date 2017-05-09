@@ -27,9 +27,9 @@
          classes: function () {
              var base = ['btn', this.type]
              if (this.triggered) {
-                 return base
-             } else {
                  return [...base, 'btn-outline']
+             } else {
+                 return base
              }
          }
      },
