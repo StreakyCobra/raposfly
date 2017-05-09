@@ -21,9 +21,9 @@
         </div>
         <div v-else-if="last_total.gt(0)">
             <div class="total alert alert-warning">
-                Paid: <span class="amount">{{ given.toFormat(2) }} CHF</span>
+                {{ $t('Cashed') }}: <span class="amount">{{ given.toFormat(2) }} CHF</span>
                 <br />
-                To pay: <span class="amount underline"><i class="fa fa-minus" style="font-size: 0.8em;"></i>&nbsp;{{ last_total.toFormat(2) }} CHF</span>
+                {{ $t('To pay') }}: <span class="amount underline"><i class="fa fa-minus" style="font-size: 0.8em;"></i>&nbsp;{{ last_total.toFormat(2) }} CHF</span>
             </div>
             <div :class="'toReturn alert alert-' + (to_return.gt(0) || given.eq(0) || given.eq(last_total) ? 'success' : 'danger')" @click="exitNumpad"><i class="fa fa-sign-in"></i>&nbsp;{{ to_return.toFormat(2) }} CHF</div>
             <hr />
