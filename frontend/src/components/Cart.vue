@@ -64,7 +64,7 @@
              'receipt'
          ]),
          to_return: function () {
-             return this.given.gt(this.last_total) && this.given.minus(this.last_total) || new BigNumber(0)
+             return (this.given.gt(this.last_total) && this.given.minus(this.last_total)) || new BigNumber(0)
          }
      },
      methods: {

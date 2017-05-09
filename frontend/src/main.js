@@ -19,6 +19,19 @@ import store from './store'
 import language from './language'
 
 // ------------------------------------------------------------------------- //
+// EXTERNAL LIBRARIES                                                        //
+// ------------------------------------------------------------------------- //
+
+// Load bootstrap
+import 'bootstrap/dist/css/bootstrap.css'
+
+// Load chartist
+import 'chartist/dist/chartist.css'
+
+// Load font-awesome
+import 'font-awesome/css/font-awesome.css'
+
+// ------------------------------------------------------------------------- //
 // URLS                                                                      //
 // ------------------------------------------------------------------------- //
 
@@ -37,18 +50,6 @@ var PROD_ROOT_BACKEND_URL = 'http://backend.raposfly.shop'
 var ROOT_URL = production ? PROD_ROOT_URL : DEV_ROOT_URL
 var ROOT_BACKEND_URL = production ? PROD_ROOT_BACKEND_URL : DEV_ROOT_BACKEND_URL
 var ROOT_API_URL = ROOT_BACKEND_URL + '/api'
-
-// ------------------------------------------------------------------------- //
-// EXTERNAL LIBRARIES                                                        //
-// ------------------------------------------------------------------------- //
-
-// Load bootstrap
-require('bootstrap')
-import 'bootstrap/dist/css/bootstrap.css'
-import 'chartist/dist/chartist.css'
-
-// Load font-awesome
-import 'font-awesome/css/font-awesome.css'
 
 // ------------------------------------------------------------------------- //
 // VUE CONFIGURATION                                                         //
