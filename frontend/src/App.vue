@@ -29,8 +29,13 @@
                     </ul>
                     <div class="navbar-right">
                         <ul class="nav navbar-nav">
-                            <li><a @click="setLang('en')">EN</a></li>
-                            <li><a @click="setLang('fr')">FR</a></li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ $i18n.locale | uppercase }} <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a @click="setLang('en')">EN</a></li>
+                                    <li><a @click="setLang('fr')">FR</a></li>
+                                </ul>
+                            </li>
                         </ul>
                         <ul class="nav navbar-nav">
                             <li><a :href="this.$backend_url + '/admin'"><i class="fa fa-cog" aria-hidden="true"></i> {{ $t('Admin') }}</a></li>
@@ -60,6 +65,11 @@
      },
      mounted: function () {
          $('#splash').delay(1000).fadeOut(1000)
+     },
+     filters: {
+         uppercase: function (val) {
+             return val.toUpperCase()
+         }
      },
      methods: {
          error: function (msg) {
