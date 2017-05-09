@@ -18,31 +18,13 @@ import fr from './assets/i18n/fr.json'
 Vue.use(VueI18n)
 
 // Define languages
-var locales = {
+var messages = {
     en: en,
     fr: fr
 }
 
-// Load languages
-Object.keys(locales).forEach(function (lang) {
-    Vue.locale(lang, locales[lang])
+export default new VueI18n({
+    locale: 'en',
+    fallbackLocale: 'en',
+    messages
 })
-
-// Select default language
-var lang = 'en'
-Vue.locale(lang, locales[lang])
-Vue.config.lang = lang
-
-// ------------------------------------------------------------------------- //
-// EXPORT                                                                    //
-// ------------------------------------------------------------------------- //
-
-export default {
-    set: function (lang) {
-        Vue.locale(lang, locales[lang])
-        Vue.config.lang = lang
-    },
-    get: function () {
-        return Vue.config.lang
-    }
-}

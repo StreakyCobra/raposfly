@@ -16,7 +16,7 @@ import Stats from './components/Stats'
 
 // Code imports
 import store from './store'
-import language from './language'
+import i18n from './language'
 
 // ------------------------------------------------------------------------- //
 // EXTERNAL LIBRARIES                                                        //
@@ -92,11 +92,6 @@ Object.defineProperties(Vue.prototype, {
         get: function () {
             return ROOT_BACKEND_URL
         }
-    },
-    $language: {
-        get: function () {
-            return language
-        }
     }
 })
 
@@ -108,9 +103,10 @@ Object.defineProperties(Vue.prototype, {
 new Vue({
     el: '#app',
     template: '<App/>',
-    store,
     components: {
         App
     },
-    router: router
+    store,
+    i18n,
+    router
 })

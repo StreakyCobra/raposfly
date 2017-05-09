@@ -66,7 +66,7 @@
              this.$refs.error.alert(msg)
          },
          setLang: function (lang) {
-             this.$language.set(lang)
+             this.$i18n.locale = lang
          }
      }
  }
