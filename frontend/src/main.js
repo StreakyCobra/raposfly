@@ -31,6 +31,8 @@ import 'chartist/dist/chartist.css'
 // Load font-awesome
 import 'font-awesome/css/font-awesome.css'
 
+require('bootstrap')
+
 // ------------------------------------------------------------------------- //
 // URLS                                                                      //
 // ------------------------------------------------------------------------- //
