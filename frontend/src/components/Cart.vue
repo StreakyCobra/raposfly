@@ -16,7 +16,7 @@
                 <item display_style=small
                       :item="entry.item"
                       :quantity="entry.quantity"
-                      @clicked="removeFromCart(entry.item)"/>
+                      @clicked="click(entry.item, arguments[1])"/>
             </template>
         </div>
         <div v-else-if="last_total.gt(0)">
@@ -39,6 +39,7 @@
  import Numpad from './Numpad'
  import { mapActions, mapGetters } from 'vuex'
  import BigNumber from '../math.js'
+ var $ = require('jquery')
 
  export default {
      name: 'cart',
@@ -77,6 +78,10 @@
              this.last_total = new BigNumber(0)
              this.given = new BigNumber(0)
              this.discardCart()
+         },
+         click: function (item, element) {
+             $(element).fadeTo(100, 0.3).fadeTo(100, 1)
+             this.removeFromCart(item)
          },
          exitNumpad: function () {
              this.last_total = new BigNumber(0)

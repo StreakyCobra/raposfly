@@ -63,7 +63,7 @@
      },
      methods: {
          clicked: function (item) {
-             this.$emit('clicked', item)
+             this.$emit('clicked', item, this.$el)
          },
          item_image: function (item) {
              return this.$backend_url + item.image

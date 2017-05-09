@@ -7,7 +7,7 @@
                   display_style=big
                   :item="item"
                   :key="item.id"
-                  @clicked="addToCart(item)"/>
+                  @clicked="click(item, arguments[1])"/>
         </div>
     </div>
 </template>
@@ -15,6 +15,7 @@
 <script>
  import Item from './Item'
  import { mapActions, mapGetters } from 'vuex'
+ var $ = require('jquery')
 
  export default {
      name: 'store',
@@ -24,9 +25,15 @@
      computed: mapGetters([
          'items'
      ]),
-     methods: mapActions([
-         'addToCart'
-     ]),
+     methods: {
+         click: function (item, element) {
+             $(element).fadeTo(100, 0.3).fadeTo(100, 1)
+             this.addToCart(item)
+         },
+         ...mapActions([
+             'addToCart'
+         ])
+     },
      mounted: function () {
          this.$store.dispatch('getItems')
      }
