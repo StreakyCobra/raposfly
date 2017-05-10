@@ -1,5 +1,15 @@
 <template>
     <div class="container">
+        <div id="shutdown-splash">
+            <div>
+                <img src="/static/logo_full.png" />
+                <br />
+                <i id="shutdown-progress" class="fa fa-spinner fa-spin" style="font-size:48px"></i>
+                <br />
+                <h2>{{ $t('Raposfly is shutting down') }}.</h2>
+                <h2>{{ $t('Please wait at least one minute until the animation stop spinning before unplugging the device') }}.</h2>
+            </div>
+        </div>
         <h1 class="page-header">{{ $t('Administration') }}</h1>
         <p>
             {{ $t('Access the database administration') }}:<br />
@@ -29,10 +39,39 @@
      },
      methods: {
          shutdown: function () {
-             shop.shutdown(() => {
-                 $('#splash').fadeIn()
-             }, () => {})
+             shop.shutdown(() => {}, () => {})
+             $('#shutdown-splash').fadeIn(100)
+             $('#shutdown-progress').delay(60000).queue(function (nxt) {
+                 $(this).hide()
+                 nxt()
+             })
          }
+     },
+     mounted: function () {
+         $('#shutdown-splash').hide()
      }
  }
 </script>
+
+<style scoped>
+ #shutdown-splash {
+     z-index: 1500;
+     position:absolute;
+     top:0;
+     left:0;
+     height:100%;
+     width:100%;
+     background-color: #cccccc;
+     background-position: center;
+     background-repeat: no-repeat;
+     text-align: center;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+ }
+
+ #shutdown-splash img {
+     width: 100%;
+     max-width: 888px;
+ }
+</style>
