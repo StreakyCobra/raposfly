@@ -64,7 +64,7 @@
          Error
      },
      mounted: function () {
-         $('#splash').delay(1000).fadeOut(1000)
+         $('#splash').delay(1000).fadeOut(500)
      },
      filters: {
          uppercase: function (val) {
