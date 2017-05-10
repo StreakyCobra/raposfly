@@ -1,19 +1,21 @@
 <template>
     <!-- Big display -->
     <div v-if="display_style === 'big'"
-         class="big item panel panel-default"
-         @click="clicked">
-        <div class="panel-body" :style="{ backgroundColor: this.item.color,
-                                        backgroundImage: 'url(' + item_image(item) + ')',
-                                        backgroundRepeat: 'no-repeat',
-                                        backgroundPosition: 'right',
-                                        backgroundOrigin: 'content-box',
-                                        backgroundSize: 'auto 100%'}">
-            <span class="quantity btn-xs" v-if="quantity">{{ quantity }}×</span>
-            <span class="name">{{ item.name }}</span>
-        </div>
-        <div class="panel-footer">
-            <span class="price"> {{ total_price.toFormat(2) }} CHF</span>
+         class="padded">
+        <div class="big item panel panel-default"
+             @click="clicked">
+            <div class="panel-body" :style="{ backgroundColor: this.item.color,
+                                            backgroundImage: 'url(' + item_image(item) + ')',
+                                            backgroundRepeat: 'no-repeat',
+                                            backgroundPosition: 'right',
+                                            backgroundOrigin: 'content-box',
+                                            backgroundSize: 'auto 100%'}">
+                <span class="quantity btn-xs" v-if="quantity">{{ quantity }}×</span>
+                <span class="name">{{ item.name }}</span>
+            </div>
+            <div class="panel-footer">
+                <span class="price"> {{ total_price.toFormat(2) }} CHF</span>
+            </div>
         </div>
     </div>
     <!-- Small display -->
@@ -76,6 +78,14 @@
  .item {
      box-shadow: 5px 5px 5px -2px gray;
      cursor: pointer;
+ }
+
+ .padded {
+     padding: 10px;
+ }
+
+ .big.panel {
+     margin-bottom: 0 !important;
  }
 
  .panel-body {
