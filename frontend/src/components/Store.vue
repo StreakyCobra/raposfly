@@ -27,7 +27,7 @@
      ]),
      methods: {
          click: function (item, element) {
-             $(element).fadeTo(100, 0.3).fadeTo(100, 1)
+             $(element).stop().fadeTo(100, 0.3).fadeTo(100, 1)
              this.addToCart(item)
          },
          ...mapActions([
