@@ -3,21 +3,21 @@
         <h1 class="page-header">{{ $t(event) }}</h1>
         <div class="row">
             <div class="section col-md-4">
-                <router-link to="/shop" tag="a" class="halfwidth btn btn-info">
+                <router-link :to="{name: 'shop'}" tag="a" class="halfwidth btn btn-info">
                     <i class="icon fa fa-shopping-basket"></i>
                     <br />
                     <div class="description">{{ $t('Shop') }}</div>
                 </router-link>
             </div>
             <div class="section col-md-4">
-                <router-link to="/history" tag="a" class="halfwidth btn btn-info">
+                <router-link :to="{name: 'history'}" tag="a" class="halfwidth btn btn-info">
                     <i class="icon fa fa-history"></i>
                     <br />
                     <div class="description">{{ $t('History') }}</div>
                 </router-link>
             </div>
             <div class="section col-md-4">
-                <router-link to="/stats" tag="a" class="halfwidth btn btn-info">
+                <router-link :to="{name: 'stats'}" tag="a" class="halfwidth btn btn-info">
                     <i class="icon fa fa-line-chart"></i>
                     <br />
                     <div class="description">{{ $t('Stats') }}</div>

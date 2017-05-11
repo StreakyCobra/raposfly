@@ -4,20 +4,16 @@
 
 // Vue imports
 import Vue from 'vue'
-import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
+import { sync } from 'vuex-router-sync'
 
 // Components imports
 import App from './App'
-import Home from './components/Home'
-import Shop from './components/Shop'
-import History from './components/History'
-import Stats from './components/Stats'
-import Admin from './components/Admin'
 
 // Code imports
 import store from './store'
 import i18n from './language'
+import router from './router'
 
 // ------------------------------------------------------------------------- //
 // EXTERNAL LIBRARIES                                                        //
@@ -58,19 +54,11 @@ var ROOT_API_URL = ROOT_BACKEND_URL + '/api'
 // VUE CONFIGURATION                                                         //
 // ------------------------------------------------------------------------- //
 
-// vue-router
-Vue.use(VueRouter)
-const routes = [
-    { path: '/', component: Home },
-    { path: '/shop', component: Shop },
-    { path: '/history', component: History },
-    { path: '/stats', component: Stats },
-    { path: '/admin', component: Admin }
-]
+// router
+sync(store, router)
 
-const router = new VueRouter({
-    mode: 'history',
-    routes: routes
+router.afterEach((to, from) => {
+    i18n.locale = to.params.lang
 })
 
 // vue-resource

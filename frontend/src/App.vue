@@ -10,21 +10,21 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <router-link class="navbar-brand" to="/" exact>
+                    <router-link class="navbar-brand" :to="{name: 'home'}" exact>
                         <img style="float: left; display:inline-block; height: 1.5em;"src="/static/favicon.png" />
                         <span style="display: inline-block;">raposfly</span>
                     </router-link>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <router-link to="/shop" tag="li" active-class="active" exact data-toggle="collapse" data-target=".navbar-collapse.in">
-                            <router-link to="/shop">{{ $t('Shop') }}</router-link>
+                        <router-link :to="{name: 'shop'}" tag="li" active-class="active" exact data-toggle="collapse" data-target=".navbar-collapse.in">
+                            <router-link :to="{name: 'shop'}">{{ $t('Shop') }}</router-link>
                         </router-link>
-                        <router-link to="/history" tag="li" active-class="active" exact data-toggle="collapse" data-target=".navbar-collapse.in">
-                            <router-link to="/history">{{ $t('History') }}</router-link>
+                        <router-link :to="{name: 'history'}" tag="li" active-class="active" exact data-toggle="collapse" data-target=".navbar-collapse.in">
+                            <router-link :to="{name: 'history'}">{{ $t('History') }}</router-link>
                         </router-link>
-                        <router-link to="/stats" tag="li" active-class="active" exact data-toggle="collapse" data-target=".navbar-collapse.in">
-                            <router-link to="/stats">{{ $t('Stats') }}</router-link>
+                        <router-link :to="{name: 'stats'}" tag="li" active-class="active" exact data-toggle="collapse" data-target=".navbar-collapse.in">
+                            <router-link :to="{name: 'stats'}">{{ $t('Stats') }}</router-link>
                         </router-link>
                     </ul>
                     <div class="navbar-right">
@@ -32,12 +32,12 @@
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ $i18n.locale | uppercase }} <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a @click="setLang('en')">EN</a></li>
-                                    <li><a @click="setLang('fr')">FR</a></li>
+                                    <li><a @click="set_lang('en')">EN</a></li>
+                                    <li><a @click="set_lang('fr')">FR</a></li>
                                 </ul>
                             </li>
-                            <router-link to="/admin" tag="li" active-class="active" exact data-toggle="collapse" data-target=".navbar-collapse.in">
-                                <router-link to="/admin"><i class="fa fa-cog" aria-hidden="true"></i> {{ $t('Administration') }}</router-link>
+                            <router-link :to="{name: 'admin'}" tag="li" active-class="active" exact data-toggle="collapse" data-target=".navbar-collapse.in">
+                                <router-link :to="{name: 'admin'}"><i class="fa fa-cog" aria-hidden="true"></i> {{ $t('Administration') }}</router-link>
                             </router-link>
                         </ul>
                     </div>
@@ -75,8 +75,10 @@
          error: function (msg) {
              this.$refs.error.alert(msg)
          },
-         setLang: function (lang) {
-             this.$i18n.locale = lang
+         set_lang: function (lang) {
+             const route = Object.assign({}, this.$route)
+             route.params.lang = lang
+             this.$router.push(route)
          }
      }
  }
