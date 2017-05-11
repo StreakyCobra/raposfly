@@ -145,7 +145,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = '/srv/http/static/'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = '/srv/http/media/'
+MEDIA_ROOT = '/var/lib/raposfly/media/'
 
 INTERNAL_IPS = ['127.0.0.1']
 CORS_ORIGIN_ALLOW_ALL = True
