@@ -1,6 +1,7 @@
 <template>
     <div class="container">
-        <h1 class="page-header">{{ $t(event) }}</h1>
+        <div class="logo"><img src="/static/logo_full.png"/></div>
+        <h1 class="page-header"><center>{{ $t(event) }}</center></h1>
         <div class="row">
             <div class="section col-md-4">
                 <router-link :to="{name: 'shop'}" tag="a" class="halfwidth btn btn-info">
@@ -63,5 +64,14 @@
      font-size: 1.5em;
      font-weight: bold;
      margin-top: 2em;
+ }
+
+ .logo {
+     text-align: center;
+     max-width: 100%;
+ }
+
+ .logo img {
+     max-width: 100%;
  }
 </style>
