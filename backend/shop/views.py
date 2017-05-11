@@ -5,7 +5,7 @@
 from subprocess import call
 
 from constance import config
-from django.db.models import F, Sum
+from django.db.models import F, Sum, Count
 from django.utils import timezone
 from rest_framework import viewsets
 from rest_framework.pagination import LimitOffsetPagination
@@ -49,7 +49,8 @@ class HistoryView(APIView):
 
     def get(self, request):
         """GET request for the list the history of purchases of the shop."""
-        purchases = Purchase.objects.all()
+        purchases = Purchase.objects.annotate(num_orders=Count('orders'))\
+                                    .filter(num_orders__gt=0)
         paginator = LimitOffsetPagination()
         result_page = paginator.paginate_queryset(purchases, request)
         return Response(self.serializer_class(result_page, many=True).data)
@@ -164,6 +165,9 @@ class StatsView(APIView):
         running_total = 0
         stats['cumulative_sales'] = []
         for purchase in purchases:
+            if purchase.total is None:
+                purchase.delete()
+                continue
             running_total += purchase.total
             stats['cumulative_sales'].append({
                 'x': int(purchase.date.timestamp()),
