@@ -18,7 +18,7 @@ const getters = {
 
 const mutations = {
     [types.ADD_TO_CART]: function (state, item) {
-        var index = arrayFindIndex(state.cart, (elm) => elm.item === item)
+        var index = arrayFindIndex(state.cart, (elm) => elm.item.id === item.id)
         if (index !== -1) {
             state.cart[index].quantity++
         } else {

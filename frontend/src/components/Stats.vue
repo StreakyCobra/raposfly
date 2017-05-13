@@ -2,7 +2,7 @@
     <div class="container">
         <h1 class="page-header">{{ $t('Stats') }}<span class="pull-right btn btn-info" @click="getStats">{{ $t('Refresh') }}</span></h1>
         <h2>{{ $t('Total Sales') }}</h2>
-        <p class="btn btn-primary">{{ stats.total_sales }} CHF</p>
+        <h3 class="alert alert-info">{{ total_sales.toFormat(2) }} CHF</h3>
         <h2>{{ $t('Sales History') }}</h2>
         <div class="chart-cumulative-sales ct-minor-eleventh"></div>
         <h2>{{ $t('Counts') }}</h2>
@@ -13,11 +13,17 @@
 <script>
  import { mapActions, mapGetters } from 'vuex'
  import Chartist from 'chartist'
+ import BigNumber from '../math.js'
  var moment = require('moment')
  moment.locale('fr-ch')
 
  export default {
      name: 'stats',
+     data: function () {
+         return {
+             total_sales: new BigNumber(0)
+         }
+     },
      computed: mapGetters([
          'stats'
      ]),
@@ -27,12 +33,11 @@
      watch: {
          stats: function (stats) {
              this.plot(stats)
+             this.total_sales = new BigNumber(stats.total_sales)
          }
      },
      methods: {
          plot: function (stats) {
-             this.total_sales = stats.total_sales
-
              Chartist.Line('.chart-cumulative-sales', {
                  series: [
                      stats.cumulative_sales

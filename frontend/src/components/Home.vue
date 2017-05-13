@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="logo"><img src="/static/logo_full.png"/></div>
-        <h1 class="page-header"><center>{{ $t(event) }}</center></h1>
+        <h1 class="page-header"><center>{{ event }}</center></h1>
         <div class="row">
             <div class="section col-md-4">
                 <router-link :to="{name: 'shop'}" tag="a" class="halfwidth btn btn-info">

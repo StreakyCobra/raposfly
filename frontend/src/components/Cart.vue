@@ -1,35 +1,49 @@
 <template>
-    <div class="cart">
+    <div class="container">
+
         <h1 class="page-header">{{ $t('Cart') }}</h1>
-        <div v-if="cart.length > 0 || last_total.eq(0)">
+
+        <div v-if="!pay_view">
             <div class="controls">
                 <p class="total">Total: <span class="amount">{{ total.toFormat(2) }} CHF</span></p>
                 <div class="buttons btn-group">
-                    <button class="btn btn-lg btn-success" @click="purchase">{{ $t('Purchase') }}</button>
+                    <button class="btn btn-lg btn-success" @click="to_pay">{{ $t('Pay') }}</button>
                     <button class="btn btn-lg btn-danger" @click="discard">{{ $t('Discard') }}</button>
                 </div>
             </div>
-            <checkbox :label="$t('Print client receipt')" :checked="receipt" @change="toggleReceipt"></checkbox>
             <hr />
-            <template
-                v-for="entry in cart">
+            <template v-for="entry in cart">
                 <item display_style=small
                       :item="entry.item"
                       :quantity="entry.quantity"
-                      @clicked="click(entry.item, arguments[1])"/>
+                      @click="itemClick(entry.item, arguments[1])"/>
             </template>
         </div>
-        <div v-else-if="last_total.gt(0)">
-            <div class="total alert alert-warning">
-                {{ $t('Cashed') }}: <span class="amount">{{ given.toFormat(2) }} CHF</span>
-                <br />
-                {{ $t('To pay') }}: <span class="amount underline"><i class="fa fa-minus" style="font-size: 0.8em;"></i>&nbsp;{{ last_total.toFormat(2) }} CHF</span>
+
+        <div v-else>
+            <div class="alert alert-info">
+                <p class="total spacing-after">
+                    {{ $t('To pay') }}: <span class="amount">&nbsp;{{ total.toFormat(2) }} CHF</span>
+                </p>
+                <checkbox :label="$t('Print client receipt')" :checked="receipt" @change="toggleReceipt"></checkbox>
+                <template v-for="entry in cart">
+                    <item display_style="list"
+                          :quantity="entry.quantity"
+                          :item="entry.item" />
+                </template>
             </div>
-            <div :class="'toReturn alert alert-' + (to_return.gt(0) || given.eq(0) || given.eq(last_total) ? 'success' : 'danger')" @click="exitNumpad"><i class="fa fa-sign-in"></i>&nbsp;{{ to_return.toFormat(2) }} CHF</div>
-            <hr />
-            <numpad ref="numpad" v-model="given"></numpad>
-            <hr />
+            <div class="total alert alert-warning">
+                <p class="spacing-after">
+                    {{ $t('Cashed') }}: <span class="amount">{{ given.toFormat(2) }} CHF</span>
+                </p>
+                <numpad ref="numpad" v-model="given"></numpad>
+            </div>
+            <div class="btn-group">
+                <div class="back-button btn btn-warning" @click="hidePayView"><i class="fa fa-chevron-circle-left"></i></div>
+                <div :class="'purchase-button btn btn-' + (to_return.gt(0) || given.eq(0) || given.eq(total) ? 'success' : 'danger')" @click="purchase"><i class="fa fa-sign-in"></i>&nbsp;{{ to_return.toFormat(2) }} CHF</div>
+            </div>
         </div>
+
     </div>
 </template>
 
@@ -50,7 +64,7 @@
      },
      data: function () {
          return {
-             last_total: new BigNumber(0),
+             pay_view: false,
              given: new BigNumber(0)
          }
      },
@@ -65,29 +79,38 @@
              'receipt'
          ]),
          to_return: function () {
-             return (this.given.gt(this.last_total) && this.given.minus(this.last_total)) || new BigNumber(0)
+             return (this.given.gt(this.total) && this.given.minus(this.total)) || new BigNumber(0)
          }
      },
      methods: {
+         add_item: function (item) {
+             this.pay_view = false
+             this.addToCart(item)
+         },
+         to_pay: function () {
+             if (this.cart.length) { this.pay_view = true }
+         },
          purchase: function () {
-             this.last_total = this.total
              this.given = new BigNumber(0)
              this.purchaseCart()
+             this.pay_view = false
          },
          discard: function () {
-             this.last_total = new BigNumber(0)
              this.given = new BigNumber(0)
              this.discardCart()
          },
-         click: function (item, element) {
+         itemClick: function (item, element) {
              $(element).stop().fadeTo(100, 0.3).fadeTo(100, 1)
              this.removeFromCart(item)
          },
          exitNumpad: function () {
-             this.last_total = new BigNumber(0)
              this.given = new BigNumber(0)
          },
+         hidePayView: function () {
+             this.pay_view = false
+         },
          ...mapActions([
+             'addToCart',
              'discardCart',
              'purchaseCart',
              'removeFromCart',
@@ -107,6 +130,21 @@
 
  .controls .btn {
      width: 50%;
+ }
+
+ .btn-group {
+     width: 100%;
+ }
+
+ .back-button {
+     font-size: 2em;
+     text-align: center;
+     width: 20%;
+ }
+
+ .purchase-button {
+     font-size: 2em;
+     width: 80%;
  }
 
  .total {
@@ -129,7 +167,7 @@
      cursor: pointer;
  }
 
- .underline {
-     border-bottom: solid 1px black;
+ .spacing-after {
+     margin-bottom: 1em;
  }
 </style>

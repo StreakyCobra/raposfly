@@ -53,35 +53,3 @@
      }
  }
 </script>
-
-<style>
- .btn-outline {
-     background-color: transparent !important;
-     color: inherit;
-     transition: all .5s;
- }
-
- .btn-primary.btn-outline {
-     color: #428bca !important;
- }
-
- .btn-success.btn-outline {
-     color: #5cb85c !important;
- }
-
- .btn-info.btn-outline {
-     color: #5bc0de !important;
- }
-
- .btn-warning.btn-outline {
-     color: #f0ad4e !important;
- }
-
- .btn-danger.btn-outline {
-     color: #d9534f !important;
- }
-
- .btn-danger.btn-outline:hover {
-     color: #d9534f;
- }
-</style>

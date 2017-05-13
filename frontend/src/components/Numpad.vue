@@ -75,12 +75,13 @@
  .number {
      display: flex;
      flex-wrap: wrap;
+     width: 100%;
  }
 
  .button {
      display: inline-flex;
      flex: 1 1 33%;
-     width: 32%;
+     width: 31%;
      margin: 0px 0px 4px 0px;
      justify-content: center;
      align-items: center;

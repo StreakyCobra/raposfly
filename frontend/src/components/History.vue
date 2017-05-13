@@ -3,7 +3,7 @@
         <h1 class="page-header">{{ $t('History') }}<span class="pull-right btn btn-info" @click="getHistory">{{ $t('Refresh') }}</span></h1>
         <template v-for="purchase in history">
             <div class="panel panel-info">
-                <div class="panel-heading clearfix">
+                <div class="panel-heading">
                     <div class="pull-right">
                         <a class="btn btn-primary btn-xs" @click="printReceipt(purchase)">{{ $t('Receipt') }}</a>
                         <a class="btn btn-danger btn-xs" @click="deletePurchase(purchase)">{{ $t('Delete') }}</a>
