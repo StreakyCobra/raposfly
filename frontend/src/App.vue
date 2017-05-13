@@ -126,4 +126,20 @@
  .container {
      margin-bottom: 1em;
  }
+
+ ::-webkit-scrollbar
+ {
+     width: 12px;  /* for vertical scrollbars */
+     height: 12px; /* for horizontal scrollbars */
+ }
+
+ ::-webkit-scrollbar-track
+ {
+     background: rgba(0, 0, 0, 0.1);
+ }
+
+ ::-webkit-scrollbar-thumb
+ {
+     background: rgba(0, 0, 0, 0.5);
+ }
 </style>
