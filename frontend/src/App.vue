@@ -48,7 +48,7 @@
         <error ref="error"></error>
 
         <!-- APPLICATION -->
-        <div id="view" class="container-fluid" style="padding-top: 50px;">
+        <div id="view" class="container-fluid">
             <router-view @error="error"></router-view>
         </div>
     </div>
@@ -97,8 +97,20 @@
      font-weight: bold;
  }
 
- #app {
+ #view {
      font-family: 'Montserrat', Helvetica, Arial, sans-serif;
+     position: absolute;
+     top: 50px;
+     bottom: 0px;
+     width: 100%;
+     overflow: auto;
+ }
+
+ @media (min-width: 768px){
+     .innerscroll {
+         height: 100%;
+         overflow: hidden;
+     }
  }
 
  .noselect {
