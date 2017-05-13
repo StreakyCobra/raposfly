@@ -1,16 +1,16 @@
 <template>
     <div>
-    <div v-for="category in items">
-        <h1 class="page-header">{{category.name}}</h1>
-        <div class="row">
-            <item v-for="item in category.items"
-                  class="col-lg-4 col-md-4 col-sm-6 col-xs-12"
-                  display_style=big
-                  :item="item"
-                  :key="item.id"
-                  @clicked="click(item, arguments[1])"/>
+        <div v-for="category in items">
+            <h1 class="page-header">{{category.name}}</h1>
+            <div class="row">
+                <item v-for="item in category.items"
+                      class="col-lg-4 col-md-4 col-sm-6 col-xs-12"
+                      display_style=big
+                      :item="item"
+                      :key="item.id"
+                      @clicked="click(item, arguments[1])"/>
+            </div>
         </div>
-    </div>
     </div>
 </template>
 
