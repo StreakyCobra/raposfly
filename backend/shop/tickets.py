@@ -28,9 +28,9 @@ def update_printer():
 
 @receiver(config_updated)
 # pylint: disable=unused-argument
-def constance_updated(sender, updated_key, new_value, **kwargs):
+def constance_updated(sender, key, old_value, new_value, **kwargs):
     """Trigger update of printer when django constance is updated."""
-    if updated_key == "PRINTER_ADDR":
+    if key == "PRINTER_ADDR":
         update_printer()
 
 
