@@ -19,22 +19,35 @@ PRODUCTION = 'RAPOSFLY_PRODUCTION' in os.environ
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# Path to data directory
+if PRODUCTION:
+    DATA_DIR = "/var/lib/raposfly"
+else:
+    DATA_DIR = os.path.join(os.path.dirname(BASE_DIR), "_data")
+    if not os.path.exists(DATA_DIR):
+        os.mkdir(DATA_DIR)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
+
 # SECURITY WARNING: keep the secret key used in production secret!
+def read_secret_key():
+    """Read the SECRET_KEY from file."""
+    with open(os.path.join(DATA_DIR, 'django_secret.txt'), 'r') as file:
+        return file.readline().strip()
+
+
 try:
-    from .secrets import SECRET_KEY
-except ImportError:
+    SECRET_KEY = read_secret_key()
+except FileNotFoundError:
     from django.utils.crypto import get_random_string
-    CONTENT = '"""Secrets."""\n\nSECRET_KEY = "{}"'.format(get_random_string(
-        50,
-        'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)'))
-    with open(os.path.join(os.path.abspath(os.path.dirname(__file__)),
-                           'secrets.py'), 'w') as f:
-        print(CONTENT, file=f)
-    from .secrets import SECRET_KEY  # noqa: F401
+    with open(os.path.join(DATA_DIR, 'django_secret.txt'), 'w') as file:
+        print(get_random_string(
+            50,
+            'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)'), file=file)
+    SECRET_KEY = read_secret_key()
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = not PRODUCTION
@@ -98,10 +111,7 @@ WSGI_APPLICATION = 'raposfly.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
-if PRODUCTION:
-    DATABASE_PATH = '/var/lib/raposfly/db.sqlite3'
-else:
-    DATABASE_PATH = os.path.join(BASE_DIR, 'db.sqlite3')
+DATABASE_PATH = os.path.join(DATA_DIR, 'db.sqlite3')
 
 DATABASES = {
     'default': {
@@ -155,7 +165,10 @@ STATIC_URL = '/static/'
 STATIC_ROOT = '/srv/http/static/'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = '/var/lib/raposfly/media/'
+if PRODUCTION:
+    MEDIA_ROOT = '/srv/http/media/'
+else:
+    MEDIA_ROOT = os.path.join(DATA_DIR, 'media')
 
 INTERNAL_IPS = ['127.0.0.1']
 CORS_ORIGIN_ALLOW_ALL = True
