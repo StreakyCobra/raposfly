@@ -3,17 +3,24 @@
     <div v-if="display_style === 'big'"
          class="padded">
         <div class="big item panel panel-default"
-             @click="clicked">
-            <div class="panel-body" :style="{ backgroundColor: this.item.color,
-                                            backgroundImage: 'url(' + item_image(item) + ')',
-                                            backgroundRepeat: 'no-repeat',
-                                            backgroundPosition: 'right',
-                                            backgroundOrigin: 'content-box',
-                                            backgroundSize: 'auto 100%'}">
+             >
+          <div class="panel-body"
+               :style="{ backgroundColor: this.item.color,
+                      backgroundImage: 'url(' + item_image(item) + ')',
+                      backgroundRepeat: 'no-repeat',
+                      backgroundPosition: 'right',
+                      backgroundOrigin: 'content-box',
+                      backgroundSize: 'auto 100%'}"
+               @click="clicked">
                 <span class="quantity btn-xs" v-if="quantity">{{ quantity }}×</span>
                 <span class="name">{{ item.name }}</span>
             </div>
             <div class="panel-footer">
+                <span class="info"
+                      data-toggle="tooltip"
+                      :title="item.name">
+                    <i class="fa fa-info-circle"></i>
+                </span>
                 <span class="price"> {{ total_price.toFormat(2) }} CHF</span>
             </div>
         </div>
@@ -46,6 +53,7 @@
 
 <script>
  import BigNumber from '../math.js'
+ var $ = require('jquery')
 
  export default {
      name: 'item',
@@ -63,6 +71,12 @@
              return new BigNumber(this.item.price).times(this.quantity)
          }
      },
+     mounted: function () {
+         $('[data-toggle="tooltip"]').tooltip({
+             placement: 'bottom',
+             trigger: 'click focus'
+         })
+     },
      methods: {
          clicked: function (item) {
              this.$emit('click', item, this.$el)
@@ -78,6 +92,7 @@
  .item {
      box-shadow: 5px 5px 5px -2px gray;
      cursor: pointer;
+     overflow-x: hidden;
  }
 
  .padded {
@@ -104,7 +119,10 @@
  }
 
  .big .name {
+     overflow: hidden;
      font-size: 2em;
+     display: block;
+     text-overflow: ellipsis;
  }
 
  .big .quantity {
@@ -114,6 +132,12 @@
  .big .price {
      font-size: 1em;
      font-weight: bold;
+ }
+
+ .big .info {
+     font-size: 1em;
+     font-weight: bold;
+     padding-left: 5px;
  }
 
  .big .price {
@@ -141,8 +165,15 @@
  }
 
  .small .name {
-     display: inline;
      overflow: hidden;
+     display: inline-block;
+     text-overflow: ellipsis;
+ }
+
+ .small .price {
+   position: relative;
+   padding-left: 10px;
+   background: inherit;
  }
 
 </style>
