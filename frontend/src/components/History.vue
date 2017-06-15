@@ -4,7 +4,7 @@
             {{ $t('History') }}
             <span class="btn-group pull-right">
                 <a class="btn btn-success" :href="this.$backend_url + '/api/shop/export'"><i class="fa fa-file-excel-o" aria-hidden="true"></i> {{ $t('Export') }}</a>
-                <a class="btn btn-info" @click="getHistory">{{ $t('Refresh') }}</a>
+                <a class="btn btn-info" @click="getHistory"><i class="fa fa-refresh" aria-hidden="true"></i> {{ $t('Refresh') }}</a>
             </span>
         </h1>
         <template v-for="purchase in history">
