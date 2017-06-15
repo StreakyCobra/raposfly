@@ -2,10 +2,13 @@
 # pylint: disable=too-many-ancestors
 """Views for the shop application."""
 
+import re
 from subprocess import call
 
+import openpyxl
 from constance import config
-from django.db.models import F, Sum, Count
+from django.db.models import Count, F, Sum
+from django.http import HttpResponse
 from django.utils import timezone
 from rest_framework import viewsets
 from rest_framework.pagination import LimitOffsetPagination
@@ -203,3 +206,45 @@ class ConfigView(APIView):
         keys = list(config.__dir__())
         confs = {k: config.__getattr__(k) for k in keys}
         return Response(confs)
+
+
+class ExportView(APIView):
+    """Export the shop."""
+
+    def get(self, request):
+        """GET request to export the shop."""
+        # Prepare the data
+        wb = openpyxl.Workbook()
+        ws = wb.active
+        ws.title = config.EVENT_NAME
+        ws.row_dimensions[1].height = 22
+        ws['A1'] = config.EVENT_NAME
+        ws['A1'].font = openpyxl.styles.Font(size=18)
+        ws['A1'].alignment = openpyxl.styles.Alignment(horizontal="center",
+                                                       vertical="center")
+        ws.merge_cells("A1:G1")
+        ws.append(["Date", "Time", "Purchase", "Article",
+                   "Article price", "Quantity", "Total price"])
+        for row in ws.iter_rows("A2:G2"):
+            for cell in row:
+                cell.font = openpyxl.styles.Font(bold=True)
+        for order in Order.objects.all():
+            ws.append(["{:%Y-%m-%d}".format(order.purchase.date),
+                       "{:%H:%M}".format(order.purchase.date),
+                       order.purchase.id,
+                       order.item.name,
+                       order.quantity,
+                       order.price,
+                       order.price * order.quantity])
+        for column_cells in ws.columns:
+            ws.column_dimensions[column_cells[0].column].width = 15
+        # Prepare the filename
+        filename = "{:%Y-%m-%d_%H-%M}_{}.xlsx".format(
+            timezone.localtime(timezone.now()),
+            re.sub(r'\W+', '', config.EVENT_NAME))
+        # Prepare the response as downloadable content
+        response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response['Content-Disposition'] = ('attachment;'
+                                           'filename="{}"'.format(filename))
+        wb.save(response)
+        return response
