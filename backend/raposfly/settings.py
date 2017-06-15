@@ -165,10 +165,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = '/srv/http/static/'
 
 MEDIA_URL = '/media/'
-if PRODUCTION:
-    MEDIA_ROOT = '/srv/http/media/'
-else:
-    MEDIA_ROOT = os.path.join(DATA_DIR, 'media')
+MEDIA_ROOT = os.path.join(DATA_DIR, 'media')
 
 INTERNAL_IPS = ['127.0.0.1']
 CORS_ORIGIN_ALLOW_ALL = True
