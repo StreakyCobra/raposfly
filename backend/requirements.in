@@ -25,6 +25,9 @@ pyflakes
 pylint
 pylint-django
 
+# Excel support
+openpyxl
+
 # Pip management
 pip-review
 pip-tools
