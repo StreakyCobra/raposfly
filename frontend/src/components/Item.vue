@@ -18,7 +18,7 @@
             <div class="panel-footer">
                 <span class="info"
                       data-toggle="tooltip"
-                      :title="item.name">
+                      :title="info">
                     <i class="fa fa-info-circle"></i>
                 </span>
                 <span class="price"> {{ total_price.toFormat(2) }} CHF</span>
@@ -69,12 +69,19 @@
          total_price: function () {
              if (this.quantity <= 0) return new BigNumber(this.item.price)
              return new BigNumber(this.item.price).times(this.quantity)
+         },
+         info: function () {
+             var text = ''
+             text += this.item.name
+             if (this.item.description) text += '<br /><br />' + this.item.description
+             return text
          }
      },
      mounted: function () {
          $('[data-toggle="tooltip"]').tooltip({
              placement: 'bottom',
-             trigger: 'click focus'
+             trigger: 'click focus',
+             html: true
          })
      },
      methods: {
