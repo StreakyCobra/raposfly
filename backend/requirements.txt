@@ -10,14 +10,14 @@ argparse==1.4.0           # via pip-review, python-escpos
 astroid==1.5.3            # via pylint, pylint-plugin-utils
 autoflake==0.7
 click==6.7                # via pip-tools
-decorator==4.0.11
-django-cleanup==0.4.2
+decorator==4.1.2
+django-cleanup==1.0.1
 django-colorful==1.2
 django-constance==2.0.0
 django-cors-headers==2.1.0
 django-debug-toolbar==1.8
-django-picklefield==0.3.2
-django==1.11.2
+django-picklefield==1.0.0
+django==1.11.3
 djangorestframework==3.6.3
 drfdocs==0.0.11
 et-xmlfile==1.0.1         # via openpyxl
@@ -36,18 +36,18 @@ pep257==0.7.0
 pep8==1.7.0
 pexpect==4.2.1            # via ipython
 pickleshare==0.7.4        # via ipython
-pillow==4.1.1             # via python-escpos
+pillow==4.2.1             # via python-escpos
 pip-review==0.5.3
 pip-tools==1.9.0
 prompt-toolkit==1.0.14    # via ipython
-ptyprocess==0.5.1         # via pexpect
+ptyprocess==0.5.2         # via pexpect
 pyflakes==1.5.0
 pygments==2.2.0           # via ipython
 pylint-django==0.7.2
 pylint-plugin-utils==0.2.6  # via pylint-django
-pylint==1.7.1
+pylint==1.7.2
 pyparsing==2.2.0          # via packaging
-pyserial==3.3             # via python-escpos
+pyserial==3.4             # via python-escpos
 python-escpos==2.2.0
 pytz==2017.2              # via django
 pyusb==1.0.0              # via python-escpos
