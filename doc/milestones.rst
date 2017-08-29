@@ -18,13 +18,13 @@ milestones are only plannifications and could be subject to changes at any time.
 Forthcoming milestones
 ======================
 
-0.2.0
+0.3.0
 -----
 
-The version `0.2.0`_ will fix the problems noticed after the test of the
-`0.1.0`_.
+The version `0.3.0`_ will fix the problems noticed after the test of the
+`0.2.0`_.
 
-.. _`0.2.0`: https://github.com/StreakyCobra/raposfly/milestone/2
+.. _`0.3.0`: https://github.com/StreakyCobra/raposfly/milestone/6
 
 1.0.0
 -----
@@ -73,3 +73,12 @@ The version `0.1.0`_ is the first version that has been tested on a real event
 Product) of the project.
 
 .. _`0.1.0`: https://github.com/StreakyCobra/raposfly/releases/tag/0.1.0
+
+0.2.0
+-----
+
+The version `0.2.0`_ is the version that has been tested on the first consequent
+whole day event (Fête au Village, 2017, Collombey, Switzerland). This version
+corrected and improved the MVP that has been developed as `0.1.0`_.
+
+.. _`0.2.0`: https://github.com/StreakyCobra/raposfly/releases/tag/0.2.0
