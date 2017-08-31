@@ -5,8 +5,8 @@
 #    pip-compile --output-file requirements.txt requirements.in
 #
 appdirs==1.4.3            # via python-escpos
-argcomplete==1.8.2        # via python-escpos
-argparse==1.4.0           # via pip-review, python-escpos
+argcomplete==1.9.2        # via python-escpos
+argparse==1.4.0           # via python-escpos
 astroid==1.5.3            # via pylint, pylint-plugin-utils
 autoflake==0.7
 click==6.7                # via pip-tools
@@ -17,8 +17,8 @@ django-constance==2.0.0
 django-cors-headers==2.1.0
 django-debug-toolbar==1.8
 django-picklefield==1.0.0
-django==1.11.3
-djangorestframework==3.6.3
+django==1.11.4
+djangorestframework==3.6.4
 drfdocs==0.0.11
 et-xmlfile==1.0.1         # via openpyxl
 first==2.0.1              # via pip-tools
@@ -37,11 +37,11 @@ pep8==1.7.0
 pexpect==4.2.1            # via ipython
 pickleshare==0.7.4        # via ipython
 pillow==4.2.1             # via python-escpos
-pip-review==0.5.3
+pip-review==1.0
 pip-tools==1.9.0
-prompt-toolkit==1.0.14    # via ipython
+prompt-toolkit==1.0.15    # via ipython
 ptyprocess==0.5.2         # via pexpect
-pyflakes==1.5.0
+pyflakes==1.6.0
 pygments==2.2.0           # via ipython
 pylint-django==0.7.2
 pylint-plugin-utils==0.2.6  # via pylint-django
@@ -58,4 +58,4 @@ six==1.10.0               # via astroid, packaging, pip-tools, prompt-toolkit, p
 sqlparse==0.2.3           # via django-debug-toolbar
 traitlets==4.3.2          # via ipython
 wcwidth==0.1.7            # via prompt-toolkit
-wrapt==1.10.10            # via astroid
+wrapt==1.10.11            # via astroid
