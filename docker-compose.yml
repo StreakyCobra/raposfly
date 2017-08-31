@@ -4,19 +4,19 @@ services:
 
   proxy:
     image: raposfly-proxy
-    build: proxy
+    build: services/proxy
     ports:
       - 80:80
 
   frontend:
     image: raposfly-frontend
-    build: frontend
+    build: services/frontend
     ports:
       - 8001:80
 
   backend:
     image: raposfly-backend
-    build: backend
+    build: services/backend
     environment:
       - RAPOSFLY_PRODUCTION=1
     ports:
@@ -29,6 +29,6 @@ services:
 
   backup:
     image: raposfly-backup
-    build: backup
+    build: services/backup
     volumes:
       - /var/lib/raposfly/:/var/lib/raposfly/
