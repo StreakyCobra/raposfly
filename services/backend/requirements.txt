@@ -8,7 +8,7 @@ appdirs==1.4.3            # via python-escpos
 argcomplete==1.9.2        # via python-escpos
 argparse==1.4.0           # via python-escpos
 astroid==1.5.3            # via pylint, pylint-plugin-utils
-autoflake==0.7
+autoflake==1.0
 click==6.7                # via pip-tools
 decorator==4.1.2
 django-cleanup==1.0.1
@@ -17,45 +17,46 @@ django-constance==2.0.0
 django-cors-headers==2.1.0
 django-debug-toolbar==1.8
 django-picklefield==1.0.0
-django==1.11.4
-djangorestframework==3.6.4
+django==1.11.6
+djangorestframework==3.7.1
 drfdocs==0.0.11
 et-xmlfile==1.0.1         # via openpyxl
 first==2.0.1              # via pip-tools
 ipython-genutils==0.2.0   # via traitlets
-ipython==6.1.0
+ipython==6.2.1
 isort==4.2.15
 jdcal==1.3                # via openpyxl
-jedi==0.10.2              # via ipython
+jedi==0.11.0              # via ipython
 lazy-object-proxy==1.3.1  # via astroid
 mccabe==0.6.1             # via pylint
 olefile==0.44             # via pillow
-openpyxl==2.4.8
+openpyxl==2.4.9
 packaging==16.8           # via pip-review
+parso==0.1.0              # via jedi
 pep257==0.7.0
 pep8==1.7.0
 pexpect==4.2.1            # via ipython
 pickleshare==0.7.4        # via ipython
-pillow==4.2.1             # via python-escpos
+pillow==4.3.0             # via python-escpos
 pip-review==1.0
-pip-tools==1.9.0
+pip-tools==1.10.1
 prompt-toolkit==1.0.15    # via ipython
 ptyprocess==0.5.2         # via pexpect
 pyflakes==1.6.0
 pygments==2.2.0           # via ipython
 pylint-django==0.7.2
 pylint-plugin-utils==0.2.6  # via pylint-django
-pylint==1.7.2
+pylint==1.7.4
 pyparsing==2.2.0          # via packaging
 pyserial==3.4             # via python-escpos
 python-escpos==2.2.0
 pytz==2017.2              # via django
-pyusb==1.0.0              # via python-escpos
+pyusb==1.0.2              # via python-escpos
 pyyaml==3.12              # via python-escpos
 qrcode==5.3               # via python-escpos
 simplegeneric==0.8.1      # via ipython
-six==1.10.0               # via astroid, packaging, pip-tools, prompt-toolkit, pylint, python-escpos, qrcode, traitlets
-sqlparse==0.2.3           # via django-debug-toolbar
+six==1.11.0               # via astroid, packaging, pip-tools, prompt-toolkit, pylint, python-escpos, qrcode, traitlets
+sqlparse==0.2.4           # via django-debug-toolbar
 traitlets==4.3.2          # via ipython
 wcwidth==0.1.7            # via prompt-toolkit
 wrapt==1.10.11            # via astroid
