@@ -27,32 +27,31 @@ Chrooting in raspbian-lite
 
 4. Open and mount the image::
 
-     sudo kpartx -a raspbian.img
+     sudo kpartx -av raspbian.img
      sudo mount /dev/mapper/loop0p2 /mnt
+     sudo mount /dev/mapper/loop0p1 /mnt/boot
 
 5. Prepare for ARM emulation::
 
      sudo cp /usr/bin/qemu-arm-static /mnt/usr/bin
-     sudo update-binfmts --enable
+     sudo update-binfmts --enable qemu-arm
      sudo update-binfmts --import
+     sudo mount --bind /sys /mnt/sys/
+     sudo mount --bind /proc /mnt/proc/
+     sudo mount --bind /dev/pts /mnt/dev/pts
+     sudo sed -i 's/^/#/g' /mnt/etc/ld.so.preload
 
 6. Chroot into the image::
 
      cd /mnt
-     sudo chroot /mnt
+     sudo systemd-nspawn -M raspberrypi -D . bin/bash
 
-7. Depending on your configuration, it may be necessary to fix some environment
-   variables. Better do to it in case of doubt::
+7. Do what you want with the image.
 
-     export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH
-     export LANG='en_GB.UTF-8'
-     sudo hostname raspberrypi
+8. Unmount the image::
 
-8. Do what you want with the image.
-
-9. Unmount the image::
-
-     sudo umount /mnt
+     sudo sed -i 's/^#//g' /mnt/etc/ld.so.preload
+     sudo umount -R /mnt
      sudo kpartx -d raspbian.img
 
 .. _image: https://www.raspberrypi.org/downloads/raspbian/
@@ -88,7 +87,7 @@ Resize the image
 
 3. Open the image::
 
-     sudo kpartx -a raspbian.img
+     sudo kpartx -av raspbian.img
 
 4. Resize the partition::
 
