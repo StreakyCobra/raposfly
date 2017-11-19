@@ -33,9 +33,8 @@ Chrooting in raspbian-lite
 5. Prepare for ARM emulation::
 
      sudo cp /usr/bin/qemu-arm-static /mnt/usr/bin
-     sudo su
-     echo ':arm:M::\x7fELF\x01\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\x28\x00:\xff\xff\xff\xff\xff\xff\xff\x00\xff\xff\xff\xff\xff\xff\xff\xff\xfe\xff\xff\xff:/usr/bin/qemu-arm-static:' > /proc/sys/fs/binfmt_misc/register
-     exit
+     sudo update-binfmts --enable
+     sudo update-binfmts --import
 
 6. Chroot into the image::
 
