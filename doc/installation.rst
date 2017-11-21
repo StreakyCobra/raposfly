@@ -1,6 +1,6 @@
-==============
- Installation
-==============
+============
+Installation
+============
 
 First you can go through the list of requirements to be sure that you have
 everything. Then you can follow the section explaining how to prepare your
@@ -41,6 +41,11 @@ This procedure has been tested on the version:
 .. figure:: https://img.shields.io/badge/raspbian--lite-Mars%202017-brightgreen.svg
    :alt: Mars 2017
 
+.. figure:: https://img.shields.io/badge/raspbian--lite-September%202017-orange.svg
+   :alt: September 2017
+
+(WIP for September 2017)
+
 Install and configure the rasbian-lite distribution
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -54,6 +59,10 @@ Usually downloading by torrent is faster than direct download.
 `Write the image file`_ to the microSD card by using the microSD to SD adapter
 and the SD card reader.
 
+Before going further, the ``SSH`` service need to be activated. For this mount
+the ``boot`` partition of the SD card to your system and create an empty ``ssh``
+file in it, as explained in the point 3 of `enable ssh`_.
+
 Once this has been done, you can put the SD card in the Rasberry Pi, plug the
 ethernet cable and power it up. The rest of the procedure is meant to be run on
 the Rasberry Pi directly. For this you will need to `find the IP address`_ of
@@ -66,6 +75,7 @@ account is ``raspberry``):
 .. _`Direct download`: https://downloads.raspberrypi.org/raspbian_lite_latest
 .. _`Torrent download`: https://downloads.raspberrypi.org/raspbian_lite_latest.torrent
 .. _`Write the image file`: https://www.raspberrypi.org/documentation/installation/installing-images/README.md
+.. _`enable ssh`: https://www.raspberrypi.org/documentation/remote-access/ssh/
 .. _`find the ip address`: https://www.raspberrypi.org/documentation/remote-access/ip-address.md
 .. _`ssh into it`: https://www.raspberrypi.org/documentation/remote-access/ssh/
 
@@ -242,25 +252,20 @@ And finally, at the end of the same file, add the following lines:
         option domain-name-servers 192.168.42.1;
     }
 
-Then edit ``/etc/default/isc-dhcp-server`` and set ``INTERFACES`` to ``wlan0``
+Then edit ``/etc/default/isc-dhcp-server`` and set ``INTERFACESv4`` to ``wlan0``
 so that the DCHP server is listening on the Wifi:
 
 .. code-block:: cfg
 
-    INTERFACES="wlan0"
+    INTERFACESv4="wlan0"
 
 The Raspberry Pi should have a fixed address, so not getting it through DHCP.
-For this edit the file ``/etc/network/interfaces`` to comment out the following
-``wlan0`` related lines and add subsequent ones:
+For this edit the file ``/etc/dhcpcd.conf`` and add the following lines:
 
 .. code-block:: cfg
 
-    # iface wlan0 inet manual
-    #    wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
-
-    iface wlan0 inet static
-        address 192.168.42.1
-        netmask 255.255.255.0
+    interface wlan0
+    static ip_address=192.168.42.1
 
 Set manually the ip address for this session:
 
@@ -376,7 +381,7 @@ should be installed:
 .. code-block:: console
 
     sudo apt update
-    sudo apt install -y apt-transport-https
+    sudo apt install -y apt-transport-https dirmngr
     echo "deb https://packagecloud.io/Hypriot/Schatzkiste/debian/ jessie main" | sudo tee /etc/apt/sources.list.d/hypriot.list
     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 37BBEE3F7AD95B3F
     sudo apt update
