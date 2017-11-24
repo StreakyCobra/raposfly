@@ -273,6 +273,28 @@ Set manually the ip address for this session:
 
     sudo ifconfig wlan0 192.168.42.1
 
+It appears that isc-dhcp-server may start before dhcpcd gives an address to
+``wlan0``, what causes a bug. In order to avoid this, add ``sleep 10`` at the
+beginnig of the ``start_daemon`` function in ``/etc/init.d/isc-dhcp-server``:
+
+.. code-block:: cfg
+
+    start_daemon()
+    {
+        VERSION="$1"
+        CONF="$2"
+        NAME="$3"
+        PIDFILE="$4"
+        DESC="$5"
+
+        shift 5
+        INTERFACES="$*"
+
+        sleep 10
+
+        test_config "$VERSION" "$CONF"
+        log_daemon_msg "Starting $DESC" "$NAME"
+
 And finally make ``isc-dhcp-server`` to start at boot:
 
 .. code-block:: console
