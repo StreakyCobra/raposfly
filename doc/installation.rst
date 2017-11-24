@@ -531,6 +531,15 @@ The sqlite database file and the backup folder should be created with:
 Build the containers
 ~~~~~~~~~~~~~~~~~~~~
 
+Due to `an issue`_ with some docker version on raspbian, downgrading docker-ce
+to a working version:
+
+.. code-block:: console
+
+    sudo apt-get install -y docker-ce=17.09.0~ce-0~raspbian --allow-downgrades
+
+.. _`an issue`: https://github.com/moby/moby/issues/35587#issuecomment-346744039
+
 The containers can simply be built with:
 
 .. code-block:: console
