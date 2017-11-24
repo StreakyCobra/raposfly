@@ -38,13 +38,8 @@ have to be done once.
 
 This procedure has been tested on the version:
 
-.. figure:: https://img.shields.io/badge/raspbian--lite-Mars%202017-brightgreen.svg
-   :alt: Mars 2017
-
-.. figure:: https://img.shields.io/badge/raspbian--lite-September%202017-orange.svg
+.. figure:: https://img.shields.io/badge/raspbian--lite-September%202017-brightgreen.svg
    :alt: September 2017
-
-(WIP for September 2017)
 
 Install and configure the rasbian-lite distribution
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
