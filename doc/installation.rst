@@ -520,7 +520,7 @@ modifications in a fork, you can simply change the URL to your one.
 Prepare database and file structure
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The sqlite database file and the backup folder should be created with::
+The sqlite database file and the backup folder should be created with:
 
 .. code-block:: console
 
