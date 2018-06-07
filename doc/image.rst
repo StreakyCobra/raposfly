@@ -45,6 +45,11 @@ Chrooting in raspbian-lite
 
      cd /mnt
      sudo systemd-nspawn -M raspberrypi -D . bin/bash
+     machinectl show --property Leader raspberrypi | sed "s/^Leader=//"
+     sudo nsenter --target=16626 --mount --uts --ipc --net --pid
+
+     # https://unix.stackexchange.com/a/391671
+     # https://superuser.com/a/1243010
 
 7. Do what you want with the image.
 
