@@ -38,8 +38,8 @@ have to be done once.
 
 This procedure has been tested on the version:
 
-.. figure:: https://img.shields.io/badge/raspbian--lite-September%202017-brightgreen.svg
-   :alt: September 2017
+.. figure:: https://img.shields.io/badge/raspbian--lite-April%202018-brightgreen.svg
+   :alt: April 2018
 
 Install and configure the rasbian-lite distribution
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -58,6 +58,10 @@ Before going further, the ``SSH`` service need to be activated. For this mount
 the ``boot`` partition of the SD card to your system and create an empty ``ssh``
 file in it, as explained in the point 3 of `enable ssh`_.
 
+In order to have it connect to your wifi network, you can use the same method
+and create an appropriate ``wpa_supplicant.conf`` file as explained in `setting
+up a raspberry pi headless`_.
+
 Once this has been done, you can put the SD card in the Rasberry Pi, plug the
 ethernet cable and power it up. The rest of the procedure is meant to be run on
 the Rasberry Pi directly. For this you will need to `find the IP address`_ of
@@ -66,11 +70,12 @@ account is ``raspberry``):
 
 .. References
 
-.. _raspbian-lite: https://www.raspberrypi.org/downloads/raspbian/
+.. _`raspbian-lite`: https://www.raspberrypi.org/downloads/raspbian/
 .. _`Direct download`: https://downloads.raspberrypi.org/raspbian_lite_latest
 .. _`Torrent download`: https://downloads.raspberrypi.org/raspbian_lite_latest.torrent
 .. _`Write the image file`: https://www.raspberrypi.org/documentation/installation/installing-images/README.md
 .. _`enable ssh`: https://www.raspberrypi.org/documentation/remote-access/ssh/
+.. _`setting up a raspberry pi headless`: https://www.raspberrypi.org/documentation/configuration/wireless/headless.md
 .. _`find the ip address`: https://www.raspberrypi.org/documentation/remote-access/ip-address.md
 .. _`ssh into it`: https://www.raspberrypi.org/documentation/remote-access/ssh/
 
